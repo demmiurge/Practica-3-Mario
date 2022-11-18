@@ -25,6 +25,7 @@ public class MarioController : MonoBehaviour
     void Update()
     {
         float l_Speed = 0.0f;
+        m_AnimatorController.SetFloat("Speed", l_Speed);
         /*if(Input.GetKey(KeyCode.UpArrow))
         {
             speed = 0.5f;
