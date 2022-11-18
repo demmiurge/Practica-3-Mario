@@ -289,12 +289,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LookAt: {fileID: 1738758069}
-  m_YawRotationalSpeed: 360
-  m_PitchRotationalSpeed: 180
+  m_YawRotationalSpeed: 720
+  m_PitchRotationalSpeed: 360
   m_MinPitch: -60
   m_MaxPitch: 10
   m_MinDistance: 3
-  m_MaxDistance: 8
+  m_MaxDistance: 6
   m_AvoidObjectsLayerMask:
     serializedVersion: 2
     m_Bits: 55
@@ -409,6 +409,18 @@ PrefabInstance:
     - target: {fileID: 2422550794503516954, guid: d330985451623d64084500d0734877bd, type: 3}
       propertyPath: m_Name
       value: SuperMario
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422550794503549956, guid: d330985451623d64084500d0734877bd, type: 3}
+      propertyPath: m_Radius
+      value: 0.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422550794503549956, guid: d330985451623d64084500d0734877bd, type: 3}
+      propertyPath: m_Center.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2422550794503549956, guid: d330985451623d64084500d0734877bd, type: 3}
+      propertyPath: m_SkinWidth
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 2422550794503549957, guid: d330985451623d64084500d0734877bd, type: 3}
       propertyPath: m_Camera
