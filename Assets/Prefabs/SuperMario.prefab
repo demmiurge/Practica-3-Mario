@@ -2142,7 +2142,7 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.5
+  m_Height: 1.4
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.3
@@ -2162,9 +2162,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Camera: {fileID: 0}
-  m_LerpRotation: 0.85
+  m_LerpRorationPct: 0.25
   m_WalkSpeed: 2.5
   m_RunSpeed: 5
+  m_JumpSpeed: 5
 --- !u!1 &2422550795314664289
 GameObject:
   m_ObjectHideFlags: 0
