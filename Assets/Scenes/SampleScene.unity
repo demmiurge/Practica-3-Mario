@@ -134,10 +134,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: SuperMario (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 2422550794503549956, guid: d330985451623d64084500d0734877bd, type: 3}
-      propertyPath: m_Height
-      value: 1.4
-      objectReference: {fileID: 0}
     - target: {fileID: 2422550794503549957, guid: d330985451623d64084500d0734877bd, type: 3}
       propertyPath: m_Camera
       value: 
