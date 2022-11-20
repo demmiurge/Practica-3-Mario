@@ -91,6 +91,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         l_Movement += l_Movement * l_MovementSpeed;
         m_PlayerRigidbody.velocity = new Vector3(l_Movement.x, m_PlayerRigidbody.velocity.y, l_Movement.z);
 
+        Debug.Log("TOCA SUELO: " + CheckCharacterIsFall());
+
         Slap();
 
         Jump();
@@ -102,9 +104,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
 
     void Slap()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (CheckCharacterIsFall() && Input.GetButtonDown("Fire1"))
         {
-            Debug.Log("Punch");
             m_Animator.SetTrigger("Punch");
         }
     }
@@ -150,5 +151,5 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     }
 
     // Utilities
-    bool CheckCharacterIsFall() => Physics.CheckSphere(m_FeetTransform.position, 0.1f, m_FloorMask);
+    bool CheckCharacterIsFall() => Physics.CheckSphere(m_FeetTransform.position, 0.01f, m_FloorMask);
 }
