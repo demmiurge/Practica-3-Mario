@@ -111,9 +111,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6785730832219408046}
-  m_LocalRotation: {x: -0, y: -0.68572193, z: -0, w: 0.7278636}
+  m_LocalRotation: {x: 0, y: -0.68572307, z: 0, w: 0.7278626}
   m_LocalPosition: {x: 26.884663, y: 9.175, z: 28.307}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 6785730832219577100}
   - {fileID: 6785730832219577106}
@@ -142,7 +142,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 7f0bf1343ec225e45b2749cf91304189, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -155,7 +155,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6785730832219408046}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 255edda2a1ea6f144885eb3e80acb412, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.25
@@ -176,7 +176,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &8299028683460148828
 MonoBehaviour:
@@ -190,12 +190,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e0cd9988c8c04458435e0c5c90f984, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Animator: {fileID: 6785730832210064588}
+  m_Camera: {fileID: 0}
+  m_LerpRorationPct: 0.25
   m_FloorMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_FeetTransform: {fileID: 4206125269388686780}
-  m_Speed: 0
-  m_JumpForce: 0
+  m_WalkSpeed: 0.45
+  m_RunSpeed: 2.5
+  m_JumpForce: 5
+  m_FallDetection: -2
+  m_AirJumpMultiplier: 1.05
 --- !u!1 &6785730832219408128
 GameObject:
   m_ObjectHideFlags: 0

@@ -112,6 +112,13 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         
     void Jump()
     {
+        // Restart jumps when touching ground
+        if (CharacterTouchTheGround())
+        {
+            m_JumpsMade = 0;
+            m_Animator.SetInteger("JumpNumber", 0);
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (CharacterTouchTheGround())
@@ -129,17 +136,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
                 m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce * m_AirJumpMultiplier, ForceMode.Impulse);
             }
         }
-
-        // Restart jumps when touching ground
-        if (CharacterTouchTheGround())
-            m_JumpsMade = 0;
     }
 
     void CheckMarioIsFall()
     {
-        m_Animator.SetBool("OnGroundFix", CharacterTouchTheGround());
-        if (CharacterTouchTheGround())
-            m_Animator.SetTrigger("OnGround");
+        m_Animator.SetBool("OnGround", CharacterTouchTheGround());
         if (!CharacterTouchTheGround() && m_PlayerRigidbody.velocity.y < m_FallDetection)
             m_Animator.SetBool("Falling", true);
         else
