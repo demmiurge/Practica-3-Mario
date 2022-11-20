@@ -24,7 +24,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
 
     [Header("Jump")]
     public float m_JumpForce = 5.0f;
-    [Range(-1f, -0.0f)] public float m_FallDetection = -0.25f;
+    [Range(-2f, -0.0f)] public float m_FallDetection = -1.0f;
     [Range(1f, 1.25f)] public float m_AirJumpMultiplier = 1.05f;
     int m_JumpsMade = 0;
     int m_MaximumNumberOfHops = 2;
@@ -88,17 +88,14 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
             }
         }
 
-        if (CheckCharacterIsFall()) 
-            m_Animator.SetFloat("Speed", l_Speed);
-        else
-            m_Animator.SetFloat("Speed", 0);
-
         l_Movement += l_Movement * l_MovementSpeed;
         m_PlayerRigidbody.velocity = new Vector3(l_Movement.x, m_PlayerRigidbody.velocity.y, l_Movement.z);
 
         Jump();
 
         CheckMarioIsFall();
+
+        m_Animator.SetFloat("Speed", l_Speed);
     }
 
         
