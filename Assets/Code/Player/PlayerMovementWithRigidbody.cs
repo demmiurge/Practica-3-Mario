@@ -91,7 +91,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         l_Movement += l_Movement * l_MovementSpeed;
         m_PlayerRigidbody.velocity = new Vector3(l_Movement.x, m_PlayerRigidbody.velocity.y, l_Movement.z);
 
-        Debug.Log("TOCA SUELO: " + CheckCharacterIsFall());
+        Debug.Log("TOCA SUELO: " + CharacterTouchTheGround());
 
         Slap();
 
@@ -104,7 +104,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
 
     void Slap()
     {
-        if (CheckCharacterIsFall() && Input.GetButtonDown("Fire1"))
+        if (CharacterTouchTheGround() && Input.GetButtonDown("Fire1"))
         {
             m_Animator.SetTrigger("Punch");
         }
@@ -114,13 +114,13 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (CheckCharacterIsFall())
+            if (CharacterTouchTheGround())
             {
                 m_Animator.SetTrigger("Jump");
                 m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
             }
 
-            if (!CheckCharacterIsFall() && m_JumpsMade < m_MaximumNumberOfHops)
+            if (!CharacterTouchTheGround() && m_JumpsMade < m_MaximumNumberOfHops)
             {
                 m_JumpsMade++;
                 m_Animator.SetTrigger("Jump");
@@ -131,15 +131,16 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         }
 
         // Restart jumps when touching ground
-        if (CheckCharacterIsFall())
+        if (CharacterTouchTheGround())
             m_JumpsMade = 0;
     }
 
     void CheckMarioIsFall()
     {
-        if (CheckCharacterIsFall()) 
+        m_Animator.SetBool("OnGroundFix", CharacterTouchTheGround());
+        if (CharacterTouchTheGround())
             m_Animator.SetTrigger("OnGround");
-        if (!CheckCharacterIsFall() && m_PlayerRigidbody.velocity.y < m_FallDetection)
+        if (!CharacterTouchTheGround() && m_PlayerRigidbody.velocity.y < m_FallDetection)
             m_Animator.SetBool("Falling", true);
         else
             m_Animator.SetBool("Falling", false);
@@ -151,5 +152,5 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     }
 
     // Utilities
-    bool CheckCharacterIsFall() => Physics.CheckSphere(m_FeetTransform.position, 0.01f, m_FloorMask);
+    bool CharacterTouchTheGround() => Physics.CheckSphere(m_FeetTransform.position, 0.01f, m_FloorMask);
 }
