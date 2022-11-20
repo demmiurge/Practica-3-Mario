@@ -287,7 +287,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6d56fb999e22f94fba55bfc77f7ea99, type: 3}
   m_Name: 
@@ -297,14 +297,19 @@ MonoBehaviour:
   m_PitchRotationalSpeed: 360
   m_MinPitch: -60
   m_MaxPitch: 10
-  m_MinDistance: 3
-  m_MaxDistance: 6
+  m_MinDistance: 1
+  m_MaxDistance: 4
   m_AvoidObjectsLayerMask:
     serializedVersion: 2
     m_Bits: 183
   m_Offset: 0.1
   m_DebugLockAngleKeyCode: 105
   m_DebugLockKeyCode: 111
+--- !u!95 &1452852653 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 6785730832210064588, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+  m_PrefabInstance: {fileID: 6785730830910304609}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1738758069 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6785730832464111316, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
@@ -412,7 +417,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2588395024447768747, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_Constraints
-      value: 80
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 2588395024447768747, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_IsKinematic
@@ -435,16 +440,28 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.75
+      value: -21.75
       objectReference: {fileID: 0}
     - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.25
+      value: 24.5
       objectReference: {fileID: 0}
     - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.5
+      value: 11.25
       objectReference: {fileID: 0}
     - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalRotation.w
@@ -479,8 +496,32 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 963194227}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_Animator
+      value: 
+      objectReference: {fileID: 1452852653}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_RunSpeed
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_JumpForce
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_JumpSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_WalkSpeed
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_FallDetection
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_FloorMask.m_Bits

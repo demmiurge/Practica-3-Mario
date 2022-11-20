@@ -23,11 +23,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     public float m_RunSpeed = 5.0f;
 
     [Header("Jump")]
-    public float m_JumpSpeed = 5.0f;
-    float m_VerticalSpeed = 0.0f;
-    bool m_OnGround = true;
-
-    Vector3 m_MoveVector;
+    public float m_JumpForce = 5.0f;
+    [Range(-1f, -0.0f)] public float m_FallDetection = -0.25f;
+    [Range(1f, 1.25f)] public float m_AirJumpMultiplier = 1.05f;
+    int m_JumpsMade = 0;
+    int m_MaximumNumberOfHops = 2;
 
     void Awake()
     {
@@ -57,31 +57,17 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         bool l_HasMovement = false;
 
         Vector3 l_Movement = Vector3.zero;
+
+        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            l_HasMovement = true;
         if (Input.GetKey(KeyCode.W))
-        {
-            l_HasMovement = true;
             l_Movement = l_ForwardsCamera;
-        }
         if (Input.GetKey(KeyCode.A))
-        {
-            l_HasMovement = true;
             l_Movement -= l_RightCamera;
-        }
         if (Input.GetKey(KeyCode.S))
-        {
-            l_HasMovement = true;
             l_Movement = -l_ForwardsCamera;
-        }
         if (Input.GetKey(KeyCode.D))
-        {
-            l_HasMovement = true;
             l_Movement += l_RightCamera;
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && m_OnGround)
-        {
-            l_HasMovement = true;
-            m_VerticalSpeed = m_JumpSpeed;
-        }
 
         l_Movement.Normalize();
 
@@ -102,27 +88,60 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
             }
         }
 
-        m_Animator.SetFloat("Speed", l_Speed);
-        l_Movement = l_Movement * l_MovementSpeed * Time.deltaTime;
+        if (CheckCharacterIsFall()) 
+            m_Animator.SetFloat("Speed", l_Speed);
+        else
+            m_Animator.SetFloat("Speed", 0);
 
-        m_MoveVector = l_Movement * m_WalkSpeed;
-        m_MoveVector.Normalize();
-        m_PlayerRigidbody.velocity = new Vector3(m_MoveVector.x * m_WalkSpeed, m_PlayerRigidbody.velocity.y, m_MoveVector.z * m_WalkSpeed);
+        l_Movement += l_Movement * l_MovementSpeed;
+        m_PlayerRigidbody.velocity = new Vector3(l_Movement.x, m_PlayerRigidbody.velocity.y, l_Movement.z);
 
-        if (Input.GetKeyDown(KeyCode.Space))
-            if (Physics.CheckSphere(m_FeetTransform.position, 0.1f, m_FloorMask))
-                m_PlayerRigidbody.AddForce(Vector3.up * m_JumpSpeed, ForceMode.Impulse);
+        Jump();
+
+        CheckMarioIsFall();
     }
 
-    private void MovePlayer()
+        
+    private void Jump()
     {
-
-
-        m_MoveVector = transform.TransformDirection(m_PlayerMovementInput) * m_WalkSpeed;
-        m_PlayerRigidbody.velocity = new Vector3(m_MoveVector.x, m_PlayerRigidbody.velocity.y, m_MoveVector.z);
-
         if (Input.GetKeyDown(KeyCode.Space))
-            if (Physics.CheckSphere(m_FeetTransform.position, 0.1f, m_FloorMask))
-                m_PlayerRigidbody.AddForce(Vector3.up * m_JumpSpeed, ForceMode.Impulse);
+        {
+            if (CheckCharacterIsFall())
+            {
+                m_Animator.SetTrigger("Jump");
+                m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
+            }
+
+            if (!CheckCharacterIsFall() && m_JumpsMade < m_MaximumNumberOfHops)
+            {
+                m_JumpsMade++;
+                m_Animator.SetTrigger("Jump");
+                m_Animator.SetInteger("JumpNumber", m_JumpsMade);
+                m_PlayerRigidbody.velocity = Vector3.zero;
+                m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce * m_AirJumpMultiplier, ForceMode.Impulse);
+            }
+        }
+
+        // Restart jumps when touching ground
+        if (CheckCharacterIsFall())
+            m_JumpsMade = 0;
     }
+
+    void CheckMarioIsFall()
+    {
+        if (CheckCharacterIsFall()) 
+            m_Animator.SetTrigger("OnGround");
+        if (!CheckCharacterIsFall() && m_PlayerRigidbody.velocity.y < m_FallDetection)
+            m_Animator.SetBool("Falling", true);
+        else
+            m_Animator.SetBool("Falling", false);
+    }
+
+    void FixedUpdate()
+    {
+        
+    }
+
+    // Utilities
+    bool CheckCharacterIsFall() => Physics.CheckSphere(m_FeetTransform.position, 0.1f, m_FloorMask);
 }
