@@ -91,6 +91,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         l_Movement += l_Movement * l_MovementSpeed;
         m_PlayerRigidbody.velocity = new Vector3(l_Movement.x, m_PlayerRigidbody.velocity.y, l_Movement.z);
 
+        Slap();
+
         Jump();
 
         CheckMarioIsFall();
@@ -98,8 +100,16 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         m_Animator.SetFloat("Speed", l_Speed);
     }
 
+    void Slap()
+    {
+        if (Input.GetButtonDown("Fire1"))
+        {
+            Debug.Log("Punch");
+            m_Animator.SetTrigger("Punch");
+        }
+    }
         
-    private void Jump()
+    void Jump()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
