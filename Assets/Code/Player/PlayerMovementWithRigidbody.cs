@@ -26,6 +26,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     public float m_JumpForce = 5.0f;
     [Range(-2f, -0.0f)] public float m_FallDetection = -1.0f;
     [Range(1f, 1.25f)] public float m_AirJumpMultiplier = 1.05f;
+    [Range(0.001f, 0.1f)] public float m_RadiusSphereTolerance = 0.01f;
     int m_JumpsMade = 0;
     int m_MaximumNumberOfHops = 2;
 
@@ -93,7 +94,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
 
         Debug.Log("TOCA SUELO: " + CharacterTouchTheGround());
 
-        Slap();
+        Punch();
 
         Jump();
 
@@ -102,12 +103,10 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         m_Animator.SetFloat("Speed", l_Speed);
     }
 
-    void Slap()
+    void Punch()
     {
         if (CharacterTouchTheGround() && Input.GetButtonDown("Fire1"))
-        {
             m_Animator.SetTrigger("Punch");
-        }
     }
         
     void Jump()
@@ -153,5 +152,5 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     }
 
     // Utilities
-    bool CharacterTouchTheGround() => Physics.CheckSphere(m_FeetTransform.position, 0.01f, m_FloorMask);
+    bool CharacterTouchTheGround() => Physics.CheckSphere(m_FeetTransform.position, m_RadiusSphereTolerance, m_FloorMask);
 }
