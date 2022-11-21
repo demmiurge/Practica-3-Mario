@@ -30,6 +30,9 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     int m_JumpsMade = 0;
     int m_MaximumNumberOfHops = 2;
 
+    // Utilities
+    bool m_IsDie;
+
     void Awake()
     {
         m_PlayerRigidbody = GetComponent<Rigidbody>();
@@ -92,15 +95,28 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         l_Movement += l_Movement * l_MovementSpeed;
         m_PlayerRigidbody.velocity = new Vector3(l_Movement.x, m_PlayerRigidbody.velocity.y, l_Movement.z);
 
-        Debug.Log("TOCA SUELO: " + CharacterTouchTheGround());
-
         Punch();
 
         Jump();
 
+        Die();
+
         CheckMarioIsFall();
 
         m_Animator.SetFloat("Speed", l_Speed);
+    }
+
+    void Die()
+    {
+        if (Input.GetKeyDown(KeyCode.N)) 
+        {
+            m_Animator.SetBool("Die", true);
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            m_Animator.SetBool("Die", false);
+        }
     }
 
     void Punch()
