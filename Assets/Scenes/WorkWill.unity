@@ -3500,13 +3500,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4343175482998503760}
-  m_LocalRotation: {x: 0.000000057601245, y: -0.70710576, z: 0.00000005760109, w: 0.7071079}
-  m_LocalPosition: {x: -800, y: -0.000061035156, z: 0}
-  m_LocalScale: {x: 0.851819, y: 0.85181886, z: 0.851819}
+  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
   m_Father: {fileID: 435021914}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1001 &3995599946799227892
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3575,7 +3575,7 @@ GameObject:
   - component: {fileID: 3967072843987936234}
   - component: {fileID: 45603545767013455}
   - component: {fileID: 2830217039621134469}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: CoinSmoothUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
