@@ -5,18 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementWithRigidbody : MonoBehaviour
 {
+    [Header("Animator")]
     public Animator m_Animator;
 
-    Rigidbody m_PlayerRigidbody;
-    private Vector3 m_PlayerMovementInput;
-
     [Header("Camera")]
-    [SerializeField] private Camera m_Camera;
-    [SerializeField] private float m_LerpRorationPct = 0.25f;
-
-    [Header("Camera")]
-    [SerializeField] private LayerMask m_FloorMask;
-    [SerializeField] private Transform m_FeetTransform;
+    public Camera m_Camera;
+    public float m_LerpRorationPct = 0.25f;
+    public LayerMask m_FloorMask;
+    public Transform m_FeetTransform;
 
     [Header("Movement")]
     public float m_WalkSpeed = 2.5f;
@@ -24,13 +20,20 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
 
     [Header("Jump")]
     public float m_JumpForce = 5.0f;
-    [Range(-2f, -0.0f)] public float m_FallDetection = -1.0f;
-    [Range(1f, 1.25f)] public float m_AirJumpMultiplier = 1.05f;
-    [Range(0.001f, 0.1f)] public float m_RadiusSphereTolerance = 0.01f;
+    [Range(-2f, -0.0f)] 
+    public float m_FallDetection = -1.0f;
+    [Range(1f, 1.25f)] 
+    public float m_AirJumpMultiplier = 1.05f;
+    [Range(0.001f, 0.1f)] 
+    public float m_RadiusSphereTolerance = 0.01f;
     int m_JumpsMade = 0;
     int m_MaximumNumberOfHops = 2;
 
-    // Utilities
+    // Private variables
+    Vector3 m_PlayerMovementInput;
+
+    Rigidbody m_PlayerRigidbody;
+
     bool m_IsDie;
 
     void Awake()

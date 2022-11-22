@@ -136,7 +136,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b81f36fec05c16e46ac9bd882d4ab594, type: 3}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b81f36fec05c16e46ac9bd882d4ab594, type: 3}
       propertyPath: m_LocalScale.x
@@ -797,6 +797,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3947ea6eb613f0e48bb46a2eca18a86c, type: 3}
+--- !u!1 &1569135449 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6785730832219408046, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+  m_PrefabInstance: {fileID: 6785730830910304609}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1569135450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569135449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841312875bf6d0d458944e53c8671d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CurrentLive: 8
+  m_MaxLive: 8
+  m_MinLive: 0
+  m_IReceivedCures:
+    m_PersistentCalls:
+      m_Calls: []
+  m_TakingDamegeEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_IHaveDiedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!4 &1738758069 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6785730832464111316, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
