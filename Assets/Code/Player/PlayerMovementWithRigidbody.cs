@@ -14,6 +14,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     public LayerMask m_FloorMask;
     public Transform m_FeetTransform;
 
+    [Header("IK Foot")]
+    [Range(0.0f, 1.0f)]
+    public float m_DistanceToGround = 0f;
+    public LayerMask m_PlayerLayerMask;
+
     [Header("Movement")]
     public float m_WalkSpeed = 2.5f;
     public float m_RunSpeed = 5.0f;
@@ -168,6 +173,44 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     void FixedUpdate()
     {
         
+    }
+
+    void OnAnimatorIK(int l_LayerIndex)
+    {
+        if (m_Animator)
+        {
+            m_Animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
+            m_Animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f);
+
+            m_Animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1f);
+            m_Animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1f);
+
+            // Left foot
+            RaycastHit l_Hit;
+            Ray l_Ray = new Ray(m_Animator.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
+            if (Physics.Raycast(l_Ray, out l_Hit, m_DistanceToGround + 1f, m_PlayerLayerMask))
+            {
+                if (l_Hit.transform.tag == "Walkable") {
+                    Vector3 l_FootPosition = l_Hit.point;
+                    l_FootPosition.y += m_DistanceToGround;
+                    m_Animator.SetIKPosition(AvatarIKGoal.LeftFoot, l_FootPosition);
+                    m_Animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, l_Hit.normal));
+                }
+            }
+
+            // Right foot
+            l_Ray = new Ray(m_Animator.GetIKPosition(AvatarIKGoal.RightFoot) + Vector3.up, Vector3.down);
+            if (Physics.Raycast(l_Ray, out l_Hit, m_DistanceToGround + 1f, m_PlayerLayerMask))
+            {
+                if (l_Hit.transform.tag == "Walkable")
+                {
+                    Vector3 l_FootPosition = l_Hit.point;
+                    l_FootPosition.y += m_DistanceToGround;
+                    m_Animator.SetIKPosition(AvatarIKGoal.RightFoot, l_FootPosition);
+                    m_Animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, l_Hit.normal));
+                }
+            }
+        }
     }
 
     // Utilities
