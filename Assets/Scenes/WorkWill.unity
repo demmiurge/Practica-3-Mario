@@ -4986,6 +4986,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 963194227}
     - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_WalkSpeed
+      value: 0.125
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_DistanceToGround
       value: 0.05
       objectReference: {fileID: 0}
