@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMovementWithRigidbody : MonoBehaviour
+public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 {
     public enum PunchType
     {
@@ -81,6 +81,9 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
 
         m_StartPosition = transform.position;
         m_StartRotation = transform.rotation;
+
+        GameController.GetGameController().AddRestartGameElements(this);
+        GameController.GetGameController().SetPlayer(this);
     }
 
     // Update is called once per frame
