@@ -1037,6 +1037,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MarioMapa
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: acc36eee311f0dd428f5959c5f4b3d97, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: acc36eee311f0dd428f5959c5f4b3d97, type: 3}
       propertyPath: m_RootOrder
       value: 2
