@@ -5,6 +5,13 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementWithRigidbody : MonoBehaviour
 {
+    public enum PunchType
+    {
+        Left_Hand = 0,
+        Right_Hand,
+        Foot
+    }
+
     [Header("Animator")]
     public Animator m_Animator;
 
@@ -34,12 +41,29 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     int m_JumpsMade = 0;
     int m_MaximumNumberOfHops = 2;
 
+    [Header("Punch")]
+    public Collider m_LeftHandCollider;
+    public Collider m_RightHandCollider;
+    public Collider m_RightFootCollider;
+    public float m_ComboPunchTime = 2.5f;
+    float m_ComboPunchCurrentTime;
+    PunchType m_CurrentComboPunch;
+    bool m_IsPunchActive = false;
+
+    [Header("Elevator")]
+    public float m_ElevatorDotAngle = 0.95f;
+    public Collider m_CurrentElevatorCollider = null;
+    public float m_BridgeForce = 2.5f;
+
     // Private variables
     Vector3 m_PlayerMovementInput;
 
     Rigidbody m_PlayerRigidbody;
 
     bool m_IsDie;
+
+    Vector3 m_StartPosition;
+    Quaternion m_StartRotation;
 
     void Awake()
     {
@@ -49,7 +73,14 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        m_LeftHandCollider.gameObject.SetActive(false);
+        m_RightHandCollider.gameObject.SetActive(false);
+        m_RightFootCollider.gameObject.SetActive(false);
+
+        m_ComboPunchCurrentTime -= m_ComboPunchTime;
+
+        m_StartPosition = transform.position;
+        m_StartRotation = transform.rotation;
     }
 
     // Update is called once per frame
@@ -103,7 +134,18 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         l_Movement += l_Movement * l_MovementSpeed;
         m_PlayerRigidbody.velocity = new Vector3(l_Movement.x, m_PlayerRigidbody.velocity.y, l_Movement.z);
 
-        Punch();
+        //Punch Input
+        if (Input.GetButtonDown("Fire1") && CanPunch())
+        {
+            if (MustRestartComboPunch())
+            {
+                SetComboPucnch(PunchType.Right_Hand);
+            }
+            else
+                NextComboPunch();
+        }
+
+        //Punch();
 
         Jump();
 
@@ -127,11 +169,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
         }
     }
 
-    void Punch()
+    /*void Punch()
     {
         if (CharacterTouchTheGround() && Input.GetButtonDown("Fire1"))
             m_Animator.SetTrigger("Punch");
-    }
+    }*/
         
     void Jump()
     {
@@ -210,6 +252,146 @@ public class PlayerMovementWithRigidbody : MonoBehaviour
                     m_Animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, l_Hit.normal));
                 }
             }
+        }
+    }
+
+    //Punch
+    public void SetPunchActiveType(PunchType PunchType, bool Active)
+    {
+        if (PunchType == PunchType.Left_Hand)
+        {
+            m_LeftHandCollider.gameObject.SetActive(Active);
+        }
+        else if (PunchType == PunchType.Right_Hand)
+        {
+            m_RightHandCollider.gameObject.SetActive(Active);
+        }
+        else if (PunchType == PunchType.Foot)
+        {
+            m_RightFootCollider.gameObject.SetActive(Active);
+        }
+    }
+
+    bool CanPunch()
+    {
+        return !m_IsPunchActive;
+    }
+
+    bool MustRestartComboPunch()
+    {
+        return (Time.time - m_ComboPunchCurrentTime) > m_ComboPunchTime;
+    }
+
+    public void SetPunchActvie(bool PunchActive)
+    {
+        m_IsPunchActive = PunchActive;
+    }
+
+    void NextComboPunch()
+    {
+        if (m_CurrentComboPunch == PunchType.Right_Hand)
+        {
+            SetComboPucnch(PunchType.Left_Hand);
+        }
+        else if (m_CurrentComboPunch == PunchType.Left_Hand)
+        {
+            SetComboPucnch(PunchType.Foot);
+        }
+        else if (m_CurrentComboPunch == PunchType.Foot)
+        {
+            SetComboPucnch(PunchType.Right_Hand);
+        }
+    }
+
+    void SetComboPucnch(PunchType PunchType)
+    {
+        m_CurrentComboPunch = PunchType;
+        m_ComboPunchCurrentTime = Time.time;
+        m_IsPunchActive = true;
+        if (m_CurrentComboPunch == PunchType.Right_Hand)
+        {
+            m_Animator.SetTrigger("Right Hand");
+        }
+        else if (m_CurrentComboPunch == PunchType.Left_Hand)
+        {
+            m_Animator.SetTrigger("Left Hand");
+        }
+        else if (m_CurrentComboPunch == PunchType.Foot)
+        {
+            m_Animator.SetTrigger("Kick");
+        }
+    }
+
+    //Restart
+    public void RestartGame()
+    {
+        transform.position = m_StartPosition;
+        transform.rotation = m_StartRotation;
+    }
+
+    //Platformers
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Elevator" && CanAttachToElevator(other))
+        {
+            AttachToElevator(other);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Elevator" && other == m_CurrentElevatorCollider)
+        {
+            DetachElevator();
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Elevator")
+        {
+            if (m_CurrentElevatorCollider != null && Vector3.Dot(other.transform.up, Vector3.up) < m_ElevatorDotAngle)
+            {
+                DetachElevator();
+            }
+            if (CanAttachToElevator(other))
+            {
+                AttachToElevator(other);
+            }
+        }
+    }
+
+    bool CanAttachToElevator(Collider other)
+    {
+        return m_CurrentElevatorCollider == null && Vector3.Dot(other.transform.up, Vector3.up) >= m_ElevatorDotAngle;
+    }
+
+    void AttachToElevator(Collider other)
+    {
+        transform.SetParent(other.transform);
+        m_CurrentElevatorCollider = other;
+    }
+
+    void DetachElevator()
+    {
+        transform.SetParent(null);
+        m_CurrentElevatorCollider = null;
+    }
+
+    void LateUpdate()
+    {
+        if (m_CurrentElevatorCollider != null)
+        {
+            Vector3 l_EulerRotation = transform.rotation.eulerAngles;
+            transform.rotation = Quaternion.Euler(0.0f, l_EulerRotation.y, 0.0f);
+        }
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        if (hit.gameObject.tag == "Bridge")
+        {
+            hit.gameObject.GetComponent<Rigidbody>().AddForceAtPosition(-hit.normal * m_BridgeForce, hit.point);
         }
     }
 
