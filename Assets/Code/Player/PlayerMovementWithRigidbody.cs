@@ -12,6 +12,15 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         Foot
     }
 
+    public enum JumpType
+    {
+        Single = 0,
+        Double,
+        Triple,
+        Long,
+        Wall
+    }
+
     [Header("Animator")]
     public Animator m_Animator;
 
@@ -40,6 +49,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     public float m_RadiusSphereTolerance = 0.01f;
     int m_JumpsMade = 0;
     int m_MaximumNumberOfHops = 2;
+    bool m_IsJumpActive = false;
+    public float m_ComboJumpTime = 2.5f;
+    float m_ComboJumpCurrentTime;
+    JumpType m_CurrentJumpType;
+
 
     [Header("Punch")]
     public Collider m_LeftHandCollider;
@@ -78,6 +92,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         m_RightFootCollider.gameObject.SetActive(false);
 
         m_ComboPunchCurrentTime -= m_ComboPunchTime;
+        m_ComboJumpCurrentTime -= m_ComboJumpTime;
 
         m_StartPosition = transform.position;
         m_StartRotation = transform.rotation;
@@ -148,9 +163,21 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 NextComboPunch();
         }
 
-        //Punch();
-
-        Jump();
+        //Jump input
+        if(Input.GetKeyDown(KeyCode.Space) && CanJump())
+        {
+            if (MustRestartJumpCombo())
+            {
+                SetJumpType(JumpType.Single);
+                m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
+            }
+            else
+            {
+                NextJump();
+                m_PlayerRigidbody.velocity = Vector3.zero;
+                m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce * m_AirJumpMultiplier, ForceMode.Impulse);
+            }
+        }
 
         Die();
 
@@ -171,18 +198,13 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             m_Animator.SetBool("Die", false);
         }
     }
-
-    /*void Punch()
-    {
-        if (CharacterTouchTheGround() && Input.GetButtonDown("Fire1"))
-            m_Animator.SetTrigger("Punch");
-    }*/
         
-    void Jump()
+    /*void Jump()
     {
         // Restart jumps when touching ground
         if (CharacterTouchTheGround())
         {
+            Debug.Log("Jumps restarted");
             m_JumpsMade = 0;
             m_Animator.SetInteger("JumpNumber", 0);
         }
@@ -191,20 +213,22 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             if (CharacterTouchTheGround())
             {
-                m_Animator.SetTrigger("Jump");
+                m_Animator.SetTrigger("Single");
+                SetJumpType(JumpType.Single);
                 m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
             }
 
             if (!CharacterTouchTheGround() && m_JumpsMade < m_MaximumNumberOfHops)
             {
                 m_JumpsMade++;
-                m_Animator.SetTrigger("Jump");
+                //m_Animator.SetTrigger("Jump");
+                NextJump();
                 m_Animator.SetInteger("JumpNumber", m_JumpsMade);
                 m_PlayerRigidbody.velocity = Vector3.zero;
                 m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce * m_AirJumpMultiplier, ForceMode.Impulse);
             }
         }
-    }
+    }*/
 
     void CheckMarioIsFall()
     {
@@ -256,6 +280,44 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 }
             }
         }
+    }
+
+    //Jumps
+
+    public void SetJumpActiveType(JumpType jumpType)
+    {
+        m_CurrentJumpType = jumpType;
+    }
+    public void SetJumpType(JumpType JumpType)
+    {
+        m_CurrentJumpType = JumpType;
+        m_ComboJumpCurrentTime = Time.time;
+        m_IsJumpActive = true;
+        if (JumpType == JumpType.Single) m_Animator.SetTrigger("SingleJump");
+        else if (JumpType == JumpType.Double) m_Animator.SetTrigger("DoubleJump");
+        else if (JumpType == JumpType.Triple) m_Animator.SetTrigger("TripleJump");
+    }
+
+    bool MustRestartJumpCombo()
+    {
+        return (Time.time - m_ComboJumpCurrentTime) > m_ComboJumpTime;
+    }
+
+    bool CanJump()
+    {
+        return !m_IsJumpActive;
+    }
+
+    public void SetJumpActive(bool jumpActive)
+    {
+        m_IsJumpActive = jumpActive;
+    }
+
+    void NextJump()
+    {
+        if (m_CurrentJumpType == JumpType.Single) SetJumpType(JumpType.Double);
+        else if (m_CurrentJumpType == JumpType.Double) SetJumpType(JumpType.Triple);
+        else if (m_CurrentJumpType == JumpType.Triple) SetJumpType(JumpType.Single);
     }
 
     //Punch
