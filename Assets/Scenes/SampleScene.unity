@@ -557,15 +557,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.884663
+      value: -21.25
       objectReference: {fileID: 0}
     - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 9.028
+      value: 26.18
       objectReference: {fileID: 0}
     - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.307
+      value: 7.08
       objectReference: {fileID: 0}
     - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalRotation.w
@@ -600,8 +600,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 963194227}
     - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_RunSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_JumpForce
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_WalkSpeed
-      value: 0.5
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LeftHandCollider
@@ -1205,7 +1213,7 @@ MonoBehaviour:
   m_MinPitch: -60
   m_MaxPitch: 10
   m_MinDistance: 3
-  m_MaxDistance: 8
+  m_MaxDistance: 6
   m_AvoidObjectsLayerMask:
     serializedVersion: 2
     m_Bits: 55

@@ -53,6 +53,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     public float m_ComboJumpTime = 2.5f;
     float m_ComboJumpCurrentTime;
     JumpType m_CurrentJumpType;
+    bool m_Falling = false;
 
 
     [Header("Punch")]
@@ -164,7 +165,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
 
         //Jump input
-        if(Input.GetKeyDown(KeyCode.Space) && CanJump())
+        if(Input.GetKeyDown(KeyCode.Space) && CanJump() && m_Falling == false)
         {
             if (MustRestartJumpCombo())
             {
@@ -234,9 +235,15 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     {
         m_Animator.SetBool("OnGround", CharacterTouchTheGround());
         if (!CharacterTouchTheGround() && m_PlayerRigidbody.velocity.y < m_FallDetection)
+        {
             m_Animator.SetBool("Falling", true);
+            m_Falling = true;
+        }
         else
+        {
+            m_Falling = false;
             m_Animator.SetBool("Falling", false);
+        }
     }
 
     void FixedUpdate()
