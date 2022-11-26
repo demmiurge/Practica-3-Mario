@@ -16,9 +16,6 @@ public class CoinValue : MonoBehaviour
     public List<int> m_ValueCoins;
     public List<Material> m_MaterialsCoins;
 
-    [Header("Manager NEED REFACTOR")] 
-    public CoinStarManager m_CoinStarManager;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -26,18 +23,5 @@ public class CoinValue : MonoBehaviour
         m_CoinMaterial.GetComponent<Renderer>().material = m_MaterialsCoins[(int)m_TypeCoin];
     }
 
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            m_CoinStarManager.AddCoinds(m_CoinValue);
-            gameObject.SetActive(false);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public int GetCoinValue() => m_CoinValue;
 }

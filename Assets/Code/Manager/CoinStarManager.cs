@@ -24,6 +24,7 @@ public class CoinStarManager : MonoBehaviour
     public void AddCoinds(int l_Coins)
     {
         m_Coins += l_Coins;
+        Debug.Log("HE1");
         UpdateCoins();
     }
 
@@ -35,12 +36,14 @@ public class CoinStarManager : MonoBehaviour
 
     void UpdateCoins()
     {
-        m_TextCoins.GetComponent<TextMeshPro>().text = m_Coins.ToString();
+        Debug.Log("HE1");
+        m_TextCoins.GetComponent<TextMeshProUGUI>().text = m_Coins.ToString();
+        Debug.Log("HE2");
     }
 
     void UpdateStars()
     {
-        m_TextStars.GetComponent<TextMeshPro>().text = m_Stars.ToString();
+        m_TextStars.GetComponent<TextMeshProUGUI>().text = m_Stars.ToString();
     }
 
     // Update is called once per frame

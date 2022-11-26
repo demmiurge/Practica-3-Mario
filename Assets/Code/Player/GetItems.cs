@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GetItems : MonoBehaviour
 {
+    public CoinStarManager m_CoinStarManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,6 +16,15 @@ public class GetItems : MonoBehaviour
     void Update()
     {
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Coin") 
+        {
+            m_CoinStarManager.AddCoinds(other.GetComponent<CoinValue>().GetCoinValue());
+            other.gameObject.SetActive(false);
+        }
     }
 
 
