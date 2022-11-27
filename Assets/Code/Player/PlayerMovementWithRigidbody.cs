@@ -40,7 +40,9 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     public float m_RunSpeed = 5.0f;
 
     [Header("Jump")]
-    public float m_JumpForce = 5.0f;
+    public float m_FirstJumpForce = 3.0f;
+    public float m_SecondJumpForce = 4.0f;
+    public float m_ThirdJumpForce = 6.0f;
     [Range(-2f, -0.0f)] 
     public float m_FallDetection = -1.0f;
     [Range(1f, 1.25f)] 
@@ -170,13 +172,13 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             if (MustRestartJumpCombo())
             {
                 SetJumpType(JumpType.Single);
-                m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse);
+                // m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse); // DEPRECATED
             }
             else
             {
                 NextJump();
                 m_PlayerRigidbody.velocity = Vector3.zero;
-                m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce * m_AirJumpMultiplier, ForceMode.Impulse);
+                // m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce * m_AirJumpMultiplier, ForceMode.Impulse); // DEPRECATED
             }
         }
 
@@ -199,7 +201,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             m_Animator.SetBool("Die", false);
         }
     }
-        
+       
+    // DEPRECATED
     /*void Jump()
     {
         // Restart jumps when touching ground
@@ -289,20 +292,33 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
     }
 
-    //Jumps
+    // Jumps
 
     public void SetJumpActiveType(JumpType jumpType)
     {
         m_CurrentJumpType = jumpType;
     }
+
     public void SetJumpType(JumpType JumpType)
     {
         m_CurrentJumpType = JumpType;
         m_ComboJumpCurrentTime = Time.time;
         m_IsJumpActive = true;
-        if (JumpType == JumpType.Single) m_Animator.SetTrigger("SingleJump");
-        else if (JumpType == JumpType.Double) m_Animator.SetTrigger("DoubleJump");
-        else if (JumpType == JumpType.Triple) m_Animator.SetTrigger("TripleJump");
+        if (JumpType == JumpType.Single)
+        {
+            m_PlayerRigidbody.AddForce(Vector3.up * m_FirstJumpForce, ForceMode.Impulse);
+            m_Animator.SetTrigger("SingleJump");
+        }
+        else if (JumpType == JumpType.Double)
+        {
+            m_PlayerRigidbody.AddForce(Vector3.up * m_SecondJumpForce, ForceMode.Impulse);
+            m_Animator.SetTrigger("DoubleJump");
+        }
+        else if (JumpType == JumpType.Triple)
+        {
+            m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce, ForceMode.Impulse);
+            m_Animator.SetTrigger("TripleJump");
+        }
     }
 
     bool MustRestartJumpCombo()
@@ -327,7 +343,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         else if (m_CurrentJumpType == JumpType.Triple) SetJumpType(JumpType.Single);
     }
 
-    //Punch
+    // Punch
     public void SetPunchActiveType(PunchType PunchType, bool Active)
     {
         if (PunchType == PunchType.Left_Hand)

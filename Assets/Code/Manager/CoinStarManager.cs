@@ -9,8 +9,8 @@ public class CoinStarManager : MonoBehaviour
     private int m_Stars;
 
     [Header("UI")]
-    public GameObject m_TextCoins;
-    public GameObject m_TextStars;
+    public TextMeshProUGUI m_TextCoins;
+    public TextMeshProUGUI m_TextStars;
 
     // Start is called before the first frame update
     void Start()
@@ -36,14 +36,12 @@ public class CoinStarManager : MonoBehaviour
 
     void UpdateCoins()
     {
-        Debug.Log("HE1");
-        m_TextCoins.GetComponent<TextMeshProUGUI>().text = m_Coins.ToString();
-        Debug.Log("HE2");
+        m_TextCoins.text = m_Coins.ToString();
     }
 
     void UpdateStars()
     {
-        m_TextStars.GetComponent<TextMeshProUGUI>().text = m_Stars.ToString();
+        m_TextStars.text = m_Stars.ToString();
     }
 
     // Update is called once per frame
