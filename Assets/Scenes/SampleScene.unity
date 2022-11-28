@@ -1187,7 +1187,7 @@ MonoBehaviour:
   m_YawRotationalSpeed: 360
   m_PitchRotationalSpeed: 180
   m_MinPitch: -60
-  m_MaxPitch: 10
+  m_MaxPitch: 5
   m_MinDistance: 3
   m_MaxDistance: 6
   m_AvoidObjectsLayerMask:
