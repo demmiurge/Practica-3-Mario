@@ -8907,18 +8907,6 @@ PrefabInstance:
       propertyPath: m_ImageCurrentLive
       value: 
       objectReference: {fileID: 1219990819}
-    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_BaseColorMaxLive.b
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_BaseColorMaxLive.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_TimeBetweenRemoveLifeTolerance
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 4867937171086539704, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_CoinStarManager
       value: 

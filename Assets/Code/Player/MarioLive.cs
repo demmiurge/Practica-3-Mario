@@ -17,6 +17,7 @@ public class MarioLive : MonoBehaviour
     public AnimationClip m_HidePower;
     [Range(8.0f, 32.0f)] public float m_TimeToDisappear = 8.0f;
     public float m_TimeBetweenRemoveLifeTolerance = 0.5f;
+    public float m_TimeBetweenAddLifeTolerance = 0.5f;
 
     [Header("Health HUD Colors")]
     public Image m_ImageCurrentLive;
@@ -114,10 +115,10 @@ public class MarioLive : MonoBehaviour
         {
             m_HUDIsVisible = true;
             m_LifePower.Play(m_ShowPower.name);
-            StartCoroutine(CanReturnToGetHeal(m_ShowPower.length + m_TimeBetweenRemoveLifeTolerance, l_CuresCaused));
+            StartCoroutine(CanReturnToGetHeal(m_ShowPower.length + m_TimeBetweenAddLifeTolerance, l_CuresCaused));
         }
         else
-            StartCoroutine(CanReturnToGetHeal( m_TimeBetweenRemoveLifeTolerance, l_CuresCaused));
+            StartCoroutine(CanReturnToGetHeal(m_TimeBetweenAddLifeTolerance, l_CuresCaused));
     }
 
     IEnumerator CanReturnToGetHeal(float l_Duration, float l_CuresCaused)
