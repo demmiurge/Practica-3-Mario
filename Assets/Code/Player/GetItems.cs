@@ -25,6 +25,12 @@ public class GetItems : MonoBehaviour
             m_CoinStarManager.AddCoinds(other.GetComponent<CoinValue>().GetCoinValue());
             other.gameObject.SetActive(false);
         }
+
+        if (other.tag == "Star")
+        {
+            m_CoinStarManager.AddStars(1);
+            other.gameObject.SetActive(false);
+        }
     }
 
 

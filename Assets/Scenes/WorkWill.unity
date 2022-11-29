@@ -1614,7 +1614,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh83566
+  m_Name: pb_Mesh21404
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2017,7 +2017,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh83488
+  m_Name: pb_Mesh21326
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2635,7 +2635,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh83718
+  m_Name: pb_Mesh21556
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2843,7 +2843,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.49019608, b: 0.012860743, a: 1}
+  m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4021,7 +4021,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh83346
+  m_Name: pb_Mesh21184
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -4526,7 +4526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 0.0013723373, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4538,7 +4538,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 0.25
+  m_FillAmount: 0.625
   m_FillClockwise: 1
   m_FillOrigin: 2
   m_UseSpriteMesh: 1
@@ -6724,7 +6724,7 @@ RectTransform:
   - {fileID: 1219990818}
   m_Father: {fileID: 317511270}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -14.782497}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 5, y: -100}
@@ -6739,12 +6739,13 @@ Animation:
   m_GameObject: {fileID: 1847836840}
   m_Enabled: 1
   serializedVersion: 3
-  m_Animation: {fileID: 0}
+  m_Animation: {fileID: 7400000, guid: d2d27d325a4513f4bb6d61aa4b7ea9df, type: 2}
   m_Animations:
-  - {fileID: 7400000, guid: ce5b17423f72a9c49a0fd9f48769b010, type: 2}
+  - {fileID: 7400000, guid: 3b1ed940e4eeb554a8dd34c17a5f7ac7, type: 2}
   - {fileID: 7400000, guid: bc2f2af49325cb147907dd9922a60323, type: 2}
+  - {fileID: 7400000, guid: d2d27d325a4513f4bb6d61aa4b7ea9df, type: 2}
   m_WrapMode: 0
-  m_PlayAutomatically: 0
+  m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
 --- !u!1 &1878251471
@@ -8894,6 +8895,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_LifePower
+      value: 
+      objectReference: {fileID: 1847836842}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_ImageMaxLive
+      value: 
+      objectReference: {fileID: 890949205}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_ImageCurrentLive
+      value: 
+      objectReference: {fileID: 1219990819}
     - target: {fileID: 4867937171086539704, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_CoinStarManager
       value: 
@@ -8946,30 +8959,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7078734995604075073, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
-    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_FallDetection
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_FirstJumpForce
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_ThirdJumpForce
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_SecondJumpForce
-      value: 5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
 --- !u!1001 &6880492383324287799
