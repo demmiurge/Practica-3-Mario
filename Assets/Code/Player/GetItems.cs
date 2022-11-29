@@ -29,7 +29,7 @@ public class GetItems : MonoBehaviour
         if (other.tag == "Coin") 
         {
             m_CoinStarManager.AddCoinds(other.GetComponent<CoinValue>().GetCoinValue());
-            m_MarioLive.Healing(other.GetComponent<CoinValue>().GetCoinLife());
+            m_MarioLive.SetHealing(other.GetComponent<CoinValue>().GetCoinLife());
             other.gameObject.SetActive(false);
         }
 

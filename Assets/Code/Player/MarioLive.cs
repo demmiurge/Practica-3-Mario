@@ -68,24 +68,25 @@ public class MarioLive : MonoBehaviour
 
     public void UpdateLiveParametersHUD()
     {
+        // We update the fill first, it can be smoothed
         m_ImageCurrentLive.fillAmount = m_CurrentLive / m_MaxLive;
 
-        if (m_CurrentLive > m_MaxLive / 2 + m_MaxLive / 4)
+        if (m_CurrentLive > m_MaxLive / 2 + m_MaxLive / 4) // Has more than 75% life
         {
             m_ImageCurrentLive.color = m_BaseColorLive;
             m_ImageMaxLive.color = m_BaseColorMaxLive;
         }
-        else if (m_CurrentLive > m_MaxLive / 2)
+        else if (m_CurrentLive > m_MaxLive / 2) // Has more than 50% life
         {
             m_ImageCurrentLive.color = m_FirstColorLive;
             m_ImageMaxLive.color = m_FirstColorMaxLive;
         } 
-        else if (m_CurrentLive > m_MaxLive / 4)
+        else if (m_CurrentLive > m_MaxLive / 4) // Has more than 25% life
         {
             m_ImageCurrentLive.color = m_SecondColorLive;
             m_ImageMaxLive.color = m_SecondColorMaxLive;
         }
-        else
+        else // The life that still remains
         {
             m_ImageCurrentLive.color = m_ThirdColorLive;
             m_ImageMaxLive.color = m_ThirdColorMaxLive;
@@ -95,15 +96,12 @@ public class MarioLive : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
-        {
-            Hit(1);
-        }
+            SetDamage(1);
 
         if (Input.GetKeyDown(KeyCode.H))
-        {
-            Healing(1);
-        }
+            SetHealing(1);
 
+        // Timer to control how long the life interface is present
         if (!m_OnStartCounter) return;
 
         m_TimerHUD += Time.deltaTime;
@@ -116,7 +114,8 @@ public class MarioLive : MonoBehaviour
         m_OnStartCounter = false;
     }
 
-    public void Healing(float l_CuresCaused)
+    // Accessible method to add cure
+    public void SetHealing(float l_CuresCaused)
     {
         if (m_MaxCurrentLife) return;
 
@@ -152,7 +151,8 @@ public class MarioLive : MonoBehaviour
         m_MaxCurrentLife = m_CurrentLive >= m_MaxLive;
     }
 
-    public void Hit(float l_DamageCaused)
+    // Accessible method to add damage
+    public void SetDamage(float l_DamageCaused)
     {
         if (!m_CanTakeDamage) return;
         
@@ -173,13 +173,13 @@ public class MarioLive : MonoBehaviour
     {
         m_TimerHUD = 0;
         yield return new WaitForSeconds(l_Duration);
-        CalculateNewLife(l_DamageCaused);
+        Damage(l_DamageCaused);
         UpdateLiveParametersHUD();
         m_CanTakeDamage = true;
         m_OnStartCounter = true;
     }
 
-    void CalculateNewLife(float l_DamageCaused)
+    void Damage(float l_DamageCaused)
     {
         if (m_CurrentLive - l_DamageCaused > m_MinLive)
             Hitted(l_DamageCaused);
