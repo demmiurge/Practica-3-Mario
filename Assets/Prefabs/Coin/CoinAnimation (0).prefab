@@ -100,6 +100,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: d37494c2177c30647a342195a0824690, type: 2}
   - {fileID: 2100000, guid: 0df3fd83b0bb6a94e93270aacf4d7e54, type: 2}
   - {fileID: 2100000, guid: 5d79f0198ee891f43b0696a7c938697e, type: 2}
+  m_PointsOfLifeRegenerate: 010000000200000005000000
 --- !u!114 &6304287239494617227
 MonoBehaviour:
   m_ObjectHideFlags: 0

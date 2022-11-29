@@ -20,10 +20,12 @@ public class MarioLive : MonoBehaviour
 
     [Header("Health HUD Colors")]
     public Image m_ImageCurrentLive;
+    public Color m_BaseColorLive = new Color(0, 0, 1, 1);
     public Color m_FirstColorLive = new Color(0,1,0,1);
     public Color m_SecondColorLive = new Color(1, 1, 0, 1);
     public Color m_ThirdColorLive = new Color(1, 0, 0, 1);
     public Image m_ImageMaxLive;
+    public Color m_BaseColorMaxLive = new Color(0, 0, 0.5f, 1);
     public Color m_FirstColorMaxLive = new Color(0, 0.5f, 0, 1);
     public Color m_SecondColorMaxLive = new Color(0.5f, 0.5f, 0, 1);
     public Color m_ThirdColorMaxLive = new Color(0.5f, 0, 0, 1);
@@ -59,7 +61,12 @@ public class MarioLive : MonoBehaviour
     {
         m_ImageCurrentLive.fillAmount = m_CurrentLive / m_MaxLive;
 
-        if (m_CurrentLive > m_MaxLive / 2)
+        if (m_CurrentLive > m_MaxLive / 2 + m_MaxLive / 4)
+        {
+            m_ImageCurrentLive.color = m_BaseColorLive;
+            m_ImageMaxLive.color = m_BaseColorMaxLive;
+        }
+        else if (m_CurrentLive > m_MaxLive / 2)
         {
             m_ImageCurrentLive.color = m_FirstColorLive;
             m_ImageMaxLive.color = m_FirstColorMaxLive;
