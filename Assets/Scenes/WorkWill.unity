@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645251, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427188, b: 0.56452495, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4839,7 +4839,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.49999997, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 1.7425, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 1.7424998, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -8907,6 +8907,10 @@ PrefabInstance:
       propertyPath: m_ImageCurrentLive
       value: 
       objectReference: {fileID: 1219990819}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_TimeBetweenRemoveLifeTolerance
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4867937171086539704, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_CoinStarManager
       value: 

@@ -9,6 +9,7 @@ public class MarioLive : MonoBehaviour
     private bool m_CanTakeDamage = false;
     private bool m_HUDIsVisible = false;
     private bool m_OnStartCounter = false;
+    private bool m_MaxCurrentLife = false;
     private float m_TimerHUD;
 
     [Header("Health HUD")] 
@@ -51,8 +52,15 @@ public class MarioLive : MonoBehaviour
 
         m_CanTakeDamage = true; // Whenever they start they can take damage
 
-        if (m_CurrentLive > m_MaxLive)
+        if (m_CurrentLive >= m_MaxLive)
+        {
             m_CurrentLive = m_MaxLive;
+            m_MaxCurrentLife = true;
+        }
+        else
+        {
+            m_MaxCurrentLife = false;
+        }
     }
 
     public void ChangeInvincibilityStatus(bool l_CanTakeDamage) => m_CanTakeDamage = l_CanTakeDamage;
@@ -111,6 +119,8 @@ public class MarioLive : MonoBehaviour
 
     public void Healing(float l_CuresCaused)
     {
+        if (m_MaxCurrentLife) return;
+
         if (!m_HUDIsVisible)
         {
             m_HUDIsVisible = true;
@@ -136,13 +146,20 @@ public class MarioLive : MonoBehaviour
         else
             m_CurrentLive += l_CuresCaused;
 
+        if (m_CurrentLive >= m_MaxLive)
+            m_MaxCurrentLife = true;
+        else
+            m_MaxCurrentLife = false;
+
         m_IReceivedCures?.Invoke();
     }
 
     public void Hit(float l_DamageCaused)
     {
         if (!m_CanTakeDamage) return;
+        
         m_CanTakeDamage = false;
+        m_MaxCurrentLife = false;
 
         if (!m_HUDIsVisible)
         {
