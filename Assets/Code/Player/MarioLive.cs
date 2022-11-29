@@ -92,7 +92,7 @@ public class MarioLive : MonoBehaviour
         }
     }
 
-    void Update() // FEO
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
@@ -104,17 +104,16 @@ public class MarioLive : MonoBehaviour
             Healing(1);
         }
 
-        if (m_OnStartCounter)
-        {
-            m_TimerHUD += Time.deltaTime;
-            if (m_TimerHUD >= m_TimeToDisappear)
-            {
-                m_TimerHUD = 0;
-                m_LifePower.Play(m_HidePower.name);
-                m_HUDIsVisible = false;
-                m_OnStartCounter = false;
-            }
-        }
+        if (!m_OnStartCounter) return;
+
+        m_TimerHUD += Time.deltaTime;
+
+        if (!(m_TimerHUD >= m_TimeToDisappear)) return;
+
+        m_TimerHUD = 0;
+        m_LifePower.Play(m_HidePower.name);
+        m_HUDIsVisible = false;
+        m_OnStartCounter = false;
     }
 
     public void Healing(float l_CuresCaused)
@@ -137,6 +136,7 @@ public class MarioLive : MonoBehaviour
         yield return new WaitForSeconds(l_Duration);
         Heal(l_CuresCaused);
         UpdateLiveParametersHUD();
+        m_OnStartCounter = true;
     }
 
     void Heal(float l_CuresCaused)
@@ -144,14 +144,12 @@ public class MarioLive : MonoBehaviour
         if (m_CurrentLive + l_CuresCaused > m_MaxLive)
             m_CurrentLive = m_MaxLive;
         else
+        {
+            m_IReceivedCures?.Invoke();
             m_CurrentLive += l_CuresCaused;
+        }
 
-        if (m_CurrentLive >= m_MaxLive)
-            m_MaxCurrentLife = true;
-        else
-            m_MaxCurrentLife = false;
-
-        m_IReceivedCures?.Invoke();
+        m_MaxCurrentLife = m_CurrentLive >= m_MaxLive;
     }
 
     public void Hit(float l_DamageCaused)
@@ -192,14 +190,12 @@ public class MarioLive : MonoBehaviour
     void Hitted(float l_DamageCaused)
     {
         m_CurrentLive -= l_DamageCaused;
-        Debug.Log("Slap me more Veronika");
         m_TakingDamegeEvent?.Invoke();
     }
 
     void Die()
     {
         m_CurrentLive = m_MinLive;
-        Debug.Log("I die");
         m_IHaveDiedEvent?.Invoke();
     }
 }
