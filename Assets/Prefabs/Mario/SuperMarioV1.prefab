@@ -427,7 +427,7 @@ MonoBehaviour:
   m_ShowPower: {fileID: 7400000, guid: 3b1ed940e4eeb554a8dd34c17a5f7ac7, type: 2}
   m_HidePower: {fileID: 7400000, guid: bc2f2af49325cb147907dd9922a60323, type: 2}
   m_TimeToDisappear: 8
-  m_TimeBetweenRemoveLifeTolerance: 0.25
+  m_TimeBetweenRemoveLifeTolerance: 0
   m_TimeBetweenAddLifeTolerance: 0
   m_ImageCurrentLive: {fileID: 0}
   m_BaseColorLive: {r: 0, g: 0, b: 1, a: 1}
