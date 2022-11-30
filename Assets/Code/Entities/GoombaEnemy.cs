@@ -58,6 +58,7 @@ public class GoombaEnemy : MonoBehaviour
                 UpdateAttackState();
                 break;
         }
+        Debug.Log(m_CurrentPatrolTargetID);
     }
 
     void UpdatePatrolState()
@@ -74,7 +75,10 @@ public class GoombaEnemy : MonoBehaviour
 
     void UpdateAlertState()
     {
-
+        if(!SeesPlayer())
+        {
+            SetPatrolState();
+        }
     }
 
     void UpdateChaseState()
@@ -104,6 +108,7 @@ public class GoombaEnemy : MonoBehaviour
         if(m_CurrentPatrolTargetID >= m_PatrolTargets.Count)
         {
             m_CurrentPatrolTargetID = 0;
+            Debug.Log("arrived");
         }
         m_NavMeshAgent.destination = m_PatrolTargets[m_CurrentPatrolTargetID].position;
     }
