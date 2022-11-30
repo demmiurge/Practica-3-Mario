@@ -7,14 +7,17 @@ using Color = UnityEngine.Color;
 
 public class MarioLife : MonoBehaviour
 {
-    private bool m_CanTakeDamage = false;
-    private bool m_HUDIsVisible = false;
-    private bool m_OnStartCounter = false;
-    private bool m_MaxCurrentLife = false;
+    private bool m_CanTakeDamage;
+    private bool m_HUDIsVisible;
+    private bool m_OnStartCounter;
+    private bool m_MaxCurrentLife;
     private float m_TimerHUD;
 
-    [Header("Lives")] 
+    [Header("Lives HUD")] 
     public TextMeshProUGUI m_TextLives;
+
+    [Header("Lives System")]
+    public int m_CurrentLives = 3;
 
     [Header("Health HUD")] 
     public Animation m_LifePower;
@@ -52,28 +55,23 @@ public class MarioLife : MonoBehaviour
 
     void Start()
     {
-        UpdateLifeParametersHUD(); // Enter life parameters in the HUD
-
+        UpdateLivesParameterHUD(); // Enter lives parameter in the HUD
+        UpdateLifeParameterHUD(); // Enter life parameter in the HUD
         m_CanTakeDamage = true; // Whenever they start they can take damage
-
-        if (m_CurrentLife >= m_MaxLife)
-        {
-            m_CurrentLife = m_MaxLife;
-            m_MaxCurrentLife = true;
-        }
-        else
-        {
-            m_MaxCurrentLife = false;
-        }
+        m_MaxCurrentLife = m_CurrentLife >= m_MaxLife; // Life is not shown if it has the maximum value
     }
 
     public void ChangeInvincibilityStatus(bool l_CanTakeDamage) => m_CanTakeDamage = l_CanTakeDamage;
     public bool CanIHitIt() => m_CanTakeDamage;
 
-    public void UpdateLifeParametersHUD()
+    public void UpdateLivesParameterHUD()
     {
-        // We update the fill first, it can be smoothed
-        m_ImageCurrentLife.fillAmount = m_CurrentLife / m_MaxLife;
+        m_TextLives.text = m_CurrentLives.ToString();
+    }
+
+    public void UpdateLifeParameterHUD()
+    {
+        m_ImageCurrentLife.fillAmount = m_CurrentLife / m_MaxLife; // We update the fill first, it can be smoothed
 
         if (m_CurrentLife > m_MaxLife / 2 + m_MaxLife / 4) // Has more than 75% life
         {
@@ -105,8 +103,7 @@ public class MarioLife : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.H))
             SetHealing(1);
 
-        // Timer to control how long the life interface is present
-        if (!m_OnStartCounter) return;
+        if (!m_OnStartCounter) return; // Timer to control how long the life interface is present
 
         m_TimerHUD += Time.deltaTime;
 
@@ -118,8 +115,7 @@ public class MarioLife : MonoBehaviour
         m_OnStartCounter = false;
     }
 
-    // Accessible method to add cure
-    public void SetHealing(float l_CuresCaused)
+    public void SetHealing(float l_CuresCaused) // Accessible method to add cure
     {
         if (m_MaxCurrentLife) return;
 
@@ -138,7 +134,7 @@ public class MarioLife : MonoBehaviour
         m_TimerHUD = 0;
         yield return new WaitForSeconds(l_Duration);
         Heal(l_CuresCaused);
-        UpdateLifeParametersHUD();
+        UpdateLifeParameterHUD();
         m_OnStartCounter = true;
     }
 
@@ -155,8 +151,7 @@ public class MarioLife : MonoBehaviour
         m_MaxCurrentLife = m_CurrentLife >= m_MaxLife;
     }
 
-    // Accessible method to add damage
-    public void SetDamage(float l_DamageCaused)
+    public void SetDamage(float l_DamageCaused) // Accessible method to add damage
     {
         if (!m_CanTakeDamage) return;
         
@@ -178,7 +173,7 @@ public class MarioLife : MonoBehaviour
         m_TimerHUD = 0;
         yield return new WaitForSeconds(l_Duration);
         Damage(l_DamageCaused);
-        UpdateLifeParametersHUD();
+        UpdateLifeParameterHUD();
         m_CanTakeDamage = true;
         m_OnStartCounter = true;
     }
@@ -186,12 +181,12 @@ public class MarioLife : MonoBehaviour
     void Damage(float l_DamageCaused)
     {
         if (m_CurrentLife - l_DamageCaused > m_MinLife)
-            Hitted(l_DamageCaused);
+            Hit(l_DamageCaused);
         else
             Die();
     }
 
-    void Hitted(float l_DamageCaused)
+    void Hit(float l_DamageCaused)
     {
         m_CurrentLife -= l_DamageCaused;
         m_TakingDamegeEvent?.Invoke();

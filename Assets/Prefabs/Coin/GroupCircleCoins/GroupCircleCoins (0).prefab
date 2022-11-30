@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6880492384123637159}
   - component: {fileID: 4333096129050056889}
   m_Layer: 0
-  m_Name: CircleCircleCoins (0)
+  m_Name: GroupCircleCoins (0)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
