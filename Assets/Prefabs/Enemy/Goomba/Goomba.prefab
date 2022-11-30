@@ -97,6 +97,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8152003623121519862}
   - component: {fileID: 8152003623112272668}
+  - component: {fileID: 1526023996}
+  - component: {fileID: 1526023998}
+  - component: {fileID: 1526023997}
   m_Layer: 0
   m_Name: Goomba
   m_TagString: Untagged
@@ -132,7 +135,7 @@ Animator:
   m_GameObject: {fileID: 8152003623121623254}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 0dc47b9b8a69aca49a111614ec2274be, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: d35da5cf4c9581944b2383a996b6abb4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -141,6 +144,63 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1526023996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152003623121623254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aad872f340b718647a126903313e428c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_State: 0
+  m_HitPlayerTime: 1.5
+  m_HitPlayerSpeed: 2
+  m_DistanceToAttack: 8
+  m_WaitToAttackTime: 3
+  m_PatrolTargets: []
+  m_VisionLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+--- !u!136 &1526023998
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152003623121623254}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.8098869
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.7124119, z: 0}
+--- !u!195 &1526023997
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152003623121623254}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &8152003623121623256
 GameObject:
   m_ObjectHideFlags: 0
