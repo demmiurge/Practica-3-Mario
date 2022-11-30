@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EventConsumer : MonoBehaviour
 {
-    public void Step(string FootName)
+    public void Step(AnimationEvent _AnimationEvent)
     {
-        Debug.Log("Step with foot " + FootName);
+        Object l_Object = _AnimationEvent.objectReferenceParameter;
+       
     }
 
     public void PunchSound1(AnimationEvent _AnimationEvent)
