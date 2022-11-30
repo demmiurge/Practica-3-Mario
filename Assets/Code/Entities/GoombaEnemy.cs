@@ -19,6 +19,11 @@ public class GoombaEnemy : MonoBehaviour
     public float m_DistanceToAttack = 8f;
     public float m_WaitToAttackTime = 3f;
 
+    public float m_VisualConeAngle = 60.0f;
+    public float m_SightDistance = 8.0f;
+    public float m_EyesHeight = 1f;
+    public float m_EyesPlayerHeight = 1.5f;
+
     NavMeshAgent m_NavMeshAgent;
     public List<Transform> m_PatrolTargets;
     public LayerMask m_VisionLayerMask;
@@ -120,6 +125,27 @@ public class GoombaEnemy : MonoBehaviour
 
     bool SeesPlayer()
     {
-        return true;
+
+        Vector3 l_PlayerPosition = GameController.GetGameController().GetPlayer().transform.position;
+        Vector3 l_DirectionToPlayerXZ = l_PlayerPosition - transform.position;
+        l_DirectionToPlayerXZ.y = 0.0f;
+        l_DirectionToPlayerXZ.Normalize();
+
+        Vector3 l_ForwardXZ = transform.forward;
+        l_ForwardXZ.y = 0.0f;
+        l_ForwardXZ.Normalize();
+
+        Vector3 l_EyesPosition = transform.position + Vector3.up * m_EyesHeight;
+        Vector3 l_PlayerEyesPosition = l_PlayerPosition + Vector3.up * m_EyesPlayerHeight;
+        Vector3 l_Direction = l_PlayerEyesPosition - l_EyesPosition;
+
+        float l_Lenght = l_Direction.magnitude;
+        l_Direction /= l_Lenght;
+
+        Ray l_Ray = new Ray(l_EyesPosition, l_Direction);
+
+        return Vector3.Distance(l_PlayerPosition, transform.position) < m_VisualConeAngle &&
+               Vector3.Dot(l_ForwardXZ, l_DirectionToPlayerXZ) > Mathf.Cos(m_VisualConeAngle * Mathf.Deg2Rad / 2.0f) &&
+               !Physics.Raycast(l_Ray, l_Lenght, m_VisionLayerMask.value);
     }
 }
