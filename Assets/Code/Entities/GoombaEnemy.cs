@@ -58,7 +58,6 @@ public class GoombaEnemy : MonoBehaviour
                 UpdateAttackState();
                 break;
         }
-        Debug.Log(m_CurrentPatrolTargetID);
     }
 
     void UpdatePatrolState()
@@ -70,6 +69,7 @@ public class GoombaEnemy : MonoBehaviour
         if(SeesPlayer())
         {
             SetAlertState();
+            Debug.Log("i see player");
         }
     }
 
