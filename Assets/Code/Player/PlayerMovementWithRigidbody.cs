@@ -78,6 +78,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     Rigidbody m_PlayerRigidbody;
 
     bool m_IsDie;
+    float m_IdleTime = 0;
 
     Vector3 m_StartPosition;
     Quaternion m_StartRotation;
@@ -139,6 +140,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
         if (l_HasMovement)
         {
+            m_IdleTime = 0;
             Quaternion l_lookAtRotation = Quaternion.LookRotation(l_Movement);
             transform.rotation = Quaternion.Lerp(transform.rotation, l_lookAtRotation, m_LerpRorationPct);
 
@@ -150,6 +152,19 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 l_Speed = 1;
                 l_MovementSpeed = m_RunSpeed;
             }
+        }
+
+        if(l_HasMovement == false)
+        {
+            m_IdleTime += Time.deltaTime;
+        }
+
+        if(m_IdleTime >= 10)
+        {
+            m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce, ForceMode.Impulse);
+            m_Animator.SetTrigger("Special");
+            Debug.Log(m_IdleTime);
+            m_IdleTime = 0;
         }
 
         l_Movement += l_Movement * l_MovementSpeed;

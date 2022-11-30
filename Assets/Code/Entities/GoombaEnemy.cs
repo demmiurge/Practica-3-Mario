@@ -120,6 +120,6 @@ public class GoombaEnemy : MonoBehaviour
 
     bool SeesPlayer()
     {
-
+        return true;
     }
 }
