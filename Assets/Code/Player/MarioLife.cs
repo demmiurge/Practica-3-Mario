@@ -1,16 +1,20 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 using Color = UnityEngine.Color;
 
-public class MarioLive : MonoBehaviour
+public class MarioLife : MonoBehaviour
 {
     private bool m_CanTakeDamage = false;
     private bool m_HUDIsVisible = false;
     private bool m_OnStartCounter = false;
     private bool m_MaxCurrentLife = false;
     private float m_TimerHUD;
+
+    [Header("Lives")] 
+    public TextMeshProUGUI m_TextLives;
 
     [Header("Health HUD")] 
     public Animation m_LifePower;
@@ -21,21 +25,21 @@ public class MarioLive : MonoBehaviour
     public float m_TimeBetweenAddLifeTolerance = 0.5f;
 
     [Header("Health HUD Colors")]
-    public Image m_ImageCurrentLive;
-    public Color m_BaseColorLive = new Color(0, 0, 1, 1);
-    public Color m_FirstColorLive = new Color(0,1,0,1);
-    public Color m_SecondColorLive = new Color(1, 1, 0, 1);
-    public Color m_ThirdColorLive = new Color(1, 0, 0, 1);
-    public Image m_ImageMaxLive;
-    public Color m_BaseColorMaxLive = new Color(0, 0, 0.5f, 1);
-    public Color m_FirstColorMaxLive = new Color(0, 0.5f, 0, 1);
-    public Color m_SecondColorMaxLive = new Color(0.5f, 0.5f, 0, 1);
-    public Color m_ThirdColorMaxLive = new Color(0.5f, 0, 0, 1);
+    public Image m_ImageCurrentLife;
+    public Color m_BaseColorLife = new Color(0, 0, 1, 1);
+    public Color m_FirstColorLife = new Color(0,1,0,1);
+    public Color m_SecondColorLife = new Color(1, 1, 0, 1);
+    public Color m_ThirdColorLife = new Color(1, 0, 0, 1);
+    public Image m_ImageMaxLife;
+    public Color m_BaseColorMaxLife = new Color(0, 0, 0.5f, 1);
+    public Color m_FirstColorMaxLife = new Color(0, 0.5f, 0, 1);
+    public Color m_SecondColorMaxLife = new Color(0.5f, 0.5f, 0, 1);
+    public Color m_ThirdColorMaxLife = new Color(0.5f, 0, 0, 1);
 
     [Header("Health System")]
-    public float m_CurrentLive = 8;
-    public float m_MaxLive = 8;
-    public float m_MinLive = 0;
+    public float m_CurrentLife = 8;
+    public float m_MaxLife = 8;
+    public float m_MinLife = 0;
     
     [Header("Event receive cures")]
     public UnityEvent m_IReceivedCures;
@@ -48,13 +52,13 @@ public class MarioLive : MonoBehaviour
 
     void Start()
     {
-        UpdateLiveParametersHUD(); // Enter live parameters in the HUD
+        UpdateLifeParametersHUD(); // Enter life parameters in the HUD
 
         m_CanTakeDamage = true; // Whenever they start they can take damage
 
-        if (m_CurrentLive >= m_MaxLive)
+        if (m_CurrentLife >= m_MaxLife)
         {
-            m_CurrentLive = m_MaxLive;
+            m_CurrentLife = m_MaxLife;
             m_MaxCurrentLife = true;
         }
         else
@@ -66,30 +70,30 @@ public class MarioLive : MonoBehaviour
     public void ChangeInvincibilityStatus(bool l_CanTakeDamage) => m_CanTakeDamage = l_CanTakeDamage;
     public bool CanIHitIt() => m_CanTakeDamage;
 
-    public void UpdateLiveParametersHUD()
+    public void UpdateLifeParametersHUD()
     {
         // We update the fill first, it can be smoothed
-        m_ImageCurrentLive.fillAmount = m_CurrentLive / m_MaxLive;
+        m_ImageCurrentLife.fillAmount = m_CurrentLife / m_MaxLife;
 
-        if (m_CurrentLive > m_MaxLive / 2 + m_MaxLive / 4) // Has more than 75% life
+        if (m_CurrentLife > m_MaxLife / 2 + m_MaxLife / 4) // Has more than 75% life
         {
-            m_ImageCurrentLive.color = m_BaseColorLive;
-            m_ImageMaxLive.color = m_BaseColorMaxLive;
+            m_ImageCurrentLife.color = m_BaseColorLife;
+            m_ImageMaxLife.color = m_BaseColorMaxLife;
         }
-        else if (m_CurrentLive > m_MaxLive / 2) // Has more than 50% life
+        else if (m_CurrentLife > m_MaxLife / 2) // Has more than 50% life
         {
-            m_ImageCurrentLive.color = m_FirstColorLive;
-            m_ImageMaxLive.color = m_FirstColorMaxLive;
+            m_ImageCurrentLife.color = m_FirstColorLife;
+            m_ImageMaxLife.color = m_FirstColorMaxLife;
         } 
-        else if (m_CurrentLive > m_MaxLive / 4) // Has more than 25% life
+        else if (m_CurrentLife > m_MaxLife / 4) // Has more than 25% life
         {
-            m_ImageCurrentLive.color = m_SecondColorLive;
-            m_ImageMaxLive.color = m_SecondColorMaxLive;
+            m_ImageCurrentLife.color = m_SecondColorLife;
+            m_ImageMaxLife.color = m_SecondColorMaxLife;
         }
         else // The life that still remains
         {
-            m_ImageCurrentLive.color = m_ThirdColorLive;
-            m_ImageMaxLive.color = m_ThirdColorMaxLive;
+            m_ImageCurrentLife.color = m_ThirdColorLife;
+            m_ImageMaxLife.color = m_ThirdColorMaxLife;
         }
     }
 
@@ -134,21 +138,21 @@ public class MarioLive : MonoBehaviour
         m_TimerHUD = 0;
         yield return new WaitForSeconds(l_Duration);
         Heal(l_CuresCaused);
-        UpdateLiveParametersHUD();
+        UpdateLifeParametersHUD();
         m_OnStartCounter = true;
     }
 
     void Heal(float l_CuresCaused)
     {
-        if (m_CurrentLive + l_CuresCaused > m_MaxLive)
-            m_CurrentLive = m_MaxLive;
+        if (m_CurrentLife + l_CuresCaused > m_MaxLife)
+            m_CurrentLife = m_MaxLife;
         else
         {
             m_IReceivedCures?.Invoke();
-            m_CurrentLive += l_CuresCaused;
+            m_CurrentLife += l_CuresCaused;
         }
 
-        m_MaxCurrentLife = m_CurrentLive >= m_MaxLive;
+        m_MaxCurrentLife = m_CurrentLife >= m_MaxLife;
     }
 
     // Accessible method to add damage
@@ -174,14 +178,14 @@ public class MarioLive : MonoBehaviour
         m_TimerHUD = 0;
         yield return new WaitForSeconds(l_Duration);
         Damage(l_DamageCaused);
-        UpdateLiveParametersHUD();
+        UpdateLifeParametersHUD();
         m_CanTakeDamage = true;
         m_OnStartCounter = true;
     }
 
     void Damage(float l_DamageCaused)
     {
-        if (m_CurrentLive - l_DamageCaused > m_MinLive)
+        if (m_CurrentLife - l_DamageCaused > m_MinLife)
             Hitted(l_DamageCaused);
         else
             Die();
@@ -189,13 +193,13 @@ public class MarioLive : MonoBehaviour
 
     void Hitted(float l_DamageCaused)
     {
-        m_CurrentLive -= l_DamageCaused;
+        m_CurrentLife -= l_DamageCaused;
         m_TakingDamegeEvent?.Invoke();
     }
 
     void Die()
     {
-        m_CurrentLive = m_MinLive;
+        m_CurrentLife = m_MinLife;
         m_IHaveDiedEvent?.Invoke();
     }
 }

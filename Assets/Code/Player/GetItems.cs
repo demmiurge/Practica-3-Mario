@@ -5,11 +5,11 @@ using UnityEngine;
 public class GetItems : MonoBehaviour
 {
     public CoinStarManager m_CoinStarManager;
-    private MarioLive m_MarioLive;
+    private MarioLife m_MarioLife;
 
     void Awake()
     {
-        m_MarioLive = GetComponent<MarioLive>();
+        m_MarioLife = GetComponent<MarioLife>();
     }
 
     // Start is called before the first frame update
@@ -29,13 +29,19 @@ public class GetItems : MonoBehaviour
         if (other.tag == "Coin") 
         {
             m_CoinStarManager.AddCoinds(other.GetComponent<CoinValue>().GetCoinValue());
-            m_MarioLive.SetHealing(other.GetComponent<CoinValue>().GetCoinLife());
+            m_MarioLife.SetHealing(other.GetComponent<CoinValue>().GetCoinLife());
             other.gameObject.SetActive(false);
         }
 
         if (other.tag == "Star")
         {
             m_CoinStarManager.AddStars(1);
+            other.gameObject.SetActive(false);
+        }
+
+        if (other.tag == "Heart")
+        {
+            
             other.gameObject.SetActive(false);
         }
     }

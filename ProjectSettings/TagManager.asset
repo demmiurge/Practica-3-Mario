@@ -9,6 +9,7 @@ TagManager:
   - Coin
   - Star
   - Goomba
+  - Heart
   layers:
   - Default
   - TransparentFX
