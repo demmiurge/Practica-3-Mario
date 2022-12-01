@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4833256509633615149}
   m_Layer: 9
   m_Name: Right Foot Collider
-  m_TagString: Untagged
+  m_TagString: MarioHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 7583646488365933046}
   m_Layer: 9
   m_Name: Left Hand Collider
-  m_TagString: Untagged
+  m_TagString: MarioHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -413,6 +413,9 @@ MonoBehaviour:
   m_ElevatorDotAngle: 0.95
   m_CurrentElevatorCollider: {fileID: 0}
   m_BridgeForce: 2.5
+  m_Checkpoint: {fileID: 0}
+  m_MaxKillAngle: 45
+  m_KillerJumpSpeed: 5
 --- !u!114 &1569135450
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -425,25 +428,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841312875bf6d0d458944e53c8671d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_TextLives: {fileID: 0}
+  m_CurrentLives: 3
   m_LifePower: {fileID: 0}
   m_ShowPower: {fileID: 7400000, guid: 3b1ed940e4eeb554a8dd34c17a5f7ac7, type: 2}
   m_HidePower: {fileID: 7400000, guid: bc2f2af49325cb147907dd9922a60323, type: 2}
   m_TimeToDisappear: 8
   m_TimeBetweenRemoveLifeTolerance: 0
   m_TimeBetweenAddLifeTolerance: 0
-  m_ImageCurrentLive: {fileID: 0}
-  m_BaseColorLive: {r: 0, g: 0, b: 1, a: 1}
-  m_FirstColorLive: {r: 0, g: 1, b: 0, a: 1}
-  m_SecondColorLive: {r: 1, g: 1, b: 0, a: 1}
-  m_ThirdColorLive: {r: 1, g: 0, b: 0, a: 1}
-  m_ImageMaxLive: {fileID: 0}
-  m_BaseColorMaxLive: {r: 0, g: 0, b: 0.5, a: 1}
-  m_FirstColorMaxLive: {r: 0, g: 0.5, b: 0, a: 1}
-  m_SecondColorMaxLive: {r: 0.5, g: 0.5, b: 0, a: 1}
-  m_ThirdColorMaxLive: {r: 0.5, g: 0, b: 0, a: 1}
-  m_CurrentLive: 8
-  m_MaxLive: 8
-  m_MinLive: 0
+  m_ImageCurrentLife: {fileID: 0}
+  m_BaseColorLife: {r: 0, g: 0, b: 1, a: 1}
+  m_FirstColorLife: {r: 0, g: 1, b: 0, a: 1}
+  m_SecondColorLife: {r: 1, g: 1, b: 0, a: 1}
+  m_ThirdColorLife: {r: 1, g: 0, b: 0, a: 1}
+  m_ImageMaxLife: {fileID: 0}
+  m_BaseColorMaxLife: {r: 0, g: 0, b: 0.5, a: 1}
+  m_FirstColorMaxLife: {r: 0, g: 0.5, b: 0, a: 1}
+  m_SecondColorMaxLife: {r: 0.5, g: 0.5, b: 0, a: 1}
+  m_ThirdColorMaxLife: {r: 0.5, g: 0, b: 0, a: 1}
+  m_CurrentLife: 8
+  m_MaxLife: 8
+  m_MinLife: 0
   m_IReceivedCures:
     m_PersistentCalls:
       m_Calls: []
@@ -2536,7 +2541,7 @@ GameObject:
   - component: {fileID: 6727348444044303687}
   m_Layer: 9
   m_Name: Right Hand Collider
-  m_TagString: Untagged
+  m_TagString: MarioHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

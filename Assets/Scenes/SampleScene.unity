@@ -437,14 +437,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 27.999
       objectReference: {fileID: 0}
-    - target: {fileID: 2229715945634899946, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_TagString
-      value: MarioHit
-      objectReference: {fileID: 0}
-    - target: {fileID: 5025392604349174030, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_TagString
-      value: MarioHit
-      objectReference: {fileID: 0}
     - target: {fileID: 6785730832219408046, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_Name
       value: SuperMarioV1
@@ -720,14 +712,6 @@ PrefabInstance:
     - target: {fileID: 6785730832219577166, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7078734995604075073, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7078734995604075073, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_TagString
-      value: MarioHit
       objectReference: {fileID: 0}
     - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_Camera
