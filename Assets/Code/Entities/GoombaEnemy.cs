@@ -196,11 +196,6 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
         if(other.collider.tag == "MarioHit")
         {
             m_NumPunches++;
-            Debug.Log("im hit");
-        }
-        else if(other.gameObject.tag == "Player")
-        {
-            Debug.Log("player collision");
         }
     }
 }

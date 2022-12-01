@@ -550,11 +550,10 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             collision.gameObject.GetComponent<GoombaEnemy>().Kill();
             JumpOverEnemy();
-            Debug.Log("kill goomba");
         }
-        else
+        else if(collision.gameObject.tag == "Goomba")
         {
-
+            Debug.Log("player hit");
         }
     }
 
