@@ -100,9 +100,10 @@ GameObject:
   - component: {fileID: 1526023996}
   - component: {fileID: 1526023998}
   - component: {fileID: 1526023997}
+  - component: {fileID: 20769744}
   m_Layer: 0
   m_Name: Goomba
-  m_TagString: Untagged
+  m_TagString: Goomba
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,7 +117,7 @@ Transform:
   m_GameObject: {fileID: 8152003623121623254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.180065, y: 23.695993, z: 9.907438}
-  m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8152003623121519868}
   - {fileID: 8152003623121519864}
@@ -161,10 +162,22 @@ MonoBehaviour:
   m_HitPlayerSpeed: 2
   m_DistanceToAttack: 8
   m_WaitToAttackTime: 3
-  m_PatrolTargets: []
+  m_VisualConeAngle: 60
+  m_SightDistance: 8
+  m_EyesHeight: 1
+  m_EyesPlayerHeight: 1.5
+  m_HearRangeDistance: 2
+  m_KillTime: 0.5
+  m_KillScale: 0.2
+  m_PatrolTargets:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_VisionLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
 --- !u!136 &1526023998
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -172,13 +185,13 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8152003623121623254}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 255edda2a1ea6f144885eb3e80acb412, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.8098869
+  m_Radius: 0.68005943
+  m_Height: 1.6202965
   m_Direction: 1
-  m_Center: {x: 0, y: 0.7124119, z: 0}
+  m_Center: {x: -0.016763687, y: 0.8072071, z: 0}
 --- !u!195 &1526023997
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -201,6 +214,22 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!54 &20769744
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152003623121623254}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 1
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1 &8152003623121623256
 GameObject:
   m_ObjectHideFlags: 0
