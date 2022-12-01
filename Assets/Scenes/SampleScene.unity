@@ -123,27 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: e2baf60397a50154396cd5ebd3b97d27, type: 2}
---- !u!1 &20769743 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8152003623121623254, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-  m_PrefabInstance: {fileID: 584140552}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &20769744
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 20769743}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 1
-  m_Constraints: 0
-  m_CollisionDetection: 2
 --- !u!1 &32166065
 GameObject:
   m_ObjectHideFlags: 0
@@ -762,14 +741,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_VisionLayerMask.m_Bits
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_PatrolTargets.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_PatrolTargets.Array.data[0]
       value: 
       objectReference: {fileID: 1267066158}
@@ -789,44 +760,8 @@ PrefabInstance:
       propertyPath: m_PatrolTargets.Array.data[4]
       value: 
       objectReference: {fileID: 1764159063}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Height
-      value: 1.6202965
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Radius
-      value: 0.68005943
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Center.x
-      value: -0.016763687
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Center.y
-      value: 0.8072071
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 255edda2a1ea6f144885eb3e80acb412, type: 2}
     - target: {fileID: 8152003623121519862, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8152003623121519862, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8152003623121519862, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8152003623121519862, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8152003623121519862, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
@@ -871,10 +806,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8152003623121623254, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_Name
-      value: Goomba
-      objectReference: {fileID: 0}
-    - target: {fileID: 8152003623121623254, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_TagString
       value: Goomba
       objectReference: {fileID: 0}
     m_RemovedComponents: []
