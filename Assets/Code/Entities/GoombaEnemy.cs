@@ -23,6 +23,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     public float m_SightDistance = 8.0f;
     public float m_EyesHeight = 1f;
     public float m_EyesPlayerHeight = 1.5f;
+    public float m_HearRangeDistance = 5.0f;
     public float m_KillTime = 0.5f;
     public float m_KillScale = 0.2f;
 
@@ -30,6 +31,10 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     public List<Transform> m_PatrolTargets;
     public LayerMask m_VisionLayerMask;
     int m_CurrentPatrolTargetID = 0;
+
+    int m_NumPunches = 0;
+
+    Vector3 m_StartScale;
 
     //Patrolling, when Mario is close it turns facing Mario, jumps and starts going towards him, if Marion changes position, Goomba doesn't change direction and stops after colliding or in certan
     //time
@@ -42,6 +47,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     void Start()
     {
         GameController.GetGameController().AddRestartGameElements(this);
+        m_StartScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
     }
 
     // Update is called once per frame
@@ -62,6 +68,11 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
                 UpdateAttackState();
                 break;
         }
+
+        if(m_NumPunches >2)
+        {
+            StartCoroutine(KillGoomba());
+        }
     }
 
     void UpdatePatrolState()
@@ -70,19 +81,17 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
         {
             //MoveToNextPosition();
         }
-        if(SeesPlayer())
+        if(HearsPlayer())
         {
             //SetAlertState();
-            //Debug.Log("i see player");
         }
     }
 
     void UpdateAlertState()
     {
-        if(!SeesPlayer())
-        {
-            SetPatrolState();
-        }
+        this.transform.rotation.SetLookRotation(GameController.GetGameController().GetPlayer().transform.position);
+        Debug.Log("i see player");
+        m_NavMeshAgent.destination = GameController.GetGameController().GetPlayer().transform.position;
     }
 
     void UpdateChaseState()
@@ -158,6 +167,11 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
                !Physics.Raycast(l_Ray, l_Lenght, m_VisionLayerMask.value);
     }
 
+    bool HearsPlayer()
+    {
+        Vector3 l_PlayerPosition = GameController.GetGameController().GetPlayer().transform.position;
+        return Vector3.Distance(l_PlayerPosition, transform.position) <= m_HearRangeDistance;
+    }
     public void Kill()
     {
         transform.localScale = new Vector3(1.0f, m_KillScale, 1.0f);
@@ -168,11 +182,25 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     {
         yield return new WaitForSeconds(m_KillTime);
         gameObject.SetActive(false);
+        m_NumPunches = 0;
     }
 
     public void RestartGame()
     {
-        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        transform.localScale = m_StartScale;
         gameObject.SetActive(true);
+    }
+
+    void OnCollisionEnter(Collision other)
+    {
+        if(other.collider.tag == "MarioHit")
+        {
+            m_NumPunches++;
+            Debug.Log("im hit");
+        }
+        else if(other.gameObject.tag == "Player")
+        {
+            Debug.Log("player collision");
+        }
     }
 }

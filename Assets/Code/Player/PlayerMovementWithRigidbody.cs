@@ -5,6 +5,11 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 {
+    public enum Turtle
+    {
+        Take = 0,
+        Throw
+    }
     public enum PunchType
     {
         Left_Hand = 0,
@@ -167,7 +172,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce, ForceMode.Impulse);
             m_Animator.SetTrigger("Special");
-            Debug.Log(m_IdleTime);
             m_IdleTime = 0;
         }
 
@@ -542,8 +546,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     void OnCollisionEnter(Collision collision)
     {
         Vector3 normal = collision.contacts[0].normal;
-        Vector3 vel = m_PlayerRigidbody.velocity;
-        if (CanKillGoomba(normal))
+        if (collision.gameObject.tag == "Goomba" && CanKillGoomba(normal))
         {
             collision.gameObject.GetComponent<GoombaEnemy>().Kill();
             JumpOverEnemy();
@@ -551,7 +554,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
         else
         {
-            Debug.Break();
+
         }
     }
 

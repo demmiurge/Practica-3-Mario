@@ -17,6 +17,6 @@ public class EventConsumer : MonoBehaviour
         int l_IntParameter = _AnimationEvent.intParameter;
         Object l_object = _AnimationEvent.objectReferenceParameter;
 
-        Debug.Log("event sound" + l_StringParameter + " + " + l_FloatParameter + " + " + l_IntParameter + " + " + l_object);
+       // Debug.Log("event sound" + l_StringParameter + " + " + l_FloatParameter + " + " + l_IntParameter + " + " + l_object);
     }
 }
