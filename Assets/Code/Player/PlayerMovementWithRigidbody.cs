@@ -89,8 +89,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     Quaternion m_StartRotation;
 
     public Checkpoint m_Checkpoint = null;
+    [Header("Kills")]
     public float m_MaxKillAngle = 45.0f;
     public float m_KillerJumpSpeed = 5.0f;
+
+    bool m_CanMove = true;
 
     void Awake()
     {
@@ -131,18 +134,19 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         bool l_HasMovement = false;
 
         Vector3 l_Movement = Vector3.zero;
-
-        if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
-            l_HasMovement = true;
-        if (Input.GetKey(KeyCode.W))
-            l_Movement = l_ForwardsCamera;
-        if (Input.GetKey(KeyCode.A))
-            l_Movement -= l_RightCamera;
-        if (Input.GetKey(KeyCode.S))
-            l_Movement = -l_ForwardsCamera;
-        if (Input.GetKey(KeyCode.D))
-            l_Movement += l_RightCamera;
-
+        if (m_CanMove)
+        {
+            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                l_HasMovement = true;
+            if (Input.GetKey(KeyCode.W))
+                l_Movement = l_ForwardsCamera;
+            if (Input.GetKey(KeyCode.A))
+                l_Movement -= l_RightCamera;
+            if (Input.GetKey(KeyCode.S))
+                l_Movement = -l_ForwardsCamera;
+            if (Input.GetKey(KeyCode.D))
+                l_Movement += l_RightCamera;
+        }
         l_Movement.Normalize();
 
         float l_MovementSpeed = 0.0f;
@@ -553,7 +557,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
         else if(collision.gameObject.tag == "Goomba")
         {
-            Debug.Log("player hit");
+            m_CanMove = false;
+            m_Animator.SetTrigger("Hit");
+            m_PlayerRigidbody.AddForce(-m_PlayerRigidbody.transform.forward * 50.0f, ForceMode.Impulse);
+            m_PlayerRigidbody.AddForce(Vector3.up * 3.0f, ForceMode.Impulse);
+            StartCoroutine(EnableMovement());
         }
     }
 
@@ -565,5 +573,9 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     // Utilities
     bool CharacterTouchTheGround() => Physics.CheckSphere(m_FeetTransform.position, m_RadiusSphereTolerance, m_FloorMask);
 
-
+    IEnumerator EnableMovement()
+    {
+        yield return new WaitForSeconds(3);
+        m_CanMove = true;
+    }
 }
