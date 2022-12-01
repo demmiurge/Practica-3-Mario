@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GoombaEnemy : MonoBehaviour
+public class GoombaEnemy : MonoBehaviour, IRestartGame
 {
     public enum GoombaState
     {
@@ -23,12 +23,16 @@ public class GoombaEnemy : MonoBehaviour
     public float m_SightDistance = 8.0f;
     public float m_EyesHeight = 1f;
     public float m_EyesPlayerHeight = 1.5f;
+    public float m_KillTime = 0.5f;
+    public float m_KillScale = 0.2f;
 
     NavMeshAgent m_NavMeshAgent;
     public List<Transform> m_PatrolTargets;
     public LayerMask m_VisionLayerMask;
     int m_CurrentPatrolTargetID = 0;
 
+    //Patrolling, when Mario is close it turns facing Mario, jumps and starts going towards him, if Marion changes position, Goomba doesn't change direction and stops after colliding or in certan
+    //time
     private void Awake()
     {
         m_NavMeshAgent = GetComponent<NavMeshAgent>();
@@ -37,7 +41,7 @@ public class GoombaEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameController.GetGameController().AddRestartGameElements(this);
     }
 
     // Update is called once per frame
@@ -64,12 +68,12 @@ public class GoombaEnemy : MonoBehaviour
     {
         if(PatrolTargetArrived())
         {
-            MoveToNextPosition();
+            //MoveToNextPosition();
         }
         if(SeesPlayer())
         {
-            SetAlertState();
-            Debug.Log("i see player");
+            //SetAlertState();
+            //Debug.Log("i see player");
         }
     }
 
@@ -152,5 +156,23 @@ public class GoombaEnemy : MonoBehaviour
         return Vector3.Distance(l_PlayerPosition, transform.position) < m_VisualConeAngle &&
                Vector3.Dot(l_ForwardXZ, l_DirectionToPlayerXZ) > Mathf.Cos(m_VisualConeAngle * Mathf.Deg2Rad / 2.0f) &&
                !Physics.Raycast(l_Ray, l_Lenght, m_VisionLayerMask.value);
+    }
+
+    public void Kill()
+    {
+        transform.localScale = new Vector3(1.0f, m_KillScale, 1.0f);
+        StartCoroutine(KillGoomba());
+    }
+
+    IEnumerator KillGoomba()
+    {
+        yield return new WaitForSeconds(m_KillTime);
+        gameObject.SetActive(false);
+    }
+
+    public void RestartGame()
+    {
+        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        gameObject.SetActive(true);
     }
 }

@@ -83,6 +83,10 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     Vector3 m_StartPosition;
     Quaternion m_StartRotation;
 
+    public Checkpoint m_Checkpoint = null;
+    public float m_MaxKillAngle = 45.0f;
+    public float m_KillerJumpSpeed = 5.0f;
+
     void Awake()
     {
         m_PlayerRigidbody = GetComponent<Rigidbody>();
@@ -428,8 +432,16 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     //Restart
     public void RestartGame()
     {
-        transform.position = m_StartPosition;
-        transform.rotation = m_StartRotation;
+        if (m_Checkpoint == null)
+        {
+            transform.position = m_StartPosition;
+            transform.rotation = m_StartRotation;
+        }
+        else
+        {
+            transform.position = m_Checkpoint.m_SpawnPosition.transform.position;
+            transform.rotation = m_Checkpoint.m_SpawnPosition.transform.rotation;
+        }
     }
 
     //Platformers
@@ -438,6 +450,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         if (other.tag == "Elevator" && CanAttachToElevator(other))
         {
             AttachToElevator(other);
+        }
+
+        if(other.tag == "Checkpoint")
+        {
+            m_Checkpoint = other.GetComponent<Checkpoint>();
         }
     }
 
@@ -490,14 +507,61 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
     }
 
+    void JumpOverEnemy()
+    {
+        m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce, ForceMode.Impulse);
+    }
+
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
+
+        /*Debug.Log("hit goomba"+ hit.gameObject.tag);
         if (hit.gameObject.tag == "Bridge")
         {
             hit.gameObject.GetComponent<Rigidbody>().AddForceAtPosition(-hit.normal * m_BridgeForce, hit.point);
         }
+
+        else if(hit.gameObject.tag == "Goomba")
+        {
+            Debug.Log("hit goomba");
+            if(CanKillGoomba(hit.normal))
+            {
+                hit.gameObject.GetComponent<GoombaEnemy>().Kill();
+                JumpOverEnemy();
+                Debug.Log("kill goomba");
+            }
+            else
+            {
+                Debug.DrawRay(hit.point, hit.normal*3.0f, Color.blue, 5.0f);
+                Debug.Break();
+            }
+            //Debug.DrawRay();
+        }*/
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Vector3 normal = collision.contacts[0].normal;
+        Vector3 vel = m_PlayerRigidbody.velocity;
+        if (CanKillGoomba(normal))
+        {
+            collision.gameObject.GetComponent<GoombaEnemy>().Kill();
+            JumpOverEnemy();
+            Debug.Log("kill goomba");
+        }
+        else
+        {
+            Debug.Break();
+        }
+    }
+
+    bool CanKillGoomba(Vector3 Normal)
+    {
+        return Vector3.Dot(Normal, Vector3.up) >= Mathf.Cos(m_MaxKillAngle * Mathf.Deg2Rad);
     }
 
     // Utilities
     bool CharacterTouchTheGround() => Physics.CheckSphere(m_FeetTransform.position, m_RadiusSphereTolerance, m_FloorMask);
+
+
 }

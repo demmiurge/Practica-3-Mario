@@ -8,8 +8,9 @@ TagManager:
   - Elevator
   - Coin
   - Star
-  - Goomba
   - Heart
+  - Checkpoint
+  - Goomba
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - Floor
   - Ghost
   - InvisibleOnCamera
-  - 
+  - LogicColliders
   - 
   - 
   - 
