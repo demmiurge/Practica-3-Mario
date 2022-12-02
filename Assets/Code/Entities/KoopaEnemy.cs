@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class GoombaEnemy : MonoBehaviour, IRestartGame
+public class KoopaEnemy : MonoBehaviour, IRestartGame
 {
-    public enum GoombaState
+    public enum KoopaState
     {
         PATROL = 0,
         ALERT,
@@ -13,7 +13,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
         ATTACK
     }
 
-    public GoombaState m_State;
+    public KoopaState m_State;
     public float m_HitPlayerTime = 1.5f;
     public float m_HitPlayerSpeed = 2f;
     public float m_DistanceToAttack = 8f;
@@ -53,23 +53,23 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     // Update is called once per frame
     void Update()
     {
-        switch(m_State)
+        switch (m_State)
         {
-            case GoombaState.PATROL:
+            case KoopaState.PATROL:
                 UpdatePatrolState();
                 break;
-            case GoombaState.ALERT:
+            case KoopaState.ALERT:
                 UpdateAlertState();
                 break;
-            case GoombaState.CHASE:
+            case KoopaState.CHASE:
                 UpdateChaseState();
                 break;
-            case GoombaState.ATTACK:
+            case KoopaState.ATTACK:
                 UpdateAttackState();
                 break;
         }
 
-        if(m_NumPunches >2)
+        if (m_NumPunches > 2)
         {
             StartCoroutine(KillGoomba());
         }
@@ -77,11 +77,11 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
 
     void UpdatePatrolState()
     {
-        if(PatrolTargetArrived())
+        if (PatrolTargetArrived())
         {
             //MoveToNextPosition();
         }
-        if(HearsPlayer())
+        if (HearsPlayer())
         {
             //SetAlertState();
         }
@@ -106,7 +106,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
 
     void SetPatrolState()
     {
-        m_State = GoombaState.PATROL;
+        m_State = KoopaState.PATROL;
         m_NavMeshAgent.destination = m_PatrolTargets[m_CurrentPatrolTargetID].position;
     }
 
@@ -118,7 +118,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     void MoveToNextPosition()
     {
         ++m_CurrentPatrolTargetID;
-        if(m_CurrentPatrolTargetID >= m_PatrolTargets.Count)
+        if (m_CurrentPatrolTargetID >= m_PatrolTargets.Count)
         {
             m_CurrentPatrolTargetID = 0;
             Debug.Log("arrived");
@@ -128,17 +128,17 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
 
     void SetAlertState()
     {
-        m_State = GoombaState.ALERT;
+        m_State = KoopaState.ALERT;
     }
 
     void SetChaseState()
     {
-        m_State = GoombaState.CHASE;
+        m_State = KoopaState.CHASE;
     }
 
     void SetAttackState()
     {
-        m_State = GoombaState.ATTACK;
+        m_State = KoopaState.ATTACK;
     }
 
     bool SeesPlayer()
@@ -174,7 +174,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     }
     public void Kill()
     {
-        transform.localScale = new Vector3(1.0f, m_KillScale, 1.0f);
+        transform.localScale = new Vector3(0.5f, m_KillScale, 0.5f);
         StartCoroutine(KillGoomba());
     }
 
@@ -193,7 +193,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
 
     void OnCollisionEnter(Collision other)
     {
-        if(other.collider.tag == "MarioHit")
+        if (other.collider.tag == "MarioHit")
         {
             m_NumPunches++;
         }

@@ -26,6 +26,8 @@ public class CameraController : MonoBehaviour
     bool m_AngleLocked = false;
     bool m_AimLocked = true;
 
+    public bool m_HasToReset = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -86,9 +88,15 @@ public class CameraController : MonoBehaviour
         }
         transform.position = l_DesiredPosition;
         transform.LookAt(m_LookAt.position);
+
+        //(0, -90, 0);
+        if(m_HasToReset)
+        {
+
+            l_ForwardCamera = new Vector3(Mathf.Sin(l_Yaw * Mathf.Deg2Rad) * Mathf.Cos(m_LookAt.transform.rotation.x * Mathf.Deg2Rad), Mathf.Sin(m_LookAt.transform.rotation.x * Mathf.Deg2Rad), Mathf.Cos(l_Yaw * Mathf.Deg2Rad) * Mathf.Cos(m_LookAt.transform.rotation.x * Mathf.Deg2Rad));
+            m_HasToReset = false;
+        }
     }
-
-
 
     // Update is called once per frame
     void Update()

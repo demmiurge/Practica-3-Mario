@@ -84,6 +84,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
     bool m_IsDie;
     float m_IdleTime = 0;
+    float m_CameraRepos = 0;
 
     Vector3 m_StartPosition;
     Quaternion m_StartRotation;
@@ -179,6 +180,13 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         if (l_HasMovement == false)
         {
             m_IdleTime += Time.deltaTime;
+            m_CameraRepos += Time.deltaTime;
+        }
+
+        if(m_CameraRepos >= 5)
+        {
+           // m_Camera.GetComponent<CameraController>().m_HasToReset = true;
+            m_CameraRepos = 0;
         }
 
         if (m_IdleTime >= 10)
