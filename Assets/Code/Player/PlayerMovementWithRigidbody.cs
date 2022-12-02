@@ -165,6 +165,10 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 l_Speed = 1;
                 l_MovementSpeed = m_RunSpeed;
             }
+           /* if(Input.GetKey(KeyCode.LeftControl))
+            {
+                m_Animator.SetTrigger("Crouch");
+            }*/
         }
 
         if(l_HasMovement == false)
@@ -559,6 +563,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             m_CanMove = false;
             m_Animator.SetTrigger("Hit");
+            Debug.Log(m_PlayerRigidbody.transform.forward);
             m_PlayerRigidbody.AddForce(-m_PlayerRigidbody.transform.forward * 50.0f, ForceMode.Impulse);
             m_PlayerRigidbody.AddForce(Vector3.up * 3.0f, ForceMode.Impulse);
             StartCoroutine(EnableMovement());
