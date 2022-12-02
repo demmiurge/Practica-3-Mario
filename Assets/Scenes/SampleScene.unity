@@ -436,6 +436,34 @@ PrefabInstance:
       propertyPath: m_PatrolTargets.Array.data[4]
       value: 
       objectReference: {fileID: 1764159063}
+    - target: {fileID: 1526023997, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_Height
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526023997, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_Radius
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526023997, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_Height
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_Radius
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_Center.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_Center.y
+      value: 0.9
+      objectReference: {fileID: 0}
     - target: {fileID: 8152003623121519862, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_RootOrder
       value: 1

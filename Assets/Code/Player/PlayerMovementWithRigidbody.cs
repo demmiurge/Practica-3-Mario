@@ -93,6 +93,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     public float m_MaxKillAngle = 45.0f;
     public float m_KillerJumpSpeed = 5.0f;
 
+    [Header("Bouncing")] 
+    public float m_TimeToBouncing = 2;
+    float m_CurrentBouncing = 0;
+    bool m_IsBouncing;
+
     bool m_CanMove = true;
 
     void Awake()
@@ -282,7 +287,12 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
     void FixedUpdate()
     {
-        
+        if (m_IsBouncing)
+        {
+            m_CurrentBouncing -= Time.deltaTime;
+            m_PlayerRigidbody.AddForce(-m_PlayerRigidbody.transform.forward * m_CurrentBouncing, ForceMode.Impulse);
+            
+        }
     }
 
     void OnAnimatorIK(int l_LayerIndex)
@@ -563,10 +573,10 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             m_CanMove = false;
             m_Animator.SetTrigger("Hit");
-            Debug.Log(m_PlayerRigidbody.transform.forward);
-            m_PlayerRigidbody.AddForce(-m_PlayerRigidbody.transform.forward * 50.0f, ForceMode.Impulse);
-            m_PlayerRigidbody.AddForce(Vector3.up * 3.0f, ForceMode.Impulse);
-            StartCoroutine(EnableMovement());
+            m_IsBouncing = true;
+            m_CurrentBouncing = m_TimeToBouncing;
+            m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce/2, ForceMode.Impulse);
+            StartCoroutine(EnableMovement(m_TimeToBouncing));
         }
     }
 
@@ -578,9 +588,10 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     // Utilities
     bool CharacterTouchTheGround() => Physics.CheckSphere(m_FeetTransform.position, m_RadiusSphereTolerance, m_FloorMask);
 
-    IEnumerator EnableMovement()
+    IEnumerator EnableMovement(float l_Time)
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(l_Time);
         m_CanMove = true;
+        m_IsBouncing = false;
     }
 }
