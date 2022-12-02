@@ -165,18 +165,18 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 l_Speed = 1;
                 l_MovementSpeed = m_RunSpeed;
             }
-           /* if(Input.GetKey(KeyCode.LeftControl))
-            {
-                m_Animator.SetTrigger("Crouch");
-            }*/
+        }
+        if (Input.GetKey(KeyCode.Z))
+        {
+            m_Animator.SetTrigger("Crouch");
         }
 
-        if(l_HasMovement == false)
+        if (l_HasMovement == false)
         {
             m_IdleTime += Time.deltaTime;
         }
 
-        if(m_IdleTime >= 10)
+        if (m_IdleTime >= 10)
         {
             m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce, ForceMode.Impulse);
             m_Animator.SetTrigger("Special");
@@ -198,7 +198,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
 
         //Jump input
-        if(Input.GetKeyDown(KeyCode.Space) && CanJump() && m_Falling == false)
+        if (Input.GetKeyDown(KeyCode.Space) && CanJump() && m_Falling == false)
         {
             if (MustRestartJumpCombo())
             {
