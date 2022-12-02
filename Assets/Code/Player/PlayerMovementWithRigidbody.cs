@@ -185,7 +185,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
         if(m_CameraRepos >= 5)
         {
-           // m_Camera.GetComponent<CameraController>().m_HasToReset = true;
+           m_Camera.GetComponent<CameraController>().m_HasToReset = true;
             m_CameraRepos = 0;
         }
 

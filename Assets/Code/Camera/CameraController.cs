@@ -89,13 +89,14 @@ public class CameraController : MonoBehaviour
         transform.position = l_DesiredPosition;
         transform.LookAt(m_LookAt.position);
 
-        //(0, -90, 0);
         if(m_HasToReset)
         {
-
+            //if(Vector3.Dot(this.transform.forward, m_LookAt.transform.forward) < Mathf.Cos(15 * Mathf.Deg2Rad))
+            Debug.Log("reset");
             l_ForwardCamera = new Vector3(Mathf.Sin(l_Yaw * Mathf.Deg2Rad) * Mathf.Cos(m_LookAt.transform.rotation.x * Mathf.Deg2Rad), Mathf.Sin(m_LookAt.transform.rotation.x * Mathf.Deg2Rad), Mathf.Cos(l_Yaw * Mathf.Deg2Rad) * Mathf.Cos(m_LookAt.transform.rotation.x * Mathf.Deg2Rad));
             m_HasToReset = false;
         }
+        //(0, -90, 0);
     }
 
     // Update is called once per frame
