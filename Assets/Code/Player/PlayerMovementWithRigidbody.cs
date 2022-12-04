@@ -100,6 +100,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     bool m_IsBouncing;
 
     bool m_CanMove = true;
+    bool m_IsCrouch = false;
 
     void Awake()
     {
@@ -172,9 +173,21 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 l_MovementSpeed = m_RunSpeed;
             }
         }
-        if (Input.GetKey(KeyCode.Z))
+        if (Input.GetKeyDown(KeyCode.Z))
         {
-            m_Animator.SetTrigger("Crouch");
+            if (m_IsCrouch == false)
+            {
+                m_Animator.SetTrigger("Crouch");
+                m_Animator.SetBool("Crouching", true);
+                m_IsCrouch = true;
+                m_CanMove = false;
+            }
+            else
+            {
+                m_IsCrouch = false;
+                m_Animator.SetBool("Crouching", false);
+                m_CanMove = true;
+            }
         }
 
         if (l_HasMovement == false)
@@ -213,16 +226,23 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         //Jump input
         if (Input.GetKeyDown(KeyCode.Space) && CanJump() && m_Falling == false)
         {
-            if (MustRestartJumpCombo())
+            if (m_IsCrouch == false)
             {
-                SetJumpType(JumpType.Single);
-                // m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse); // DEPRECATED
+                if (MustRestartJumpCombo())
+                {
+                    SetJumpType(JumpType.Single);
+                    // m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce, ForceMode.Impulse); // DEPRECATED
+                }
+                else
+                {
+                    NextJump();
+                    m_PlayerRigidbody.velocity = Vector3.zero;
+                    // m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce * m_AirJumpMultiplier, ForceMode.Impulse); // DEPRECATED
+                }
             }
             else
             {
-                NextJump();
-                m_PlayerRigidbody.velocity = Vector3.zero;
-                // m_PlayerRigidbody.AddForce(Vector3.up * m_JumpForce * m_AirJumpMultiplier, ForceMode.Impulse); // DEPRECATED
+                SetJumpType(JumpType.Long);
             }
         }
 
@@ -367,6 +387,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce, ForceMode.Impulse);
             m_Animator.SetTrigger("TripleJump");
+        }
+        else if (JumpType == JumpType.Long)
+        {
+            m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce, ForceMode.Impulse);
+            m_Animator.SetTrigger("LongJump");
         }
     }
 
