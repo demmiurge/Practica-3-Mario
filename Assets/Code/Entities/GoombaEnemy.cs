@@ -71,7 +71,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
                 break;
         }
 
-        if(m_NumPunches >2)
+        if(m_NumPunches > 2)
         {
             StartCoroutine(KillGoomba());
         }

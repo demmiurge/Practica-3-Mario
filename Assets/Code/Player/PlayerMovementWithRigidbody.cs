@@ -635,6 +635,15 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             //m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce/2, ForceMode.Impulse);
             StartCoroutine(EnableMovement(m_TimeToBouncing));
         }
+        else if (collision.gameObject.tag == "Koopa")
+        {
+            m_CanMove = false;
+            m_Animator.SetTrigger("Hit");
+            m_IsBouncing = true;
+            m_CurrentBouncing = m_TimeToBouncing;
+            //m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce/2, ForceMode.Impulse);
+            StartCoroutine(EnableMovement(m_TimeToBouncing));
+        }
     }
 
     bool CanKillGoomba(Vector3 Normal)

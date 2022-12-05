@@ -13,6 +13,8 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
         ATTACK
     }
 
+    public Animator m_Animator;
+
     public KoopaState m_State;
     public float m_HitPlayerTime = 1.5f;
     public float m_HitPlayerSpeed = 2f;
@@ -48,6 +50,7 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
     {
         GameController.GetGameController().AddRestartGameElements(this);
         m_StartScale = new Vector3(transform.localScale.x, transform.localScale.y, transform.localScale.z);
+        m_Animator.SetBool("Dead", false);
     }
 
     // Update is called once per frame
@@ -71,37 +74,69 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
 
         if (m_NumPunches > 2)
         {
-            StartCoroutine(KillGoomba());
+            StartCoroutine(KillKoopa());
         }
     }
 
     void UpdatePatrolState()
     {
+        m_Animator.SetBool("Chasing", false);
+        m_Animator.SetBool("Walking", true);
         if (PatrolTargetArrived())
         {
-            //MoveToNextPosition();
+            MoveToNextPosition();
         }
         if (HearsPlayer())
         {
-            //SetAlertState();
+            SetAlertState();
+        }
+        else
+        {
+            SetPatrolState();
         }
     }
 
     void UpdateAlertState()
     {
-        this.transform.rotation.SetLookRotation(GameController.GetGameController().GetPlayer().transform.position);
-        Debug.Log("i see player");
-        m_NavMeshAgent.destination = GameController.GetGameController().GetPlayer().transform.position;
+        transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
+        m_Animator.SetBool("Alert", true);
+        m_Animator.SetBool("Walking", false);
+        if (SeesPlayer())
+            SetChaseState();
+        else
+            SetPatrolState();
     }
 
     void UpdateChaseState()
     {
+        m_Animator.SetBool("Alert", false);
+        m_Animator.SetBool("Chasing", true);
+        m_NavMeshAgent.destination = GameController.GetGameController().GetPlayer().transform.position;
+        if (InDistanceToAttack())
+        {
+            SetAttackState();
+        }
+        if (!HearsPlayer())
+        {
+            SetPatrolState();
+        }
+    }
 
+    bool InDistanceToAttack()
+    {
+        return (transform.position - GameController.GetGameController().GetPlayer().transform.position).magnitude <= m_DistanceToAttack;
     }
 
     void UpdateAttackState()
     {
-
+        if (InDistanceToAttack())
+        {
+            Debug.Log("attacking");
+        }
+        else
+        {
+            SetChaseState();
+        }
     }
 
     void SetPatrolState()
@@ -121,7 +156,6 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
         if (m_CurrentPatrolTargetID >= m_PatrolTargets.Count)
         {
             m_CurrentPatrolTargetID = 0;
-            Debug.Log("arrived");
         }
         m_NavMeshAgent.destination = m_PatrolTargets[m_CurrentPatrolTargetID].position;
     }
@@ -175,14 +209,15 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
     public void Kill()
     {
         transform.localScale = new Vector3(0.5f, m_KillScale, 0.5f);
-        StartCoroutine(KillGoomba());
+        StartCoroutine(KillKoopa());
     }
 
-    IEnumerator KillGoomba()
+    IEnumerator KillKoopa()
     {
         yield return new WaitForSeconds(m_KillTime);
         gameObject.SetActive(false);
         m_NumPunches = 0;
+        m_Animator.SetBool("Dead", true);
     }
 
     public void RestartGame()

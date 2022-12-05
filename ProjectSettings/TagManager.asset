@@ -12,6 +12,7 @@ TagManager:
   - Checkpoint
   - Goomba
   - MarioHit
+  - Koopa
   layers:
   - Default
   - TransparentFX
