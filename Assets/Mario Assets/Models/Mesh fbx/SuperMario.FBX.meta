@@ -2267,7 +2267,14 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.50000286
+        functionName: Land
+        data: 
+        objectReferenceParameter: {fileID: 3336113624997716032, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask:
       - path: 
         weight: 1

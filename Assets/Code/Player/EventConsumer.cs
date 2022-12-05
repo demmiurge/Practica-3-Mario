@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class EventConsumer : MonoBehaviour
 {
+    public ParticleSystem m_Step;
     public void Step(AnimationEvent _AnimationEvent)
     {
         Object l_Object = _AnimationEvent.objectReferenceParameter;
-       
+        m_Step.Play();
+    }
+
+    public void Land(AnimationEvent _AnimationEvent)
+    {
+        m_Step.Play();
+        Debug.Log("land");
     }
 
     public void PunchSound1(AnimationEvent _AnimationEvent)
