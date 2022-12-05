@@ -61,6 +61,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     float m_ComboJumpCurrentTime;
     JumpType m_CurrentJumpType;
     bool m_Falling = false;
+    public LayerMask m_WallJumpLayer;
+    public Transform m_EyesHeight;
 
 
     [Header("Punch")]
@@ -245,6 +247,14 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 SetJumpType(JumpType.Long);
             }
         }
+
+        Ray l_Ray = new Ray(m_EyesHeight.position, transform.forward);
+        RaycastHit l_RaycastHit;
+        if (Physics.Raycast(l_Ray, out l_RaycastHit, 0.1f, m_WallJumpLayer.value))
+        {
+            Debug.Log("wallJump");
+        }
+        Debug.DrawLine(m_EyesHeight.position, l_RaycastHit.point,  Color.red);
 
         Die();
 
@@ -608,7 +618,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             m_Animator.SetTrigger("Hit");
             m_IsBouncing = true;
             m_CurrentBouncing = m_TimeToBouncing;
-            m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce/2, ForceMode.Impulse);
+            //m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce/2, ForceMode.Impulse);
             StartCoroutine(EnableMovement(m_TimeToBouncing));
         }
     }

@@ -26,6 +26,7 @@ public class CameraController : MonoBehaviour
     bool m_AngleLocked = false;
     bool m_AimLocked = true;
 
+    [HideInInspector]
     public bool m_HasToReset = false;
 
     // Start is called before the first frame update

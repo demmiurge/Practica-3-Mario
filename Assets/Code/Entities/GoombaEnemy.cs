@@ -15,7 +15,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
 
     public GoombaState m_State;
     public float m_HitPlayerTime = 1.5f;
-    public float m_HitPlayerSpeed = 2f;
+    public float m_HitPlayerSpeed = 1f;
     public float m_DistanceToAttack = 8f;
     public float m_WaitToAttackTime = 3f;
 
@@ -75,21 +75,26 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
         }
     }
 
+    void LateUpdate()
+    {
+        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+    }
+
     void UpdatePatrolState()
     {
         if(PatrolTargetArrived())
         {
-            //MoveToNextPosition();
+            MoveToNextPosition();
         }
         if(HearsPlayer())
         {
-            //SetAlertState();
+            SetAlertState();
         }
     }
 
     void UpdateAlertState()
     {
-        this.transform.rotation.SetLookRotation(GameController.GetGameController().GetPlayer().transform.position);
+        transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
         Debug.Log("i see player");
         m_NavMeshAgent.destination = GameController.GetGameController().GetPlayer().transform.position;
     }

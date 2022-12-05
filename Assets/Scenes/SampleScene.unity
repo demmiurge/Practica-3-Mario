@@ -372,6 +372,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_WallJumpLayer.m_Bits
+      value: 128
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
 --- !u!4 &318157039 stripped
@@ -416,6 +420,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 20769744, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 20769744, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_CollisionDetection
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_PatrolTargets.Array.data[0]
       value: 
@@ -436,34 +448,14 @@ PrefabInstance:
       propertyPath: m_PatrolTargets.Array.data[4]
       value: 
       objectReference: {fileID: 1764159063}
-    - target: {fileID: 1526023997, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Height
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023997, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Radius
-      value: 0.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023997, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Height
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Radius
-      value: 0.9
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Center.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Center.y
-      value: 0.9
-      objectReference: {fileID: 0}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 255edda2a1ea6f144885eb3e80acb412, type: 2}
     - target: {fileID: 8152003623121519862, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1052,6 +1044,7 @@ MonoBehaviour:
   m_Offset: 0.1
   m_DebugLockAngleKeyCode: 105
   m_DebugLockKeyCode: 111
+  m_HasToReset: 0
 --- !u!1 &1022041058
 GameObject:
   m_ObjectHideFlags: 0
