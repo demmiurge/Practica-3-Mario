@@ -420,13 +420,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 20769744, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Constraints
-      value: 80
-      objectReference: {fileID: 0}
-    - target: {fileID: 20769744, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_CollisionDetection
-      value: 3
+    - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_DistanceToAttack
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_PatrolTargets.Array.data[0]
@@ -448,14 +444,6 @@ PrefabInstance:
       propertyPath: m_PatrolTargets.Array.data[4]
       value: 
       objectReference: {fileID: 1764159063}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023998, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Material
-      value: 
-      objectReference: {fileID: 13400000, guid: 255edda2a1ea6f144885eb3e80acb412, type: 2}
     - target: {fileID: 8152003623121519862, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_RootOrder
       value: 1

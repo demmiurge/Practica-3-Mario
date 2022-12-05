@@ -16,14 +16,14 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     public GoombaState m_State;
     public float m_HitPlayerTime = 1.5f;
     public float m_HitPlayerSpeed = 1f;
-    public float m_DistanceToAttack = 8f;
+    public float m_DistanceToAttack = 0.1f;
     public float m_WaitToAttackTime = 3f;
 
     public float m_VisualConeAngle = 60.0f;
     public float m_SightDistance = 8.0f;
     public float m_EyesHeight = 1f;
     public float m_EyesPlayerHeight = 1.5f;
-    public float m_HearRangeDistance = 5.0f;
+    public float m_HearRangeDistance = 20.0f;
     public float m_KillTime = 0.5f;
     public float m_KillScale = 0.2f;
 
@@ -90,23 +90,47 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
         {
             SetAlertState();
         }
+        else
+        {
+            SetPatrolState();
+        }
     }
 
     void UpdateAlertState()
     {
         transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
-        Debug.Log("i see player");
-        m_NavMeshAgent.destination = GameController.GetGameController().GetPlayer().transform.position;
+        if (SeesPlayer())
+            SetChaseState();
+        else
+            SetPatrolState();
     }
 
     void UpdateChaseState()
     {
+        m_NavMeshAgent.destination = GameController.GetGameController().GetPlayer().transform.position;
+        if(InDistanceToAttack())
+        {
+            SetAttackState();
+        }
+        if (!HearsPlayer())
+            SetPatrolState();
+    }
 
+    bool InDistanceToAttack()
+    {
+        return (transform.position - GameController.GetGameController().GetPlayer().transform.position).magnitude <= m_DistanceToAttack;
     }
 
     void UpdateAttackState()
     {
-
+        if(InDistanceToAttack())
+        {
+            Debug.Log("attacking");
+        }
+        else
+        {
+            SetChaseState();
+        }
     }
 
     void SetPatrolState()
@@ -126,7 +150,6 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
         if(m_CurrentPatrolTargetID >= m_PatrolTargets.Count)
         {
             m_CurrentPatrolTargetID = 0;
-            Debug.Log("arrived");
         }
         m_NavMeshAgent.destination = m_PatrolTargets[m_CurrentPatrolTargetID].position;
     }
@@ -202,5 +225,11 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
         {
             m_NumPunches++;
         }
+    }
+
+    IEnumerator SetChase(float Time)
+    {
+        yield return new WaitForSeconds(Time);
+        SetChaseState();
     }
 }
