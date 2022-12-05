@@ -13,6 +13,8 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
         ATTACK
     }
 
+    public Animator m_Animator;
+
     public GoombaState m_State;
     public float m_HitPlayerTime = 1.5f;
     public float m_HitPlayerSpeed = 1f;
@@ -82,7 +84,8 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
 
     void UpdatePatrolState()
     {
-        if(PatrolTargetArrived())
+        m_Animator.SetBool("Chasing", false);
+        if (PatrolTargetArrived())
         {
             MoveToNextPosition();
         }
@@ -99,6 +102,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     void UpdateAlertState()
     {
         transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
+        m_Animator.SetBool("Alert", true);
         if (SeesPlayer())
             SetChaseState();
         else
@@ -107,13 +111,17 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
 
     void UpdateChaseState()
     {
+        m_Animator.SetBool("Alert", false);
+        m_Animator.SetBool("Chasing", true);
         m_NavMeshAgent.destination = GameController.GetGameController().GetPlayer().transform.position;
         if(InDistanceToAttack())
         {
             SetAttackState();
         }
         if (!HearsPlayer())
+        {
             SetPatrolState();
+        }
     }
 
     bool InDistanceToAttack()
