@@ -257,8 +257,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             {
                 m_CanMove = false;
                 m_IsWallJumping = true;
-                m_CurrentBouncing = m_TimeToBounce;
-                StartCoroutine(EnableMovement(m_TimeToBouncing));
+                m_CurrentBouncing = m_TimeToBouncing;
+                StartCoroutine(EnableMovement(1));
             }
         }
         //Debug.DrawLine(m_EyesHeight.position, l_RaycastHit.point,  Color.red);       
@@ -342,9 +342,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             float l_NewRotation = -transform.rotation.y;
             transform.rotation = Quaternion.Euler(0.0f, l_NewRotation, 0.0f);
-            Debug.Log(transform.rotation);
             m_CurrentBouncing -= Time.deltaTime;
-            m_PlayerRigidbody.AddForce(m_PlayerRigidbody.transform.forward * m_CurrentBouncing, ForceMode.Impulse);
+            m_PlayerRigidbody.AddForce(m_PlayerRigidbody.transform.forward * 5, ForceMode.Impulse);
         }
     }
 
