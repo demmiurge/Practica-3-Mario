@@ -11,8 +11,9 @@ public class EventConsumer : MonoBehaviour
         m_Step.Play();
     }
 
-    public void Land(AnimationEvent _AnimationEvent)
+    public void LandParticles(AnimationEvent _AnimationEvent)
     {
+        Object l_Object = _AnimationEvent.objectReferenceParameter;
         m_Step.Play();
         Debug.Log("land");
     }
