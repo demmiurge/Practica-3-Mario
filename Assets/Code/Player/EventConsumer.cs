@@ -5,6 +5,7 @@ using UnityEngine;
 public class EventConsumer : MonoBehaviour
 {
     public ParticleSystem m_Step;
+    public ParticleSystem m_Hit;
     public void Step(AnimationEvent _AnimationEvent)
     {
         Object l_Object = _AnimationEvent.objectReferenceParameter;
@@ -16,6 +17,12 @@ public class EventConsumer : MonoBehaviour
         Object l_Object = _AnimationEvent.objectReferenceParameter;
         m_Step.Play();
         Debug.Log("land");
+    }
+
+    public void HitFront(AnimationEvent _AnimationEvent)
+    {
+        Object l_Object = _AnimationEvent.objectReferenceParameter;
+        m_Hit.Play();
     }
 
     public void PunchSound1(AnimationEvent _AnimationEvent)
