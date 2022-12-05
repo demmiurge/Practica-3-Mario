@@ -2836,6 +2836,38 @@ PrefabInstance:
       propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].value
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].inWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.maxCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[0].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minCurve.m_Curve.Array.data[1].outWeight
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 3336113624997716045, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -2930,6 +2962,10 @@ PrefabInstance:
     - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
       propertyPath: ShapeModule.type
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
       propertyPath: InitialModule.rotation3D
@@ -3189,6 +3225,10 @@ PrefabInstance:
     - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
       propertyPath: ShapeModule.type
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3336113624997716034, guid: 066745bacd55ff14ca570d5751c453ed, type: 3}
       propertyPath: InitialModule.rotation3D

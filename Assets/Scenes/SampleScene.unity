@@ -320,14 +320,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3336113625964980356, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: moveWithTransform
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5658799253398145814, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: moveWithTransform
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6785730832219408046, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_Name
       value: SuperMarioV1
@@ -424,18 +416,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 391130136, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
-      propertyPath: m_Speed
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 391130136, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
-      propertyPath: m_BaseOffset
-      value: -0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 391130138, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
-      propertyPath: m_DistanceToAttack
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 391130138, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
       propertyPath: m_PatrolTargets.Array.data[0]
       value: 

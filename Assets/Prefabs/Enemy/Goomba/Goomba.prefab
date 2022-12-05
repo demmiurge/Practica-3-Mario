@@ -107,7 +107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8152003623121519862
 Transform:
   m_ObjectHideFlags: 0
@@ -157,16 +157,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad872f340b718647a126903313e428c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Animator: {fileID: 8152003623112272668}
   m_State: 0
   m_HitPlayerTime: 1.5
   m_HitPlayerSpeed: 2
-  m_DistanceToAttack: 0.1
+  m_DistanceToAttack: 1
   m_WaitToAttackTime: 3
   m_VisualConeAngle: 60
   m_SightDistance: 8
   m_EyesHeight: 1
   m_EyesPlayerHeight: 1.5
-  m_HearRangeDistance: 10
+  m_HearRangeDistance: 8
   m_KillTime: 0.5
   m_KillScale: 0.2
   m_PatrolTargets:

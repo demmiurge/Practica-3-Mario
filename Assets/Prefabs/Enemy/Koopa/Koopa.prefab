@@ -1775,7 +1775,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -1784,7 +1784,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: -0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &391130138
@@ -1803,7 +1803,7 @@ MonoBehaviour:
   m_State: 0
   m_HitPlayerTime: 1.5
   m_HitPlayerSpeed: 2
-  m_DistanceToAttack: 8
+  m_DistanceToAttack: 1
   m_WaitToAttackTime: 3
   m_VisualConeAngle: 60
   m_SightDistance: 8
