@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
@@ -103,6 +104,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
     bool m_CanMove = true;
     bool m_IsCrouch = false;
+    bool m_HasJumped = false;
 
     void Awake()
     {
@@ -145,16 +147,27 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         Vector3 l_Movement = Vector3.zero;
         if (m_CanMove)
         {
-            if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+            /*if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+                l_HasMovement = true;*/
+
+            if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
                 l_HasMovement = true;
-            if (Input.GetKey(KeyCode.W))
+            if(Input.GetButton("Horizontal"))
+            {
+                l_Movement = Input.GetAxis("Horizontal") * l_RightCamera;
+            }
+            if (Input.GetButton("Vertical"))
+            {
+                l_Movement = Input.GetAxis("Vertical") * l_ForwardsCamera;
+            }
+            /*if (Input.GetKey(KeyCode.W))
                 l_Movement = l_ForwardsCamera;
             if (Input.GetKey(KeyCode.A))
                 l_Movement -= l_RightCamera;
             if (Input.GetKey(KeyCode.S))
                 l_Movement = -l_ForwardsCamera;
             if (Input.GetKey(KeyCode.D))
-                l_Movement += l_RightCamera;
+                l_Movement += l_RightCamera;*/
         }
         l_Movement.Normalize();
 
@@ -179,7 +192,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             if (m_IsCrouch == false)
             {
-                m_Animator.SetTrigger("Crouch");
                 m_Animator.SetBool("Crouching", true);
                 m_IsCrouch = true;
                 m_CanMove = false;
@@ -192,7 +204,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             }
         }
 
-        if (l_HasMovement == false)
+        if (l_HasMovement == false && m_HasJumped == false)
         {
             m_IdleTime += Time.deltaTime;
             m_CameraRepos += Time.deltaTime;
@@ -226,8 +238,9 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
 
         //Jump input
-        if (Input.GetKeyDown(KeyCode.Space) && CanJump() && m_Falling == false)
+        if (Input.GetButtonDown("Jump") && CanJump() && m_Falling == false)
         {
+            m_HasJumped = true;
             if (m_IsCrouch == false)
             {
                 if (MustRestartJumpCombo())
@@ -245,6 +258,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             else
             {
                 SetJumpType(JumpType.Long);
+                m_PlayerRigidbody.velocity = Vector3.zero;
             }
         }
 
@@ -327,6 +341,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             m_Falling = false;
             m_Animator.SetBool("Falling", false);
+            m_HasJumped = false;
         }
     }
 
@@ -415,7 +430,10 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         else if (JumpType == JumpType.Long)
         {
             m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce, ForceMode.Impulse);
+            m_Animator.SetBool("Crouching", false);
             m_Animator.SetTrigger("LongJump");
+            m_IsCrouch = false;
+            m_CanMove = true;
         }
     }
 
