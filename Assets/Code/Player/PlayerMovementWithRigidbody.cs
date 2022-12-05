@@ -54,8 +54,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     public float m_AirJumpMultiplier = 1.05f;
     [Range(0.001f, 0.1f)] 
     public float m_RadiusSphereTolerance = 0.01f;
-    int m_JumpsMade = 0;
-    int m_MaximumNumberOfHops = 2;
     bool m_IsJumpActive = false;
     public float m_ComboJumpTime = 2.5f;
     float m_ComboJumpCurrentTime;
@@ -98,8 +96,10 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
     [Header("Bouncing")] 
     public float m_TimeToBouncing = 2;
+    float m_TimeToBounce = 4;
     float m_CurrentBouncing = 0;
     bool m_IsBouncing;
+    bool m_IsWallJumping = false;
 
     bool m_CanMove = true;
     bool m_IsCrouch = false;
@@ -248,13 +248,20 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             }
         }
 
+        //Wall jump
         Ray l_Ray = new Ray(m_EyesHeight.position, transform.forward);
         RaycastHit l_RaycastHit;
         if (Physics.Raycast(l_Ray, out l_RaycastHit, 0.1f, m_WallJumpLayer.value))
         {
-            Debug.Log("wallJump");
+            if (m_IsJumpActive == true)
+            {
+                m_CanMove = false;
+                m_IsWallJumping = true;
+                m_CurrentBouncing = m_TimeToBounce;
+                StartCoroutine(EnableMovement(m_TimeToBouncing));
+            }
         }
-        Debug.DrawLine(m_EyesHeight.position, l_RaycastHit.point,  Color.red);
+        //Debug.DrawLine(m_EyesHeight.position, l_RaycastHit.point,  Color.red);       
 
         Die();
 
@@ -330,6 +337,14 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             m_CurrentBouncing -= Time.deltaTime;
             m_PlayerRigidbody.AddForce(-m_PlayerRigidbody.transform.forward * m_CurrentBouncing, ForceMode.Impulse);
             
+        }
+        if(m_IsWallJumping)
+        {
+            float l_NewRotation = -transform.rotation.y;
+            transform.rotation = Quaternion.Euler(0.0f, l_NewRotation, 0.0f);
+            Debug.Log(transform.rotation);
+            m_CurrentBouncing -= Time.deltaTime;
+            m_PlayerRigidbody.AddForce(m_PlayerRigidbody.transform.forward * m_CurrentBouncing, ForceMode.Impulse);
         }
     }
 
@@ -636,5 +651,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         yield return new WaitForSeconds(l_Time);
         m_CanMove = true;
         m_IsBouncing = false;
+        m_IsWallJumping = false;
     }
 }
