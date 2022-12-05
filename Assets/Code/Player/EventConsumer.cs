@@ -5,6 +5,7 @@ using UnityEngine;
 public class EventConsumer : MonoBehaviour
 {
     public ParticleSystem m_Step;
+    public ParticleSystem m_Land;
     public ParticleSystem m_Hit;
     public void Step(AnimationEvent _AnimationEvent)
     {
@@ -15,7 +16,7 @@ public class EventConsumer : MonoBehaviour
     public void LandParticles(AnimationEvent _AnimationEvent)
     {
         Object l_Object = _AnimationEvent.objectReferenceParameter;
-        m_Step.Play();
+        m_Land.Play();
         Debug.Log("land");
     }
 
