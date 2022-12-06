@@ -37,6 +37,10 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
 
     int m_NumPunches = 0;
 
+    [Header("Life")]
+    public int m_NumPucnhesToKill = 2;
+    bool m_IsDead;
+
     [Header("IK Foot")]
     [Range(0.0f, 1.0f)]
     public float m_DistanceToGround = 0f;
@@ -78,7 +82,7 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
                 break;
         }
 
-        if (m_NumPunches > 2)
+        if (m_NumPunches > m_NumPucnhesToKill)
         {
             StartCoroutine(KillKoopa());
         }
@@ -261,6 +265,7 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
     public void Kill()
     {
         //transform.localScale = new Vector3(0.5f, m_KillScale, 0.5f);
+        m_IsDead = true;
         StartCoroutine(KillKoopa());
     }
 
@@ -269,8 +274,22 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
         yield return new WaitForSeconds(m_KillTime);
         gameObject.SetActive(false);
         m_NumPunches = 0;
-        m_Animator.SetBool("Dead", true);
+        m_Animator.SetBool("Dead", m_IsDead);
         Instantiate(m_Prefab, new Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z), Quaternion.identity);
+    }
+
+    public int GetCurrentPunches() => m_NumPunches;
+
+    public void SetCurrentPunches(int l_NumPunches)
+    {
+        m_NumPunches = l_NumPunches;
+    }
+
+    public bool GetIsDead() => m_IsDead;
+
+    public void SetIsDead(bool l_IsDead)
+    {
+        m_IsDead = l_IsDead;
     }
 
     public void RestartGame()

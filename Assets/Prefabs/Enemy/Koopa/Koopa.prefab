@@ -1686,6 +1686,8 @@ GameObject:
   - component: {fileID: 391130137}
   - component: {fileID: 391130136}
   - component: {fileID: 391130138}
+  - component: {fileID: 1114874555}
+  - component: {fileID: 1114874554}
   m_Layer: 0
   m_Name: Koopa
   m_TagString: Koopa
@@ -1820,10 +1822,37 @@ MonoBehaviour:
   m_VisionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_NumPucnhesToKill: 2
   m_DistanceToGround: 0.22
   m_KoopaLayerMask:
     serializedVersion: 2
     m_Bits: 439
+--- !u!114 &1114874555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5951331742921662507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dfd19a2eb1dfa942a6a2d87e6293646, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AvailableToSetAttributes: 1
+--- !u!114 &1114874554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5951331742921662507}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7bd4b23f961b84e948e42abe030570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AvailableToSetAttributes: 0
 --- !u!1 &6075909191456662708
 GameObject:
   m_ObjectHideFlags: 0
