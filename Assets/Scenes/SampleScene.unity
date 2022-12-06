@@ -320,10 +320,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 148241436, guid: f10dc441c13666d4090fbfe473d32832, type: 3}
-      propertyPath: m_Constraints
-      value: 80
-      objectReference: {fileID: 0}
     - target: {fileID: 3409089091815687856, guid: f10dc441c13666d4090fbfe473d32832, type: 3}
       propertyPath: m_Name
       value: Shell
@@ -383,15 +379,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 638962812, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 638962812, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.518
+      value: 0.796
       objectReference: {fileID: 0}
     - target: {fileID: 638962812, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.52
+      value: 0.842
       objectReference: {fileID: 0}
     - target: {fileID: 6785730832219408046, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_Name
@@ -445,6 +441,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_AttachedShellThrowForce
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
 --- !u!4 &318157039 stripped
@@ -490,6 +490,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 391130138, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
+      propertyPath: m_Prefab
+      value: 
+      objectReference: {fileID: 3409089091815687856, guid: f10dc441c13666d4090fbfe473d32832, type: 3}
+    - target: {fileID: 391130138, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
       propertyPath: m_PatrolTargets.Array.data[0]
       value: 
       objectReference: {fileID: 1267066158}
@@ -515,7 +519,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5951331742921662507, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6475244002179971729, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
       propertyPath: m_RootOrder

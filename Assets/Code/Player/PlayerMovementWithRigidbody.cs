@@ -253,14 +253,36 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         m_PlayerRigidbody.velocity = new Vector3(l_Movement.x, m_PlayerRigidbody.velocity.y, l_Movement.z);
 
         //Punch Input
-        if (Input.GetButtonDown("Punch") && CanPunch())
+        if (!m_AttachedShell)
         {
-            if (MustRestartComboPunch())
+            if (Input.GetButtonDown("Punch") && CanPunch())
             {
-                SetComboPucnch(PunchType.Right_Hand);
+                if (MustRestartComboPunch())
+                {
+                    SetComboPucnch(PunchType.Right_Hand);
+                }
+                else
+                    NextComboPunch();
             }
-            else
-                NextComboPunch();
+        }
+        //Take and Throw
+        else if(m_AttachedShell && m_ShellAttached)
+        {
+            if (Input.GetButtonDown("Throw"))
+            {
+                Debug.Log("throw");
+                ThrowShell(m_AttachedShellThrowForce);
+                m_ShellAttached = null;
+            }
+        }
+        if (Input.GetButtonDown("Take") && CanAttach())
+        {
+            AttachShell();
+        }
+
+        if (m_AttachedShell == true)
+        {
+            UpdateAttachedShell();
         }
 
 
@@ -305,23 +327,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             }
         }
         
-        //Take and Throw
-        if(Input.GetButtonDown("Take") && CanAttach())
-        {
-            AttachShell();
-        }
-
-        if(Input.GetButtonDown("Throw") && m_ShellAttached && !m_AttachedShell)
-        {
-            ThrowShell(m_AttachedShellThrowForce);
-            m_ShellAttached = null;
-        }
-
-        if(m_AttachedShell)
-        {
-            //UpdateAttachedShell();
-        }
-
         Die();
 
         CheckMarioIsFall();
@@ -362,20 +367,42 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
     void AttachShell()
     {
-        Ray l_Ray = new Ray(m_AttachingPosition.position, m_PlayerRigidbody.transform.forward);
+        Vector3 l_DetectionPoint = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
+        Ray l_Ray = new Ray(l_DetectionPoint, m_PlayerRigidbody.transform.forward);
         RaycastHit l_RaycastHit;
         Debug.DrawRay(l_Ray.origin, l_Ray.direction * 2f, Color.red);
         if (Physics.Raycast(l_Ray, out l_RaycastHit, m_MaxAttachDistance, m_AttachShellLayermask))
         {
             if (l_RaycastHit.collider.tag == "KoopaShell")
             {
-                Debug.Log("attach");
                 m_AttachedShell = true;
                 m_ShellAttached = l_RaycastHit.collider.GetComponent<Rigidbody>();
                 m_ShellAttached.GetComponent<KoopaShell>().SetAttached(true);
                 m_ShellAttached.isKinematic = true;
                 m_AttachingShellStartRotation = l_RaycastHit.collider.transform.rotation;
             }
+        }
+    }
+
+    void UpdateAttachedShell()
+    {
+        Vector3 l_EulerAngles = m_AttachingPosition.rotation.eulerAngles;
+        Vector3 l_Direction = m_AttachingPosition.transform.position - m_ShellAttached.transform.position;
+        float l_Distance = l_Direction.magnitude;
+        float l_Movement = m_AttachingShellSpeed * Time.deltaTime;
+
+        if (l_Movement >= l_Distance)
+        {
+            //m_AttachedShell = false;
+            m_ShellAttached.transform.SetParent(m_AttachingPosition);
+            m_ShellAttached.transform.localPosition = Vector3.zero;
+            m_ShellAttached.transform.localRotation = Quaternion.identity;
+        }
+        else
+        {
+            l_Direction /= l_Distance;
+            m_ShellAttached.MovePosition(m_ShellAttached.transform.position + l_Direction * l_Movement);
+            m_ShellAttached.MoveRotation(Quaternion.Lerp(m_AttachingShellStartRotation, Quaternion.Euler(0.0f, l_EulerAngles.y, l_EulerAngles.z), 1.0f - Mathf.Min(l_Distance / 1.5f, 1.0f)));
         }
     }
 
