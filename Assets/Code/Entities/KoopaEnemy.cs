@@ -28,6 +28,7 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
     public float m_HearRangeDistance = 5.0f;
     public float m_KillTime = 0.5f;
     public float m_KillScale = 0.2f;
+    public GameObject m_Prefab;
 
     NavMeshAgent m_NavMeshAgent;
     public List<Transform> m_PatrolTargets;
@@ -218,6 +219,7 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
         gameObject.SetActive(false);
         m_NumPunches = 0;
         m_Animator.SetBool("Dead", true);
+        Instantiate(m_Prefab, new Vector3(this.transform.position.x, this.transform.position.y + 1, this.transform.position.z), Quaternion.identity);
     }
 
     public void RestartGame()
