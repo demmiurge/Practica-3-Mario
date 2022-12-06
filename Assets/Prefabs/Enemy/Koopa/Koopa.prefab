@@ -1784,7 +1784,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: -0.5
+  m_BaseOffset: -0.3
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &391130138
@@ -1812,6 +1812,7 @@ MonoBehaviour:
   m_HearRangeDistance: 5
   m_KillTime: 0.5
   m_KillScale: 0.2
+  m_Prefab: {fileID: 3409089091815687856, guid: f10dc441c13666d4090fbfe473d32832, type: 3}
   m_PatrolTargets:
   - {fileID: 0}
   - {fileID: 0}

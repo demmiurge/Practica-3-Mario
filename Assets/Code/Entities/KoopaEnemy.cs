@@ -21,7 +21,7 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
     public float m_DistanceToAttack = 8f;
     public float m_WaitToAttackTime = 3f;
 
-    public float m_VisualConeAngle = 60.0f;
+    public float m_VisualConeAngle = 30.0f;
     public float m_SightDistance = 8.0f;
     public float m_EyesHeight = 1f;
     public float m_EyesPlayerHeight = 1.5f;
@@ -83,6 +83,8 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
     {
         m_Animator.SetBool("Chasing", false);
         m_Animator.SetBool("Walking", true);
+        m_Animator.speed = 2f;
+        m_NavMeshAgent.speed = 2f;
         if (PatrolTargetArrived())
         {
             MoveToNextPosition();
@@ -103,7 +105,7 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
         m_Animator.SetBool("Alert", true);
         m_Animator.SetBool("Walking", false);
         if (SeesPlayer())
-            SetChaseState();
+            StartCoroutine(SetChase(0.5f));
         else
             SetPatrolState();
     }
@@ -112,6 +114,8 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
     {
         m_Animator.SetBool("Alert", false);
         m_Animator.SetBool("Chasing", true);
+        m_Animator.speed = 1f;
+        m_NavMeshAgent.speed = 3f;
         m_NavMeshAgent.destination = GameController.GetGameController().GetPlayer().transform.position;
         if (InDistanceToAttack())
         {
@@ -132,7 +136,8 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
     {
         if (InDistanceToAttack())
         {
-            Debug.Log("attacking");
+            m_Animator.SetBool("Chasing", false);
+            m_Animator.SetBool("Walking", false);
         }
         else
         {
@@ -234,5 +239,11 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
         {
             m_NumPunches++;
         }
+    }
+
+    IEnumerator SetChase(float Time)
+    {
+        yield return new WaitForSeconds(Time);
+        SetChaseState();
     }
 }

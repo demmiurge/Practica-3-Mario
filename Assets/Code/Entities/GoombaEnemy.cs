@@ -21,7 +21,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     public float m_DistanceToAttack = 0.1f;
     public float m_WaitToAttackTime = 3f;
 
-    public float m_VisualConeAngle = 60.0f;
+    public float m_VisualConeAngle = 30.0f;
     public float m_SightDistance = 8.0f;
     public float m_EyesHeight = 1f;
     public float m_EyesPlayerHeight = 1.5f;
@@ -79,7 +79,11 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
 
     void LateUpdate()
     {
-        transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+        //transform.localEulerAngles = new Vector3(0, transform.localEulerAngles.y, 0);
+        if(m_State == GoombaState.ALERT)
+        {
+            transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
+        }
     }
 
     void UpdatePatrolState()
@@ -101,10 +105,10 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
 
     void UpdateAlertState()
     {
-        transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
+        //transform.LookAt(GameObject.FindGameObjectWithTag("Player").transform);
         m_Animator.SetBool("Alert", true);
         if (SeesPlayer())
-            SetChaseState();
+            StartCoroutine(SetChase(0.5f));
         else
             SetPatrolState();
     }
@@ -133,7 +137,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     {
         if(InDistanceToAttack())
         {
-            Debug.Log("attacking");
+            //Debug.Log("attacking");
         }
         else
         {
@@ -210,7 +214,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     }
     public void Kill()
     {
-        transform.localScale = new Vector3(1.0f, m_KillScale, 1.0f);
+        transform.localScale = new Vector3(0.5f, m_KillScale, 0.5f);
         StartCoroutine(KillGoomba());
     }
 

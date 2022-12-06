@@ -115,7 +115,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
     bool m_CanMove = true;
     bool m_IsCrouch = false;
-    bool m_HasJumped = false;
 
     void Awake()
     {
@@ -230,7 +229,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             }
         }
 
-        if (l_HasMovement == false && m_HasJumped == false)
+        if (l_HasMovement == false)
         {
             m_IdleTime += Time.deltaTime;
             m_CameraRepos += Time.deltaTime;
@@ -288,7 +287,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         //Jump input
         if (Input.GetButtonDown("Jump") && CanJump() && m_Falling == false)
         {
-            m_HasJumped = true;
+            m_IdleTime = 0;
             if (m_IsCrouch == false)
             {
                 if (MustRestartJumpCombo())
@@ -450,7 +449,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             m_Falling = false;
             m_Animator.SetBool("Falling", false);
-            m_HasJumped = false;
         }
     }
 
@@ -775,13 +773,20 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
         else if (collision.gameObject.tag == "KoopaShell")
         {
-            m_CanMove = false;
-            m_Animator.SetTrigger("Hit");
-            m_IsBouncing = true;
-            m_CurrentBouncing = m_TimeToBouncing;
-            m_PlayerRigidbody.GetComponent<MarioLife>().SetDamage(1);
-            //m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce/2, ForceMode.Impulse);
-            StartCoroutine(EnableMovement(m_TimeToBouncing));
+            if (collision.gameObject.GetComponent<KoopaShell>().m_hasMovement == true)
+            {
+                m_CanMove = false;
+                m_Animator.SetTrigger("Hit");
+                m_IsBouncing = true;
+                m_CurrentBouncing = m_TimeToBouncing;
+                m_PlayerRigidbody.GetComponent<MarioLife>().SetDamage(1);
+                //m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce/2, ForceMode.Impulse);
+                StartCoroutine(EnableMovement(m_TimeToBouncing));
+            }
+            else
+            {
+                collision.rigidbody.AddForce(m_PlayerRigidbody.transform.forward * 2, ForceMode.Impulse);
+            }
         }
     }
 
