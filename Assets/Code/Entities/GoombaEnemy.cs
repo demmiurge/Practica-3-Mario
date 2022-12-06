@@ -89,6 +89,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     void UpdatePatrolState()
     {
         m_Animator.SetBool("Chasing", false);
+        m_NavMeshAgent.speed = 1.25f;
         if (PatrolTargetArrived())
         {
             MoveToNextPosition();
@@ -117,6 +118,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
     {
         m_Animator.SetBool("Alert", false);
         m_Animator.SetBool("Chasing", true);
+        m_NavMeshAgent.speed = 3f;
         m_NavMeshAgent.destination = GameController.GetGameController().GetPlayer().transform.position;
         if(InDistanceToAttack())
         {
