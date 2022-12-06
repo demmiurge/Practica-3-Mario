@@ -37,6 +37,11 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
 
     int m_NumPunches = 0;
 
+    [Header("IK Foot")]
+    [Range(0.0f, 1.0f)]
+    public float m_DistanceToGround = 0f;
+    public LayerMask m_KoopaLayerMask;
+
     Vector3 m_StartScale;
 
     //Patrolling, when Mario is close it turns facing Mario, jumps and starts going towards him, if Marion changes position, Goomba doesn't change direction and stops after colliding or in certan
@@ -79,12 +84,53 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
         }
     }
 
+    void OnAnimatorIK()
+    {
+        if (m_Animator)
+        {
+            Debug.Log("ANIMATOR");
+            m_Animator.SetIKPositionWeight(AvatarIKGoal.LeftFoot, 1f);
+            m_Animator.SetIKRotationWeight(AvatarIKGoal.LeftFoot, 1f);
+
+            m_Animator.SetIKPositionWeight(AvatarIKGoal.RightFoot, 1f);
+            m_Animator.SetIKRotationWeight(AvatarIKGoal.RightFoot, 1f);
+
+            // Left foot
+            RaycastHit l_Hit;
+            Ray l_Ray = new Ray(m_Animator.GetIKPosition(AvatarIKGoal.LeftFoot) + Vector3.up, Vector3.down);
+            if (Physics.Raycast(l_Ray, out l_Hit, m_DistanceToGround + 1f, m_KoopaLayerMask))
+            {
+                Debug.Log("PISADA");
+                if (l_Hit.transform.tag == "Walkable")
+                {
+                    Vector3 l_FootPosition = l_Hit.point;
+                    l_FootPosition.y += m_DistanceToGround;
+                    m_Animator.SetIKPosition(AvatarIKGoal.LeftFoot, l_FootPosition);
+                    m_Animator.SetIKRotation(AvatarIKGoal.LeftFoot, Quaternion.LookRotation(transform.forward, l_Hit.normal));
+                }
+            }
+
+            // Right foot
+            l_Ray = new Ray(m_Animator.GetIKPosition(AvatarIKGoal.RightFoot) + Vector3.up, Vector3.down);
+            if (Physics.Raycast(l_Ray, out l_Hit, m_DistanceToGround + 1f, m_KoopaLayerMask))
+            {
+                if (l_Hit.transform.tag == "Walkable")
+                {
+                    Vector3 l_FootPosition = l_Hit.point;
+                    l_FootPosition.y += m_DistanceToGround;
+                    m_Animator.SetIKPosition(AvatarIKGoal.RightFoot, l_FootPosition);
+                    m_Animator.SetIKRotation(AvatarIKGoal.RightFoot, Quaternion.LookRotation(transform.forward, l_Hit.normal));
+                }
+            }
+        }
+    }
+
     void UpdatePatrolState()
     {
         m_Animator.SetBool("Chasing", false);
         m_Animator.SetBool("Walking", true);
-        m_Animator.speed = 2f;
-        m_NavMeshAgent.speed = 2f;
+        m_Animator.speed = 1.5f;
+        m_NavMeshAgent.speed = 0.75f;
         if (PatrolTargetArrived())
         {
             MoveToNextPosition();

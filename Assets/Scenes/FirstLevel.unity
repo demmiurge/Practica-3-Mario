@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427188, b: 0.56452495, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645251, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -107,14 +107,14 @@ NavMeshSettings:
     serializedVersion: 2
     agentTypeID: 0
     agentRadius: 0.5
-    agentHeight: 3
-    agentSlope: 55
-    agentClimb: 0.8
-    ledgeDropHeight: 0
+    agentHeight: 2
+    agentSlope: 25
+    agentClimb: 0.43
+    ledgeDropHeight: 4
     maxJumpAcrossDistance: 0
-    minRegionArea: 2
-    manualCellSize: 0
-    cellSize: 0.16666667
+    minRegionArea: 0.63
+    manualCellSize: 1
+    cellSize: 0.025
     manualTileSize: 0
     tileSize: 256
     accuratePlacement: 0
@@ -783,10 +783,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1280721548}
     m_Modifications:
-    - target: {fileID: 391130138, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
-      propertyPath: m_PatrolTargets.Array.size
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 391130138, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
       propertyPath: m_PatrolTargets.Array.data[0]
       value: 
@@ -2018,7 +2014,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-139182
+  m_Name: pb_Mesh-129474
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5003,14 +4999,6 @@ PrefabInstance:
       propertyPath: m_PatrolTargets.Array.data[2]
       value: 
       objectReference: {fileID: 2103809623}
-    - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_PatrolTargets.Array.data[3]
-      value: 
-      objectReference: {fileID: 1982610330}
-    - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_PatrolTargets.Array.data[4]
-      value: 
-      objectReference: {fileID: 978102932}
     - target: {fileID: 8152003623121519862, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -5146,7 +5134,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.49999997, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 1.7424998, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 1.7425, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -7492,6 +7480,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1280721548}
     m_Modifications:
     - target: {fileID: 391130138, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
+      propertyPath: m_PatrolTargets.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 391130138, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
       propertyPath: m_PatrolTargets.Array.data[0]
       value: 
       objectReference: {fileID: 575586730}
@@ -7595,7 +7587,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25.000244, y: 400}
+  m_AnchoredPosition: {x: -25.000229, y: 400}
   m_SizeDelta: {x: -50.00015, y: -800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1833758253
