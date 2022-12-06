@@ -270,7 +270,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             if (Input.GetButtonDown("Throw"))
             {
-                Debug.Log("throw");
                 ThrowShell(m_AttachedShellThrowForce);
                 m_ShellAttached = null;
             }
@@ -313,7 +312,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
         //Wall jump
         Ray l_Ray = new Ray(m_EyesHeight.position, m_PlayerRigidbody.transform.forward);
-        //Debug.DrawRay(l_Ray.origin, l_Ray.direction * 0.25f, Color.red);
         RaycastHit l_RaycastHit;
         if (Physics.Raycast(l_Ray, out l_RaycastHit, 0.25f, m_WallJumpLayer.value))
         {
@@ -361,7 +359,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             m_ShellAttached.transform.SetParent(null);
             m_ShellAttached.GetComponent<KoopaShell>().SetAttached(false);
             m_ShellAttached.isKinematic = false;
-            m_ShellAttached.AddForce(m_AttachingPosition.forward * force);
+            m_ShellAttached.AddForce(m_AttachingPosition.forward * force, ForceMode.VelocityChange);
+            m_ShellAttached.GetComponent<KoopaShell>().m_hasMovement = true;
         }
     }
 
@@ -370,7 +369,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         Vector3 l_DetectionPoint = new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z);
         Ray l_Ray = new Ray(l_DetectionPoint, m_PlayerRigidbody.transform.forward);
         RaycastHit l_RaycastHit;
-        Debug.DrawRay(l_Ray.origin, l_Ray.direction * 2f, Color.red);
+      
         if (Physics.Raycast(l_Ray, out l_RaycastHit, m_MaxAttachDistance, m_AttachShellLayermask))
         {
             if (l_RaycastHit.collider.tag == "KoopaShell")
@@ -380,6 +379,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 m_ShellAttached.GetComponent<KoopaShell>().SetAttached(true);
                 m_ShellAttached.isKinematic = true;
                 m_AttachingShellStartRotation = l_RaycastHit.collider.transform.rotation;
+                m_ShellAttached.GetComponent<KoopaShell>().m_hasMovement = false;
             }
         }
     }

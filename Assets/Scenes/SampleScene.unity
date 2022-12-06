@@ -320,6 +320,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 148241435, guid: f10dc441c13666d4090fbfe473d32832, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 2c3476ab418be2d4fbf86c61ed5e7d64, type: 2}
+    - target: {fileID: 148241436, guid: f10dc441c13666d4090fbfe473d32832, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 3409089091815687856, guid: f10dc441c13666d4090fbfe473d32832, type: 3}
       propertyPath: m_Name
       value: Shell
@@ -443,7 +451,7 @@ PrefabInstance:
       objectReference: {fileID: 963194227}
     - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_AttachedShellThrowForce
-      value: 200
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
@@ -519,7 +527,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5951331742921662507, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6475244002179971729, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
       propertyPath: m_RootOrder
