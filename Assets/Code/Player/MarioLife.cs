@@ -53,6 +53,9 @@ public class MarioLife : MonoBehaviour
     [Header("Event on death")]
     public UnityEvent m_IHaveDiedEvent;
 
+    [Header("Event not having lives")]
+    public UnityEvent m_IDontHaveLives;
+
     void Start()
     {
         UpdateLivesParameterHUD(); // Enter lives parameter in the HUD
@@ -67,6 +70,12 @@ public class MarioLife : MonoBehaviour
     public void AddLife(int l_NumLives = 1)
     {
         m_CurrentLives += l_NumLives;
+        UpdateLivesParameterHUD();
+    }
+
+    public void TakeLife(int l_NumLives = 1)
+    {
+        m_CurrentLives -= l_NumLives;
         UpdateLivesParameterHUD();
     }
 
@@ -201,6 +210,10 @@ public class MarioLife : MonoBehaviour
     void Die()
     {
         m_CurrentLife = m_MinLife;
-        m_IHaveDiedEvent?.Invoke();
+
+        if (m_CurrentLives > 0)
+            m_IHaveDiedEvent?.Invoke();
+        else
+            m_IDontHaveLives?.Invoke();
     }
 }

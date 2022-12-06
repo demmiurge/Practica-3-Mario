@@ -6213,6 +6213,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6785730832219408046, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
   m_PrefabInstance: {fileID: 6785730830910304609}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1569135456 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+  m_PrefabInstance: {fileID: 6785730830910304609}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1569135449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841312875bf6d0d458944e53c8671d61, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1578233555 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3640187559213646672, guid: 43b7d43c14539b64eb8c94516592014a, type: 3}
@@ -9822,6 +9833,94 @@ PrefabInstance:
       propertyPath: m_ImageCurrentLife
       value: 
       objectReference: {fileID: 1219990819}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IDontHaveLives.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IDontHaveLives.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IDontHaveLives.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 282066052}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 282066049}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Target
+      value: 
+      objectReference: {fileID: 1569135456}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IDontHaveLives.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IDontHaveLives.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: GoToScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Respawn
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
+      value: TakeLife
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IDontHaveLives.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: SceneController, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ManagerStatusObjectsOnTime, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
+      value: MarioLife, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IDontHaveLives.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IDontHaveLives.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 1569135450, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 4867937171086539704, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_CoinStarManager
       value: 
