@@ -35,4 +35,17 @@ public class KoopaShell : MonoBehaviour
     {
         isAttached = Attached;
     }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        Vector3 normal = collision.contacts[0].normal;
+        if (collision.gameObject.tag == "Goomba")
+        {
+            collision.gameObject.GetComponent<GoombaEnemy>().Kill();
+        }
+        else if (collision.gameObject.tag == "Koopa")
+        {
+            collision.gameObject.GetComponent<KoopaEnemy>().Kill();
+        }
+    }
 }

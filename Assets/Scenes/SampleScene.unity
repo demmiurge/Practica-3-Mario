@@ -497,6 +497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Koopa
       objectReference: {fileID: 0}
+    - target: {fileID: 5951331742921662507, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6475244002179971729, guid: 609a4eacc2a57784d9c49210df154879, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -617,6 +621,10 @@ PrefabInstance:
     - target: {fileID: 8152003623121623254, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_Name
       value: Goomba
+      objectReference: {fileID: 0}
+    - target: {fileID: 8152003623121623254, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
