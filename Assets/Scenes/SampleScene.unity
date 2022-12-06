@@ -377,6 +377,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3336113624594676183, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624594676183, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.05809614
+      objectReference: {fileID: 0}
     - target: {fileID: 6785730832219408046, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_Name
       value: SuperMarioV1
@@ -429,10 +437,6 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
-    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
-      propertyPath: m_AttachingShellSpeed
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
 --- !u!4 &318157039 stripped
@@ -1166,7 +1170,7 @@ MonoBehaviour:
   m_MaxDistance: 6
   m_AvoidObjectsLayerMask:
     serializedVersion: 2
-    m_Bits: 55
+    m_Bits: 183
   m_Offset: 0.1
   m_DebugLockAngleKeyCode: 105
   m_DebugLockKeyCode: 111

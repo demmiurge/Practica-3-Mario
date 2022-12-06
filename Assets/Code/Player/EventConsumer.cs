@@ -7,6 +7,7 @@ public class EventConsumer : MonoBehaviour
     public ParticleSystem m_Step;
     public ParticleSystem m_Land;
     public ParticleSystem m_Hit;
+    public ParticleSystem m_Punch;
     public void Step(AnimationEvent _AnimationEvent)
     {
         Object l_Object = _AnimationEvent.objectReferenceParameter;
@@ -17,7 +18,6 @@ public class EventConsumer : MonoBehaviour
     {
         Object l_Object = _AnimationEvent.objectReferenceParameter;
         m_Land.Play();
-        Debug.Log("land");
     }
 
     public void HitFront(AnimationEvent _AnimationEvent)
@@ -28,11 +28,20 @@ public class EventConsumer : MonoBehaviour
 
     public void PunchSound1(AnimationEvent _AnimationEvent)
     {
-        string l_StringParameter = _AnimationEvent.stringParameter;
-        float l_FloatParameter = _AnimationEvent.floatParameter;
-        int l_IntParameter = _AnimationEvent.intParameter;
-        Object l_object = _AnimationEvent.objectReferenceParameter;
+        m_Punch.Play();
 
        // Debug.Log("event sound" + l_StringParameter + " + " + l_FloatParameter + " + " + l_IntParameter + " + " + l_object);
+    }
+
+    public void PunchSound2(AnimationEvent _AnimationEvent)
+    {
+        m_Punch.Play();
+ 
+    }
+
+    public void PunchSoun3(AnimationEvent _AnimationEvent)
+    {
+        m_Punch.Play();
+
     }
 }
