@@ -759,6 +759,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             m_Animator.SetTrigger("Hit");
             m_IsBouncing = true;
             m_CurrentBouncing = m_TimeToBouncing;
+            m_PlayerRigidbody.GetComponent<MarioLife>().SetDamage(1);
             //m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce/2, ForceMode.Impulse);
             StartCoroutine(EnableMovement(m_TimeToBouncing));
         }
@@ -768,6 +769,17 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             m_Animator.SetTrigger("Hit");
             m_IsBouncing = true;
             m_CurrentBouncing = m_TimeToBouncing;
+            m_PlayerRigidbody.GetComponent<MarioLife>().SetDamage(1);
+            //m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce/2, ForceMode.Impulse);
+            StartCoroutine(EnableMovement(m_TimeToBouncing));
+        }
+        else if (collision.gameObject.tag == "KoopaShell")
+        {
+            m_CanMove = false;
+            m_Animator.SetTrigger("Hit");
+            m_IsBouncing = true;
+            m_CurrentBouncing = m_TimeToBouncing;
+            m_PlayerRigidbody.GetComponent<MarioLife>().SetDamage(1);
             //m_PlayerRigidbody.AddForce(Vector3.up * m_ThirdJumpForce/2, ForceMode.Impulse);
             StartCoroutine(EnableMovement(m_TimeToBouncing));
         }
