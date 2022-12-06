@@ -155,13 +155,27 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 l_HasMovement = true;
             if(Input.GetButton("MoveHorizontal"))
             {
-                Debug.Log("move");
                 l_Movement = Input.GetAxis("MoveHorizontal") * l_RightCamera;
             }
             if (Input.GetButton("MoveVertical"))
             {
                 l_Movement = Input.GetAxis("MoveVertical") * l_ForwardsCamera;
             }
+
+            if(Input.GetJoystickNames().Length > 0)
+            {
+                if(Input.GetAxis("MoveVertical") != 0)
+                {
+                    l_HasMovement = true;
+                    l_Movement = Input.GetAxis("MoveVertical") * l_ForwardsCamera;
+                }
+                if (Input.GetAxis("MoveHorizontal") != 0)
+                {
+                    l_HasMovement = true;
+                    l_Movement = Input.GetAxis("MoveHorizontal") * l_RightCamera;
+                }
+            }
+
             /*if (Input.GetKey(KeyCode.W))
                 l_Movement = l_ForwardsCamera;
             if (Input.GetKey(KeyCode.A))
