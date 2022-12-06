@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.HID;
 
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
@@ -264,11 +265,17 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
         //Wall jump
         Ray l_Ray = new Ray(m_EyesHeight.position, m_PlayerRigidbody.transform.forward);
+        Debug.DrawRay(l_Ray.origin, l_Ray.direction * 0.25f, Color.red);
         RaycastHit l_RaycastHit;
-        if (Physics.Raycast(l_Ray, out l_RaycastHit, 0.1f, m_WallJumpLayer.value))
+        if (Physics.Raycast(l_Ray, out l_RaycastHit, 0.25f, m_WallJumpLayer.value))
         {
             if (m_IsJumpActive == true)
             {
+                //Debug.DrawRay(l_RaycastHit.normal, l_Ray.direction * 0.25f, Color.red);
+                //m_PlayerRigidbody.rotation = Quaternion.Euler(l_RaycastHit.normal);
+                transform.rotation = Quaternion.FromToRotation(transform.forward, l_RaycastHit.normal) * transform.rotation;
+                Debug.DrawRay(l_RaycastHit.point, l_RaycastHit.normal * 2f, Color.blue);
+                //Debug.Break();
                 m_CanMove = false;
                 m_IsWallJumping = true;
                 m_CurrentBouncing = m_TimeToBouncing;
@@ -355,8 +362,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
         if(m_IsWallJumping)
         {
-            float l_NewRotation = -m_PlayerRigidbody.transform.rotation.y;
-            m_PlayerRigidbody.transform.rotation = Quaternion.Euler(0.0f, -m_PlayerRigidbody.transform.rotation.eulerAngles.y, 0.0f);
+            //float l_NewRotation = -m_PlayerRigidbody.transform.rotation.y;
+            //m_PlayerRigidbody.transform.rotation = Quaternion.Euler(0.0f, -m_PlayerRigidbody.transform.rotation.eulerAngles.y, 0.0f);
             m_CurrentBouncing -= Time.deltaTime;
             m_PlayerRigidbody.AddForce(m_PlayerRigidbody.transform.forward * 5, ForceMode.Impulse);
         }
