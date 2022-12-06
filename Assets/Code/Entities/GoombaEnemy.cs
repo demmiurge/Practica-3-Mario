@@ -220,6 +220,12 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
         StartCoroutine(KillGoomba());
     }
 
+    public void ShellKill()
+    {
+        gameObject.SetActive(false);
+        m_NumPunches = 0;
+    }
+
     IEnumerator KillGoomba()
     {
         yield return new WaitForSeconds(m_KillTime);

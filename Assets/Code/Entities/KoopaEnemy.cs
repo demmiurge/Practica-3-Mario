@@ -269,6 +269,12 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
         StartCoroutine(KillKoopa());
     }
 
+    public void ShellKill()
+    {
+        gameObject.SetActive(false);
+        m_NumPunches = 0;
+    }
+
     IEnumerator KillKoopa()
     {
         yield return new WaitForSeconds(m_KillTime);

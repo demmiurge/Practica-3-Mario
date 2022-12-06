@@ -49,11 +49,11 @@ public class KoopaShell : MonoBehaviour
         
         if (collision.gameObject.tag == "Goomba")
         {
-            collision.gameObject.GetComponent<GoombaEnemy>().Kill();
+            collision.gameObject.GetComponent<GoombaEnemy>().ShellKill();
         }
         else if (collision.gameObject.tag == "Koopa")
         {
-            collision.gameObject.GetComponent<KoopaEnemy>().Kill();
+            collision.gameObject.GetComponent<KoopaEnemy>().ShellKill();
         }
     }
 }
