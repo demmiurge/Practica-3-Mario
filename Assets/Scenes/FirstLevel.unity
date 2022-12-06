@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427194, b: 0.5645251, a: 1}
+  m_IndirectSpecularColor: {r: 0.4366757, g: 0.48427188, b: 0.56452495, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3697,7 +3697,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 503
+    m_Bits: 2551
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -5147,7 +5147,7 @@ HingeJoint:
   m_Anchor: {x: 0, y: 0.49999997, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0, y: 1.7425, z: 0}
+  m_ConnectedAnchor: {x: 0, y: 1.7424998, z: 0}
   m_UseSpring: 1
   m_Spring:
     spring: 0
@@ -7629,7 +7629,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -25.000229, y: 400}
+  m_AnchoredPosition: {x: -25.000244, y: 400}
   m_SizeDelta: {x: -50.00015, y: -800}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1833758253
@@ -9952,6 +9952,14 @@ PrefabInstance:
       propertyPath: m_IHaveDiedEvent.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 3336113624594676183, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 3336113624594676183, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.019385792
+      objectReference: {fileID: 0}
     - target: {fileID: 4867937171086539704, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_CoinStarManager
       value: 
@@ -10008,6 +10016,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 8299028683460148828, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_AttachedShellThrowForce
+      value: 15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
 --- !u!1001 &6880492383324287799

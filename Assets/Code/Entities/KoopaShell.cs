@@ -9,7 +9,7 @@ public class KoopaShell : MonoBehaviour
     public bool m_hasMovement;
     float m_Rotation = 0.5f;
     float m_Time;
-    float m_MaxTime = 5f;
+    float m_MaxTime = 15f;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +33,7 @@ public class KoopaShell : MonoBehaviour
             //Debug.Log("stop");
         }
         //Debug.Log(m_Rigidbody.velocity.magnitude);
-        if(m_Time > m_MaxTime)
+        if(m_Time > m_MaxTime && isAttached == false)
         {
             Destroy(gameObject);
         }
@@ -42,6 +42,7 @@ public class KoopaShell : MonoBehaviour
     public void SetAttached(bool Attached)
     {
         isAttached = Attached;
+        m_Time = 0;
     }
 
     void OnCollisionEnter(Collision collision)
