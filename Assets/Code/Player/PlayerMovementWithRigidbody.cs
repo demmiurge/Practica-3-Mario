@@ -198,7 +198,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             l_Speed = 0.5f;
             l_MovementSpeed = m_WalkSpeed;
 
-            if (Input.GetKey(KeyCode.LeftShift))
+            if (Input.GetButton("Run"))
             {
                 l_Speed = 1;
                 l_MovementSpeed = m_RunSpeed;
@@ -243,7 +243,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         m_PlayerRigidbody.velocity = new Vector3(l_Movement.x, m_PlayerRigidbody.velocity.y, l_Movement.z);
 
         //Punch Input
-        if (Input.GetButtonDown("Fire1") && CanPunch())
+        if (Input.GetButtonDown("Punch") && CanPunch())
         {
             if (MustRestartComboPunch())
             {
