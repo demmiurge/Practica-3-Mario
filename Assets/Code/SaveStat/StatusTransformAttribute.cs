@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class StatusTransformAttribute : GameObjectStateLoadReload
 {
@@ -52,6 +53,14 @@ public class StatusTransformAttribute : GameObjectStateLoadReload
 
     public override void ResetDefaultAttributes()
     {
+        m_Position = m_PositionInitial;
+        m_Rotation = m_RotationInitial;
+
+        if (GetComponent<Rigidbody>() != null)
+        {
+            m_Velocity = m_VelocityInitial;
+        }
+
         transform.position = m_PositionInitial;
         transform.rotation = m_RotationInitial;
 

@@ -21,10 +21,24 @@ public class CoinStarManager : MonoBehaviour
         UpdateStars();
     }
 
+    public int GetCoins() => m_Coins;
+    public int GetStars() => m_Coins;
+
+    public void SetCoins(int l_NewCurrentCoins)
+    {
+        m_Coins = l_NewCurrentCoins;
+        UpdateCoins();
+    }
+
+    public void SetStars(int m_NewCurrentStars)
+    {
+        m_Stars = m_NewCurrentStars;
+        UpdateStars();
+    }
+
     public void AddCoinds(int l_Coins)
     {
         m_Coins += l_Coins;
-        Debug.Log("HE1");
         UpdateCoins();
     }
 

@@ -25,6 +25,7 @@ public class StatusActiveAttribute : GameObjectStateLoadReload
 
     public override void ResetDefaultAttributes()
     {
+        m_IsActive = m_IsActiveInitial;
         gameObject.SetActive(m_IsActiveInitial);
     }
 }
