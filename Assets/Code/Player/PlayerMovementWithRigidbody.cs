@@ -263,7 +263,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
 
         //Wall jump
-        Ray l_Ray = new Ray(m_EyesHeight.position, transform.forward);
+        Ray l_Ray = new Ray(m_EyesHeight.position, m_PlayerRigidbody.transform.forward);
         RaycastHit l_RaycastHit;
         if (Physics.Raycast(l_Ray, out l_RaycastHit, 0.1f, m_WallJumpLayer.value))
         {
@@ -355,8 +355,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
         if(m_IsWallJumping)
         {
-            float l_NewRotation = -transform.rotation.y;
-            transform.rotation = Quaternion.Euler(0.0f, l_NewRotation, 0.0f);
+            float l_NewRotation = -m_PlayerRigidbody.transform.rotation.y;
+            m_PlayerRigidbody.transform.rotation = Quaternion.Euler(0.0f, -m_PlayerRigidbody.transform.rotation.eulerAngles.y, 0.0f);
             m_CurrentBouncing -= Time.deltaTime;
             m_PlayerRigidbody.AddForce(m_PlayerRigidbody.transform.forward * 5, ForceMode.Impulse);
         }

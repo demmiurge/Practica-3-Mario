@@ -320,6 +320,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2588395024447768747, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 6785730832219408046, guid: 6dda830120fc155489e86b2f1f823897, type: 3}
       propertyPath: m_Name
       value: SuperMarioV1
@@ -494,18 +498,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_Animator
-      value: 
-      objectReference: {fileID: 760309396}
-    - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_DistanceToAttack
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_HearRangeDistance
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 1526023996, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_PatrolTargets.Array.data[0]
       value: 
       objectReference: {fileID: 1267066158}
@@ -572,10 +564,6 @@ PrefabInstance:
     - target: {fileID: 8152003623121623254, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
       propertyPath: m_Name
       value: Goomba
-      objectReference: {fileID: 0}
-    - target: {fileID: 8152003623121623254, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
@@ -927,11 +915,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!95 &760309396 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 8152003623112272668, guid: 1c77727fd4a9e0344a983405583c9832, type: 3}
-  m_PrefabInstance: {fileID: 584140552}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &923933128
 PrefabInstance:
   m_ObjectHideFlags: 0
