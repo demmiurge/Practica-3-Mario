@@ -214,7 +214,7 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
     }
     public void Kill()
     {
-        transform.localScale = new Vector3(0.5f, m_KillScale, 0.5f);
+        //transform.localScale = new Vector3(0.5f, m_KillScale, 0.5f);
         StartCoroutine(KillKoopa());
     }
 
