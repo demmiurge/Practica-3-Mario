@@ -103,6 +103,16 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     bool m_IsBouncing;
     bool m_IsWallJumping = false;
 
+    [Header("Objects")]
+    public Transform m_AttachingPosition;
+    Rigidbody m_ShellAttached;
+    bool m_AttachedShell = false;
+    public float m_AttachingShellSpeed = 3.0f;
+    Quaternion m_AttachingShellStartRotation;
+    public float m_MaxAttachDistance;
+    public LayerMask m_AttachShellLayermask;
+    public float m_AttachedShellThrowForce;
+
     bool m_CanMove = true;
     bool m_IsCrouch = false;
     bool m_HasJumped = false;
@@ -253,6 +263,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 NextComboPunch();
         }
 
+
         //Jump input
         if (Input.GetButtonDown("Jump") && CanJump() && m_Falling == false)
         {
@@ -280,7 +291,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
         //Wall jump
         Ray l_Ray = new Ray(m_EyesHeight.position, m_PlayerRigidbody.transform.forward);
-        Debug.DrawRay(l_Ray.origin, l_Ray.direction * 0.25f, Color.red);
+        //Debug.DrawRay(l_Ray.origin, l_Ray.direction * 0.25f, Color.red);
         RaycastHit l_RaycastHit;
         if (Physics.Raycast(l_Ray, out l_RaycastHit, 0.25f, m_WallJumpLayer.value))
         {
@@ -293,7 +304,25 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 StartCoroutine(EnableMovement(1));
             }
         }
-        //Debug.DrawLine(m_EyesHeight.position, l_RaycastHit.point,  Color.red);       
+        
+        //Take and Throw
+        if(Input.GetButtonDown("Take") && CanAttach())
+        {
+            AttachShell();
+        }
+
+        if(Input.GetButtonDown("Throw") && m_ShellAttached && !m_AttachedShell)
+        {
+            ThrowShell(m_AttachedShellThrowForce);
+            m_ShellAttached = null;
+        }
+
+        if(m_AttachedShell)
+        {
+            //UpdateAttachedShell();
+        }
+
+        Debug.DrawRay(m_AttachingPosition.position, m_PlayerRigidbody.transform.forward);
 
         Die();
 
@@ -315,6 +344,43 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         }
     }
        
+    //Shell
+    bool CanAttach()
+    {
+        return m_ShellAttached == null;
+    }
+
+    void ThrowShell(float force)
+    {
+        if (m_ShellAttached != null)
+        {
+            m_AttachedShell = false;
+            m_ShellAttached.transform.SetParent(null);
+            m_ShellAttached.GetComponent<KoopaShell>().SetAttached(false);
+            m_ShellAttached.isKinematic = false;
+            m_ShellAttached.AddForce(m_AttachingPosition.forward * force);
+        }
+    }
+
+    void AttachShell()
+    {
+        Ray l_Ray = new Ray(m_AttachingPosition.position, m_PlayerRigidbody.transform.forward);
+        RaycastHit l_RaycastHit;
+       
+        if (Physics.Raycast(l_Ray, out l_RaycastHit, m_MaxAttachDistance, m_AttachShellLayermask))
+        {
+            if (l_RaycastHit.collider.tag == "KoopaShell")
+            {
+                Debug.Log("attach");
+                m_AttachedShell = true;
+                m_ShellAttached = l_RaycastHit.collider.GetComponent<Rigidbody>();
+                m_ShellAttached.GetComponent<KoopaShell>().SetAttached(true);
+                m_ShellAttached.isKinematic = true;
+                m_AttachingShellStartRotation = l_RaycastHit.collider.transform.rotation;
+            }
+        }
+    }
+
     // DEPRECATED
     /*void Jump()
     {
