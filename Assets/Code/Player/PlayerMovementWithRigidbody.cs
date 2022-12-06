@@ -204,7 +204,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 l_MovementSpeed = m_RunSpeed;
             }
         }
-        if (Input.GetKeyDown(KeyCode.Z))
+        if (Input.GetButtonDown("Crouch"))
         {
             if (m_IsCrouch == false)
             {
