@@ -39,9 +39,13 @@ public class EventConsumer : MonoBehaviour
  
     }
 
-    public void PunchSoun3(AnimationEvent _AnimationEvent)
+    public void PunchSound3(AnimationEvent _AnimationEvent)
     {
         m_Punch.Play();
-
     }
+
+    /*public void FinishPunch(AnimationEvent _AnimationEvent)
+    {
+        m_Punch.Play();
+    }*/
 }
