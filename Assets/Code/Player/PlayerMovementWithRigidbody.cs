@@ -7,11 +7,6 @@ using UnityEngine.InputSystem.HID;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 {
-    public enum Turtle
-    {
-        Take = 0,
-        Throw
-    }
     public enum PunchType
     {
         Left_Hand = 0,
@@ -269,6 +264,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             if (Input.GetButtonDown("Throw"))
             {
+                m_Animator.SetTrigger("Right Hand");
                 ThrowShell(m_AttachedShellThrowForce);
                 m_ShellAttached = null;
             }
@@ -785,7 +781,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             }
             else
             {
-                collision.rigidbody.AddForce(m_PlayerRigidbody.transform.forward * 2, ForceMode.Impulse);
+                collision.rigidbody.AddForce(m_PlayerRigidbody.transform.forward * 7, ForceMode.Impulse);
             }
         }
     }

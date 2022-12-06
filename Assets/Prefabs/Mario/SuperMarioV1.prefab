@@ -488,7 +488,7 @@ MonoBehaviour:
   m_KillerJumpSpeed: 5
   m_TimeToBouncing: 2
   m_AttachingPosition: {fileID: 638962812}
-  m_AttachingShellSpeed: 10
+  m_AttachingShellSpeed: 15
   m_MaxAttachDistance: 3
   m_AttachShellLayermask:
     serializedVersion: 2
@@ -534,6 +534,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IHaveDiedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_IDontHaveLives:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &4867937171086539704
