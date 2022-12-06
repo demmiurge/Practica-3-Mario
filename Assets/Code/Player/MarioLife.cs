@@ -64,6 +64,12 @@ public class MarioLife : MonoBehaviour
     public void ChangeInvincibilityStatus(bool l_CanTakeDamage) => m_CanTakeDamage = l_CanTakeDamage;
     public bool CanIHitIt() => m_CanTakeDamage;
 
+    public void AddLife(int l_NumLives = 1)
+    {
+        m_CurrentLives += l_NumLives;
+        UpdateLivesParameterHUD();
+    }
+
     public void UpdateLivesParameterHUD()
     {
         m_TextLives.text = m_CurrentLives.ToString();

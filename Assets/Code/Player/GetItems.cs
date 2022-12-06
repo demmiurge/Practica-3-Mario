@@ -41,7 +41,7 @@ public class GetItems : MonoBehaviour
 
         if (other.tag == "Heart")
         {
-            
+            m_MarioLife.AddLife();
             other.gameObject.SetActive(false);
         }
     }
