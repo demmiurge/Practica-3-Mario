@@ -67,6 +67,14 @@ public class MarioLife : MonoBehaviour
     public void ChangeInvincibilityStatus(bool l_CanTakeDamage) => m_CanTakeDamage = l_CanTakeDamage;
     public bool CanIHitIt() => m_CanTakeDamage;
 
+    public float GetCurrentLife() => m_CurrentLife;
+
+    public void SetCurrentLife(float l_CurrentLife)
+    {
+        m_CurrentLife = l_CurrentLife;
+        UpdateLivesParameterHUD();
+    }
+
     public void AddLife(int l_NumLives = 1)
     {
         m_CurrentLives += l_NumLives;
@@ -211,7 +219,7 @@ public class MarioLife : MonoBehaviour
     {
         m_CurrentLife = m_MinLife;
 
-        if (m_CurrentLives > 0)
+        if (m_CurrentLives > 1)
             m_IHaveDiedEvent?.Invoke();
         else
             m_IDontHaveLives?.Invoke();
