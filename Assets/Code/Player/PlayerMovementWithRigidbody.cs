@@ -322,8 +322,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             //UpdateAttachedShell();
         }
 
-        Debug.DrawRay(m_AttachingPosition.position, m_PlayerRigidbody.transform.forward);
-
         Die();
 
         CheckMarioIsFall();
@@ -366,7 +364,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     {
         Ray l_Ray = new Ray(m_AttachingPosition.position, m_PlayerRigidbody.transform.forward);
         RaycastHit l_RaycastHit;
-       
+        Debug.DrawRay(l_Ray.origin, l_Ray.direction * 2f, Color.red);
         if (Physics.Raycast(l_Ray, out l_RaycastHit, m_MaxAttachDistance, m_AttachShellLayermask))
         {
             if (l_RaycastHit.collider.tag == "KoopaShell")
