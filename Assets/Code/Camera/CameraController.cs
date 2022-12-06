@@ -58,8 +58,8 @@ public class CameraController : MonoBehaviour
         UpdateInputDebug();
 #endif
 
-        float l_MouseX = Input.GetAxis("Mouse X");
-        float l_MouseY = Input.GetAxis("Mouse Y");
+        float l_MouseX = Input.GetAxis("Camera X");
+        float l_MouseY = Input.GetAxis("Camera Y");
 
 #if UNITY_EDITOR
         if (m_AngleLocked)
