@@ -10,5 +10,7 @@ public abstract class GameObjectStateLoadReload : MonoBehaviour
 
     public abstract void LoadDefaultAttributes();
 
+    public abstract void ResetDefaultAttributes();
+
     public bool CanAttributesBeSet() => m_AvailableToSetAttributes;
 }

@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class StatusActiveAttribute : GameObjectStateLoadReload
 {
+    bool m_IsActiveInitial;
     bool m_IsActive;
 
     void Start()
     {
+        m_IsActiveInitial = gameObject.activeSelf;
         SetCurrentAttributesAsDefault();
     }
 
@@ -19,5 +21,10 @@ public class StatusActiveAttribute : GameObjectStateLoadReload
     public override void LoadDefaultAttributes()
     {
         gameObject.SetActive(m_IsActive);
+    }
+
+    public override void ResetDefaultAttributes()
+    {
+        gameObject.SetActive(m_IsActiveInitial);
     }
 }

@@ -8,8 +8,21 @@ public class StatusTransformAttribute : GameObjectStateLoadReload
     Quaternion m_Rotation;
     Vector3 m_Velocity;
 
+    Vector3 m_PositionInitial;
+    Quaternion m_RotationInitial;
+    Vector3 m_VelocityInitial;
+
     void Start()
     {
+        m_PositionInitial = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        m_RotationInitial = new Quaternion(transform.rotation.x, transform.rotation.y, transform.rotation.z, transform.rotation.w);
+
+        if (GetComponent<Rigidbody>() != null)
+        {
+            Rigidbody l_Rigidbody = GetComponent<Rigidbody>();
+            m_VelocityInitial = l_Rigidbody.velocity;
+        }
+
         SetCurrentAttributesAsDefault();
     }
 
@@ -34,6 +47,18 @@ public class StatusTransformAttribute : GameObjectStateLoadReload
         {
             Rigidbody l_Rigidbody = GetComponent<Rigidbody>();
             l_Rigidbody.velocity = m_Velocity;
+        }
+    }
+
+    public override void ResetDefaultAttributes()
+    {
+        transform.position = m_PositionInitial;
+        transform.rotation = m_RotationInitial;
+
+        if (GetComponent<Rigidbody>() != null)
+        {
+            Rigidbody l_Rigidbody = GetComponent<Rigidbody>();
+            l_Rigidbody.velocity = m_VelocityInitial;
         }
     }
 }
