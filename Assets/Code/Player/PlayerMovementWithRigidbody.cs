@@ -151,15 +151,16 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             /*if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
                 l_HasMovement = true;*/
 
-            if (Input.GetButton("Horizontal") || Input.GetButton("Vertical"))
+            if (Input.GetButton("MoveHorizontal") || Input.GetButton("MoveVertical"))
                 l_HasMovement = true;
-            if(Input.GetButton("Horizontal"))
+            if(Input.GetButton("MoveHorizontal"))
             {
-                l_Movement = Input.GetAxis("Horizontal") * l_RightCamera;
+                Debug.Log("move");
+                l_Movement = Input.GetAxis("MoveHorizontal") * l_RightCamera;
             }
-            if (Input.GetButton("Vertical"))
+            if (Input.GetButton("MoveVertical"))
             {
-                l_Movement = Input.GetAxis("Vertical") * l_ForwardsCamera;
+                l_Movement = Input.GetAxis("MoveVertical") * l_ForwardsCamera;
             }
             /*if (Input.GetKey(KeyCode.W))
                 l_Movement = l_ForwardsCamera;
@@ -271,11 +272,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         {
             if (m_IsJumpActive == true)
             {
-                //Debug.DrawRay(l_RaycastHit.normal, l_Ray.direction * 0.25f, Color.red);
-                //m_PlayerRigidbody.rotation = Quaternion.Euler(l_RaycastHit.normal);
                 transform.rotation = Quaternion.FromToRotation(transform.forward, l_RaycastHit.normal) * transform.rotation;
-                Debug.DrawRay(l_RaycastHit.point, l_RaycastHit.normal * 2f, Color.blue);
-                //Debug.Break();
                 m_CanMove = false;
                 m_IsWallJumping = true;
                 m_CurrentBouncing = m_TimeToBouncing;
