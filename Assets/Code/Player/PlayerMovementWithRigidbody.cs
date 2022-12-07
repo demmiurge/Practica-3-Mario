@@ -149,6 +149,9 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
         bool l_HasMovement = false;
 
+        // In the event that Mario dies in midair
+        if (CharacterTouchTheGround()) m_IsJumpActive = false;
+
         Vector3 l_Movement = Vector3.zero;
         if (m_CanMove)
         {
@@ -319,7 +322,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 StartCoroutine(EnableMovement(1));
             }
         }
-        
+
         Die();
 
         CheckMarioIsFall();
@@ -407,7 +410,6 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         // Restart jumps when touching ground
         if (CharacterTouchTheGround())
         {
-            Debug.Log("Jumps restarted");
             m_JumpsMade = 0;
             m_Animator.SetInteger("JumpNumber", 0);
         }
@@ -616,17 +618,11 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         m_ComboPunchCurrentTime = Time.time;
         m_IsPunchActive = true;
         if (m_CurrentComboPunch == PunchType.Right_Hand)
-        {
             m_Animator.SetTrigger("Right Hand");
-        }
         else if (m_CurrentComboPunch == PunchType.Left_Hand)
-        {
             m_Animator.SetTrigger("Left Hand");
-        }
         else if (m_CurrentComboPunch == PunchType.Foot)
-        {
             m_Animator.SetTrigger("Kick");
-        }
     }
 
     //Restart
@@ -648,37 +644,25 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Elevator" && CanAttachToElevator(other))
-        {
             AttachToElevator(other);
-        }
 
         if(other.tag == "Checkpoint")
-        {
             m_Checkpoint = other.GetComponent<Checkpoint>();
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "Elevator" && other == m_CurrentElevatorCollider)
-        {
             DetachElevator();
-        }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Elevator")
-        {
-            if (m_CurrentElevatorCollider != null && Vector3.Dot(other.transform.up, Vector3.up) < m_ElevatorDotAngle)
-            {
-                DetachElevator();
-            }
-            if (CanAttachToElevator(other))
-            {
-                AttachToElevator(other);
-            }
-        }
+        if (other.tag != "Elevator") return;
+        if (m_CurrentElevatorCollider != null && Vector3.Dot(other.transform.up, Vector3.up) < m_ElevatorDotAngle)
+            DetachElevator();
+        if (CanAttachToElevator(other))
+            AttachToElevator(other);
     }
 
     bool CanAttachToElevator(Collider other)
@@ -780,9 +764,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 StartCoroutine(EnableMovement(m_TimeToBouncing));
             }
             else
-            {
                 collision.rigidbody.AddForce(m_PlayerRigidbody.transform.forward * 7, ForceMode.Impulse);
-            }
         }
     }
 

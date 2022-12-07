@@ -36,7 +36,7 @@ public class CameraController : MonoBehaviour
         m_AimLocked = Cursor.lockState == CursorLockMode.Locked;
     }
 
-#if UNITY_EDITOR
+    #if UNITY_EDITOR
     void UpdateInputDebug()
     {
         if (Input.GetKeyDown(m_DebugLockAngleKeyCode))
@@ -50,24 +50,25 @@ public class CameraController : MonoBehaviour
             m_AimLocked = Cursor.lockState == CursorLockMode.Locked;
         }
     }
-#endif
+    #endif
 
     void LateUpdate()
     {
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         UpdateInputDebug();
-#endif
+        #endif
 
         float l_MouseX = Input.GetAxis("Camera X");
         float l_MouseY = Input.GetAxis("Camera Y");
 
-#if UNITY_EDITOR
+        #if UNITY_EDITOR
         if (m_AngleLocked)
         {
             l_MouseX = 0.0f;
             l_MouseY = 0.0f;
         }
-#endif
+        #endif
+
         transform.LookAt(m_LookAt.position);
         float l_Distance = Vector3.Distance(transform.position, m_LookAt.position);
         Vector3 l_EulerAngles = transform.rotation.eulerAngles;
@@ -93,7 +94,6 @@ public class CameraController : MonoBehaviour
         if(m_HasToReset)
         {
             //if(Vector3.Dot(this.transform.forward, m_LookAt.transform.forward) < Mathf.Cos(15 * Mathf.Deg2Rad))
-            Debug.Log("reset");
             l_ForwardCamera = new Vector3(Mathf.Sin(l_Yaw * Mathf.Deg2Rad) * Mathf.Cos(m_LookAt.transform.rotation.x * Mathf.Deg2Rad), Mathf.Sin(m_LookAt.transform.rotation.x * Mathf.Deg2Rad), Mathf.Cos(l_Yaw * Mathf.Deg2Rad) * Mathf.Cos(m_LookAt.transform.rotation.x * Mathf.Deg2Rad));
             m_HasToReset = false;
         }
