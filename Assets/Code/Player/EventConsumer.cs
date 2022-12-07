@@ -14,15 +14,13 @@ public class EventConsumer : MonoBehaviour
         m_Step.Play();
     }
 
-    public void LandParticles(AnimationEvent _AnimationEvent)
+    public void Land(AnimationEvent _AnimationEvent)
     {
-        Object l_Object = _AnimationEvent.objectReferenceParameter;
         m_Land.Play();
     }
 
     public void HitFront(AnimationEvent _AnimationEvent)
     {
-        Object l_Object = _AnimationEvent.objectReferenceParameter;
         m_Hit.Play();
     }
 

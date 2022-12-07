@@ -109,6 +109,9 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     public LayerMask m_AttachShellLayermask;
     public float m_AttachedShellThrowForce;
 
+    [Header("Death")]
+    public UnityEvent m_DieEvent;
+
     bool m_CanMove = true;
     bool m_IsCrouch = false;
 
@@ -132,6 +135,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
         GameController.GetGameController().AddRestartGameElements(this);
         GameController.GetGameController().SetPlayer(this);
+
+        m_Animator.SetBool("Die", false);
     }
 
     // Update is called once per frame
@@ -320,25 +325,17 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 StartCoroutine(EnableMovement(1));
             }
         }
-
-        Die();
+   
 
         CheckMarioIsFall();
 
         m_Animator.SetFloat("Speed", l_Speed);
     }
 
-    void Die()
+    public void Die()
     {
-        if (Input.GetKeyDown(KeyCode.N)) 
-        {
-            m_Animator.SetBool("Die", true);
-        }
-
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            m_Animator.SetBool("Die", false);
-        }
+        m_Animator.SetBool("Die", true);
+        StartCoroutine(DieEvent(3));
     }
        
     //Shell
@@ -724,6 +721,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
     void OnCollisionEnter(Collision collision)
     {
         Vector3 normal = collision.contacts[0].normal;
+        
         if (collision.gameObject.tag == "Goomba" && CanKillGoomba(normal))
         {
             collision.gameObject.GetComponent<GoombaEnemy>().Kill();
@@ -780,5 +778,12 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         m_CanMove = true;
         m_IsBouncing = false;
         m_IsWallJumping = false;
+    }
+
+    IEnumerator DieEvent(float l_Time)
+    {
+        yield return new WaitForSeconds(l_Time);
+        m_DieEvent.Invoke();
+        m_Animator.SetBool("Die", false);
     }
 }

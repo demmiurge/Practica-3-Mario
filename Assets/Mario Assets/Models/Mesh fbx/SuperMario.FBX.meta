@@ -2283,7 +2283,7 @@ ModelImporter:
       curves: []
       events:
       - time: 0.335512
-        functionName: LandParticles
+        functionName: Land
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0

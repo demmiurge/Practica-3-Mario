@@ -220,6 +220,7 @@ public class MarioLife : MonoBehaviour
         m_CurrentLife = m_MinLife;
 
         if (m_CurrentLives > 1)
+            //GetComponentInParent<PlayerMovementWithRigidbody>().Die();
             m_IHaveDiedEvent?.Invoke();
         else
             m_IDontHaveLives?.Invoke();
