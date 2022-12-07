@@ -19,7 +19,7 @@ public class ShowHideMenu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(m_PauseMenuKeyCode))
+        if (Input.GetButtonDown("Pause"))
             HideShowCanvas(!m_PauseMenuCanvas.activeSelf);
     }
 
