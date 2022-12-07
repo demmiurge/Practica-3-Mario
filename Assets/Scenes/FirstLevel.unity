@@ -1519,7 +1519,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31550
+  m_Name: pb_Mesh150704
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2313,7 +2313,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-86560
+  m_Name: pb_Mesh-72898
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -2658,8 +2658,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Load from last checkpoint
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 54931862504263d4785fbff5a87052cb, type: 2}
-  m_sharedMaterial: {fileID: -8415466583192675077, guid: 54931862504263d4785fbff5a87052cb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aa1c4458941c3444d8b0bb14d3b48360, type: 2}
+  m_sharedMaterial: {fileID: -8415466583192675077, guid: aa1c4458941c3444d8b0bb14d3b48360, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2693,7 +2693,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -4535,10 +4535,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit menu
+  m_text: Exit to main menu
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 54931862504263d4785fbff5a87052cb, type: 2}
-  m_sharedMaterial: {fileID: -8415466583192675077, guid: 54931862504263d4785fbff5a87052cb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aa1c4458941c3444d8b0bb14d3b48360, type: 2}
+  m_sharedMaterial: {fileID: -8415466583192675077, guid: aa1c4458941c3444d8b0bb14d3b48360, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4572,7 +4572,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -18663,7 +18663,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31466
+  m_Name: pb_Mesh150620
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -19105,8 +19105,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Restart level
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 54931862504263d4785fbff5a87052cb, type: 2}
-  m_sharedMaterial: {fileID: -8415466583192675077, guid: 54931862504263d4785fbff5a87052cb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aa1c4458941c3444d8b0bb14d3b48360, type: 2}
+  m_sharedMaterial: {fileID: -8415466583192675077, guid: aa1c4458941c3444d8b0bb14d3b48360, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -19140,7 +19140,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -21020,8 +21020,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit game
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 54931862504263d4785fbff5a87052cb, type: 2}
-  m_sharedMaterial: {fileID: -8415466583192675077, guid: 54931862504263d4785fbff5a87052cb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aa1c4458941c3444d8b0bb14d3b48360, type: 2}
+  m_sharedMaterial: {fileID: -8415466583192675077, guid: aa1c4458941c3444d8b0bb14d3b48360, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -21055,7 +21055,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -22785,7 +22785,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh31454
+  m_Name: pb_Mesh150608
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -23002,8 +23002,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Resume
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 54931862504263d4785fbff5a87052cb, type: 2}
-  m_sharedMaterial: {fileID: -8415466583192675077, guid: 54931862504263d4785fbff5a87052cb, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: aa1c4458941c3444d8b0bb14d3b48360, type: 2}
+  m_sharedMaterial: {fileID: -8415466583192675077, guid: aa1c4458941c3444d8b0bb14d3b48360, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -23037,7 +23037,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 2
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
