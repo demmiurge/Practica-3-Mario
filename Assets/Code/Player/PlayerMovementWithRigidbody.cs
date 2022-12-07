@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.HID;
 
@@ -149,8 +150,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
         bool l_HasMovement = false;
 
-        // In the event that Mario dies in midair
-        if (CharacterTouchTheGround()) m_IsJumpActive = false;
+        if (CharacterTouchTheGround()) m_IsJumpActive = false; // In the event that Mario dies in midair
 
         Vector3 l_Movement = Vector3.zero;
         if (m_CanMove)
@@ -160,14 +160,12 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
 
             if (Input.GetButton("MoveHorizontal") || Input.GetButton("MoveVertical"))
                 l_HasMovement = true;
+            
             if(Input.GetButton("MoveHorizontal"))
-            {
                 l_Movement = Input.GetAxis("MoveHorizontal") * l_RightCamera;
-            }
+            
             if (Input.GetButton("MoveVertical"))
-            {
                 l_Movement = Input.GetAxis("MoveVertical") * l_ForwardsCamera;
-            }
 
             if(Input.GetJoystickNames().Length > 0)
             {
@@ -192,6 +190,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             if (Input.GetKey(KeyCode.D))
                 l_Movement += l_RightCamera;*/
         }
+
         l_Movement.Normalize();
 
         float l_MovementSpeed = 0.0f;
@@ -211,6 +210,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 l_MovementSpeed = m_RunSpeed;
             }
         }
+
         if (Input.GetButtonDown("Crouch"))
         {
             if (m_IsCrouch == false)
@@ -249,8 +249,8 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
         l_Movement += l_Movement * l_MovementSpeed;
         m_PlayerRigidbody.velocity = new Vector3(l_Movement.x, m_PlayerRigidbody.velocity.y, l_Movement.z);
 
-        //Punch Input
-        if (!m_AttachedShell)
+        
+        if (!m_AttachedShell) // Punch Input
         {
             if (Input.GetButtonDown("Punch") && CanPunch())
             {
@@ -262,8 +262,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                     NextComboPunch();
             }
         }
-        //Take and Throw
-        else if(m_AttachedShell && m_ShellAttached)
+        else if(m_AttachedShell && m_ShellAttached) // Take and Throw
         {
             if (Input.GetButtonDown("Throw"))
             {
@@ -272,6 +271,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
                 m_ShellAttached = null;
             }
         }
+
         if (Input.GetButtonDown("Take") && CanAttach())
         {
             AttachShell();
@@ -282,9 +282,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             UpdateAttachedShell();
         }
 
-
-        //Jump input
-        if (Input.GetButtonDown("Jump") && CanJump() && m_Falling == false)
+        if (Input.GetButtonDown("Jump") && CanJump() && m_Falling == false) // Jump input
         {
             m_IdleTime = 0;
             if (m_IsCrouch == false)
@@ -308,7 +306,7 @@ public class PlayerMovementWithRigidbody : MonoBehaviour, IRestartGame
             }
         }
 
-        //Wall jump
+        // Wall jump
         Ray l_Ray = new Ray(m_EyesHeight.position, m_PlayerRigidbody.transform.forward);
         RaycastHit l_RaycastHit;
         if (Physics.Raycast(l_Ray, out l_RaycastHit, 0.25f, m_WallJumpLayer.value))

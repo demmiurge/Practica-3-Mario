@@ -262,6 +262,7 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
         Vector3 l_PlayerPosition = GameController.GetGameController().GetPlayer().transform.position;
         return Vector3.Distance(l_PlayerPosition, transform.position) <= m_HearRangeDistance;
     }
+
     public void Kill()
     {
         //transform.localScale = new Vector3(0.5f, m_KillScale, 0.5f);
@@ -271,6 +272,7 @@ public class KoopaEnemy : MonoBehaviour, IRestartGame
 
     public void ShellKill()
     {
+        m_IsDead = true;
         gameObject.SetActive(false);
         m_NumPunches = 0;
     }

@@ -101,6 +101,8 @@ GameObject:
   - component: {fileID: 1526023998}
   - component: {fileID: 1526023997}
   - component: {fileID: 20769744}
+  - component: {fileID: 4779414917299214498}
+  - component: {fileID: 507875859154011618}
   m_Layer: 0
   m_Name: Goomba
   m_TagString: Goomba
@@ -177,6 +179,7 @@ MonoBehaviour:
   m_VisionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_NumPucnhesToKill: 2
 --- !u!136 &1526023998
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -229,6 +232,32 @@ Rigidbody:
   m_Interpolate: 1
   m_Constraints: 80
   m_CollisionDetection: 3
+--- !u!114 &4779414917299214498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152003623121623254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab5ad543576c2924c9a762e1f96044c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AvailableToSetAttributes: 0
+--- !u!114 &507875859154011618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8152003623121623254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b7bd4b23f961b84e948e42abe030570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AvailableToSetAttributes: 0
 --- !u!1 &8152003623121623256
 GameObject:
   m_ObjectHideFlags: 0

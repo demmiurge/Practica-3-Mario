@@ -36,6 +36,10 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
 
     int m_NumPunches = 0;
 
+    [Header("Life")]
+    public int m_NumPucnhesToKill = 2;
+    bool m_IsDead;
+
     Vector3 m_StartScale;
 
     //Patrolling, when Mario is close it turns facing Mario, jumps and starts going towards him, if Marion changes position, Goomba doesn't change direction and stops after colliding or in certan
@@ -71,7 +75,7 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
                 break;
         }
 
-        if(m_NumPunches > 2)
+        if(m_NumPunches > m_NumPucnhesToKill)
         {
             StartCoroutine(KillGoomba());
         }
@@ -214,16 +218,33 @@ public class GoombaEnemy : MonoBehaviour, IRestartGame
         Vector3 l_PlayerPosition = GameController.GetGameController().GetPlayer().transform.position;
         return Vector3.Distance(l_PlayerPosition, transform.position) <= m_HearRangeDistance;
     }
+
     public void Kill()
     {
         transform.localScale = new Vector3(0.5f, m_KillScale, 0.5f);
+        m_IsDead = true;
         StartCoroutine(KillGoomba());
     }
 
     public void ShellKill()
     {
+        m_IsDead = true;
         gameObject.SetActive(false);
         m_NumPunches = 0;
+    }
+
+    public int GetCurrentPunches() => m_NumPunches;
+
+    public void SetCurrentPunches(int l_NumPunches)
+    {
+        m_NumPunches = l_NumPunches;
+    }
+
+    public bool GetIsDead() => m_IsDead;
+
+    public void SetIsDead(bool l_IsDead)
+    {
+        m_IsDead = l_IsDead;
     }
 
     IEnumerator KillGoomba()
