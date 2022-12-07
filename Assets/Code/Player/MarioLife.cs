@@ -72,7 +72,7 @@ public class MarioLife : MonoBehaviour
     public void SetCurrentLife(float l_CurrentLife)
     {
         m_CurrentLife = l_CurrentLife;
-        UpdateLivesParameterHUD();
+        UpdateLifeParameterHUD();
     }
 
     public void AddLife(int l_NumLives = 1)
